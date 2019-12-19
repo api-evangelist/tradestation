@@ -1,5 +1,5 @@
 {
-    "id": "59d4adf9178f6e7f985aa017becfd69a",
+    "id": "6c50b4a3bcce3875b79a2a46ca6a54a3",
     "name": "Tradestation API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "bcf63283265f5f40ff39bb788eb65c63",
+            "id": "f481a3a9d87ace2adf75f17f7d913952",
             "name": "Get Symbol Info\n",
             "url": "httpsapi.tradestation.com\/v2\/data\/symbol\/{symbol}",
             "description": "Finds the given symbol and returns a collection of fields describing the\nsymbol, its origin exchange, and other pertinant information.\n",
@@ -44,11 +44,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "04c76f220bc18fb4ffb89ad456290adc",
+            "id": "cc17efea26536528a2784cee0e87c956",
             "name": "Suggest Symbols\n",
             "url": "httpsapi.tradestation.com\/v2\/data\/symbols\/suggest\/{text}",
             "description": "Suggests symbols semantically based upon partial input of symbol name,\ncompany name, or description\n",
@@ -96,11 +96,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "aebb9cca012629798cb7515f9234c54e",
+            "id": "f7092b12ad4c9950d8a284ed3843e5ca",
             "name": "Search for Symbols\n",
             "url": "httpsapi.tradestation.com\/v2\/data\/symbols\/search\/{criteria}",
             "description": "Searches symbols based upon input criteria including Name, Category and\nCountry.\n",
@@ -134,11 +134,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "2a862758b144f2a0bd122030a1809779",
+            "id": "30cf3ed4385e9c6fdd3a545388acac6c",
             "name": "Get Quote\n",
             "url": "httpsapi.tradestation.com\/v2\/data\/quote\/{symbols}",
             "description": "Gets the latest Level 1 Quote for the given Symbol\n",
@@ -172,11 +172,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "d059da11647cf41f31990b9af610873d",
+            "id": "147117cadc597179c07271d7ac72ba13",
             "name": "Stream Quote Changes\n",
             "url": "httpsapi.tradestation.com\/v2\/stream\/quote\/changes\/{symbols}",
             "description": "Streams the latest Quote information for the given Symbols. The first chunk in the stream is a full quote snapshot - subsequent chunks only contain fields of the quote object that have changed since the last chunk.\n\nAn invalid symbol name will result in a response of this form - {\"Symbol\":\"BADEXAMPLESYMBOL\",\"Error\":\"FAILED, EX_INVALID_SYMBOL\"}\n\nIf the user is not entitled for the symbol requested, response will be of this form - {\"Symbol\":\"EXAMPLESYMBOL\",\"Error\":\"FAILED, EX_NOT_ENTITLED\"}\n",
@@ -210,11 +210,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "2d7612c2fec1c65918257a20f37ab0e2",
+            "id": "8d7bba06f34626df30be9b2d79d30421",
             "name": "Stream Quote Snapshots\n",
             "url": "httpsapi.tradestation.com\/v2\/stream\/quote\/snapshots\/{symbols}",
             "description": "Streams the latest Quote for the given Symbols. Each chunk is a full quote object.\n\nAn invalid symbol name will result in a response of this form - {\"Symbol\":\"BADSYMBOLEXAMPLE\",\"Error\":\"FAILED, EX_INVALID_SYMBOL\"}\n\nIf the user is not entitled for the symbol requested, response will be of this form - {\"Symbol\":\"EXAMPLESYMBOL\",\"Error\":\"FAILED, EX_NOT_ENTITLED\"}\n",
@@ -248,11 +248,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "849d88114340cef155e28b89036f2768",
+            "id": "cf464301f9856dd0abf96381f84b8493",
             "name": "Stream BarChart - Starting on Date\n",
             "url": "httpsapi.tradestation.com\/v2\/stream\/barchart\/{symbol}\/{interval}\/{unit}\/{startDate}",
             "description": "Streams barchart data starting from startDate, each bar filling quantity of unit.\n",
@@ -314,11 +314,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "1e3eb80b603ea9d2dd8d242a1919a356",
+            "id": "3b3d5f2fe3bdd8cb5dece62746836030",
             "name": "Stream BarChart - Date Range\n",
             "url": "httpsapi.tradestation.com\/v2\/stream\/barchart\/{symbol}\/{interval}\/{unit}\/{startDate}\/{endDate}",
             "description": "Streams barchart data starting from startDate to end date, each bar filling interval of unit.\n",
@@ -387,11 +387,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "1a2700a0f5e3d95a31a74cb7196c1c5c",
+            "id": "2e28b2db040a3b02ba1de721d2eb6d1f",
             "name": "Stream BarChart - Bars Back\n",
             "url": "httpsapi.tradestation.com\/v2\/stream\/barchart\/{symbol}\/{interval}\/{unit}\/{barsBack}\/{lastDate}\/...",
             "description": "Streams barchart data starting from a number of bars back from last date, each bar filling interval of unit.\n",
@@ -460,11 +460,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "7b1c1d669fd8cd67785d476b0d787f9a",
+            "id": "ec0b56a20403e0711220f5429f632f25",
             "name": "Stream BarChart - Days Back\n",
             "url": "httpsapi.tradestation.com\/v2\/stream\/barchart\/{symbol}\/{interval}\/{unit}",
             "description": "Streams barchart data starting from a number of days back from last date, each bar filling interval of unit.\n",
@@ -533,11 +533,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "8cf184910de436f94158141cca4adab7",
+            "id": "e13f9d1bffe7a0ffe02dc9f6d0216ad0",
             "name": "Stream Tick Bars\n",
             "url": "httpsapi.tradestation.com\/v2\/stream\/tickbars\/{symbol}\/{interval}\/{barsBack}",
             "description": "Streams tick bars data from a number of bars back, each bar returned separated by interval number of ticks.\n",
@@ -585,11 +585,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "d16a2d71580b543fbe5a18bb67a43394",
+            "id": "004b903b3b9079c9640d428acdf5820d",
             "name": "Get all Symbol Lists\n",
             "url": "httpsapi.tradestation.com\/v2\/data\/symbollists",
             "description": "Gets a list of all Symbol Lists\n",
@@ -616,11 +616,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "714ef348ab0fa64fa15c56b6498c9378",
+            "id": "8deaa2fc47d2eda6523539f098a9d773",
             "name": "Get Symbol List\n",
             "url": "httpsapi.tradestation.com\/v2\/data\/symbollists\/{symbol_list_id}",
             "description": "Gets a specific Symbol List\n",
@@ -654,11 +654,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "883b758bec41dd00bdf3eae145303259",
+            "id": "4df64099714c1e6f0f57e69aa6fd7df7",
             "name": "Get Symbols in a Symbol List\n",
             "url": "httpsapi.tradestation.com\/v2\/data\/symbollists\/{symbol_list_id}\/symbols",
             "description": "Gets the Symbols for a specific Symbol List\n",
@@ -692,11 +692,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "6ff780a53bee88839fe162a19e895ffd",
+            "id": "e4c1871991d2cb7c5de908830b17b461",
             "name": "Get User Accounts\n",
             "url": "httpsapi.tradestation.com\/v2\/users\/{user_id}\/accounts",
             "description": "Returns all accounts for the given user\n",
@@ -730,11 +730,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "0276486331bbc3eceb0d55515e356f9a",
+            "id": "86492eeefa8fb67feb6d31aa2ac5c5d9",
             "name": "Get Account Balances\n",
             "url": "httpsapi.tradestation.com\/v2\/accounts\/{account_keys}\/balances",
             "description": "Returns the Balance for the given accounts\n",
@@ -768,11 +768,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "03fbc1d7a32187f2d3d9523a395ed0b6",
+            "id": "4712918c575fdc3fbfbf26118d2685e9",
             "name": "Get Account Positions\n",
             "url": "httpsapi.tradestation.com\/v2\/accounts\/{account_keys}\/positions",
             "description": "Returns the Positions for the given accounts\n",
@@ -813,11 +813,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "c5814287d328cda2fe98b7d4798f9ac1",
+            "id": "ebc8caf27c7a02abcbd79f9712e1af12",
             "name": "Get Account Orders\n",
             "url": "httpsapi.tradestation.com\/v2\/accounts\/{account_keys}\/orders",
             "description": "Returns the Orders for the given accounts sorted descending, most recent order first.\n\nNote: Intermediate order state changes are not available.\n",
@@ -872,11 +872,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "02eacc16344a3f8d51fde2f6fbca033a",
+            "id": "6914d4ca460827adada7523d9e72dbef",
             "name": "Confirm Order\n",
             "url": "httpsapi.tradestation.com\/v2\/orders\/confirm",
             "description": "Returns estimated cost and commission information for an order without the order actually being placed. The fields that are returned in the response depend on the order type.\nThe following shows the different fields that will be returned.\n\n**Base Confirmation**  (All confirmations will have these fields)\n* Route\n* Duration\n* Account\n* SummaryMessage\n* OrderConfirmId\n\n**Equity Confirmation** (Base Confirmation fields + the following)\n* EstimatedPrice\n* EstimatedPriceDisplay\n* EstimatedCost\n* Esti",
@@ -903,11 +903,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "e0036c81b072fb88137f8e97a4728fdb",
+            "id": "b067cc236f2933b753ea0cb789a9eaef",
             "name": "Submit Order\n",
             "url": "httpsapi.tradestation.com\/v2\/orders",
             "description": "Submits 1 or more orders\n",
@@ -934,11 +934,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "a730abb11dffc691cd16ecab515729ff",
+            "id": "1855ad76e1e66331c2b333b7bc2e8343",
             "name": "Cancel Order\n",
             "url": "httpsapi.tradestation.com\/v2\/orders\/{order_id}",
             "description": "Cancels an open order. You cannot cancel an order that has been filled.\n",
@@ -972,11 +972,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "7b927f25a98954127b222db1fa8fb541",
+            "id": "600615e26bc4e2c7b51c731e23035ebf",
             "name": "Update Order\n",
             "url": "httpsapi.tradestation.com\/v2\/orders\/{order_id}",
             "description": "Updates (Cancels & Replaces) an open order. You cannot update an order\nthat has been filled.\n\nRules:\n\n | Original order type              | Fields to update                 | Can only change order type to |\n | -------------------------------- | -------------------------------- | ----------------------------- |\n | Limit Orders                     | Quantity, Stop Price             | Market                        |\n | Stop Orders                      | Quantity, Stop Price             | Market    ",
@@ -1010,11 +1010,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "47c137b214deede3965ad2b6046465f6",
+            "id": "701cc7e775086f837a8b983e3376e47a",
             "name": "Confirm Group Order\n",
             "url": "httpsapi.tradestation.com\/v2\/orders\/groups\/confirm",
             "description": "Returns estimated cost and commission information for a group of orders (OCO, BRK) without the orders actually being placed\n\n**Base Confirmation**  (All confirmations will have these fields)\n* Route\n* Duration\n* Account\n* SummaryMessage\n* OrderConfirmId\n\n**Equity Confirmation** (Base Confirmation fields + the following)\n* EstimatedPrice\n* EstimatedPriceDisplay\n* EstimatedCost\n* EstimatedCostDisplay\n* EstimatedCommission\n* EstimatedCommissionDisplay\n\n**Forex Confirmation** (Base Confirmation fiel",
@@ -1041,11 +1041,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "0c1154914356ab922b769cbc86cda16e",
+            "id": "15925f8a2077685184480e76c56fad5a",
             "name": "Submit Group Order\n",
             "url": "httpsapi.tradestation.com\/v2\/orders\/groups",
             "description": "Submits a group order such as Bracket and OCO Orders.\n\n#### Order Cancels Order (OCO)\nAn OCO order is a group of orders whereby if one of the orders is filled\nor partially-filled, then all of the other orders in the group are\ncancelled.\n\n#### Bracket OCO Orders\nA bracket order is a special instance of an OCO (Order Cancel Order).\nBracket orders are used to exit an existing position. They are designed\nto limit loss and lock in profit by \u201cbracketing\u201d an order with a\nsimultaneous stop and limit",
@@ -1072,11 +1072,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "81fd24d992824693081034fae4c04532",
+            "id": "c8d5e1656b7c66f0d7a5329ffe0ecbd5",
             "name": "\nRequest Available Activation Triggers\n",
             "url": "httpsapi.tradestation.com\/v2\/orderexecution\/activationtriggers",
             "description": "To place orders with activation triggers, a valid TriggerKey must be sent with the order.  This resource provides the available trigger methods with their corresponding key.\n",
@@ -1103,11 +1103,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         },
         {
-            "id": "990bc5e8b258ed4552ea7594ef503d01",
+            "id": "2f5a6f151548a3ba486fab9941d9c0c4",
             "name": "Request Available Exchanges\n",
             "url": "httpsapi.tradestation.com\/v2\/orderexecution\/exchanges",
             "description": "Returns a list of valid exchanges that a client can specify when posting an order.\n",
@@ -1134,7 +1134,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "59d4adf9178f6e7f985aa017becfd69a",
+            "collectionId": "6c50b4a3bcce3875b79a2a46ca6a54a3",
             "rawModeData": ""
         }
     ]

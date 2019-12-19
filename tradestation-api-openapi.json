@@ -1,0 +1,1815 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "20160101",
+        "title": "Tradestation API",
+        "description": "This document describes the resources that make up the official TradeStation\nAPI. If you have any problems or requests please contact [support](mailto:webapi@tradestation.com).\n\nOverview\n========\n\nThe TradeStation API is reachable at the base-url:\n```\nhttps:\/\/api.tradestation.com\/v2\n```\n\nCurrent Version\n---------------\n\nThe latest version is 20160101, but currently we are in transition, so by\ndefault all requests receive the 20101026 version for backwards compatibility.\n\nAlways explicitly request this version by adding the `APIVersion`\nquerystring parameter as shown below:\n\n```\nhttps:\/\/api.tradestation.com\/v2\/data\/quote\/msft?APIVersion=20160101\n```\n\nNote: This will ensure your application will not be broken when we deprecate\nthe 20101026 version in favor of 20160101 or newer versions.\n\nSIM vs LIVE\n-----------\n\nWe also offer a Simulator(SIM) API for \"Paper Trading\" that is identical\nto the Live API in all ways except it uses fake trading accounts seeded with\nfake money and orders are no",
+        "termsOfService": "http:\/\/elasticbeanstalk-us-east-1-525856068889.s3.amazonaws.com\/wp-content\/uploads\/2014\/03\/Guidelines_For_Acceptance.pdf"
+    },
+    "servers": [
+        "httpsapi.tradestation.com\/v2"
+    ],
+    "paths": {
+        "\/data\/symbol\/{symbol}": {
+            "get": {
+                "summary": "Get Symbol Info\n",
+                "description": "Finds the given symbol and returns a collection of fields describing the\nsymbol, its origin exchange, and other pertinant information.\n",
+                "operationId": "GetSymbol",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "symbol",
+                        "in": "path",
+                        "description": "Symbol to lookup"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/data\/symbols\/suggest\/{text}": {
+            "get": {
+                "summary": "Suggest Symbols\n",
+                "description": "Suggests symbols semantically based upon partial input of symbol name,\ncompany name, or description\n",
+                "operationId": "Suggestsymbols",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "description": "The top number of results to return"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "An OData filter to apply to the results"
+                    },
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "text",
+                        "in": "path",
+                        "description": "Symbol text for suggestion"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/data\/symbols\/search\/{criteria}": {
+            "get": {
+                "summary": "Search for Symbols\n",
+                "description": "Searches symbols based upon input criteria including Name, Category and\nCountry.\n",
+                "operationId": "SearchSymbols",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "criteria",
+                        "in": "path",
+                        "description": "Criteria are represented as Key\/value pairs (`&` separated):\n\n`N`: Name of Symbol. (Optional)\n\n`C`: Asset categories. (Optional) Possible values:\n  - `Future` or `FU`\n  - `FutureOption` or `FO`\n  - `Stock` or `S` (Default)\n  - `StockOption` or `SO` (If root is specified, default category)\n  - `Index` or `IDX`\n  - `CurrencyOption` or `CO`\n  - `MutualFund` or `MF`\n  - `MoneyMarketFund` or `MMF`\n  - `IndexOption` or `IO`\n  - `Bond` or `B`\n  - `Forex` or `FX`\n\n`Cnt`: Country where the symbol is trad"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/data\/quote\/{symbols}": {
+            "get": {
+                "summary": "Get Quote\n",
+                "description": "Gets the latest Level 1 Quote for the given Symbol\n",
+                "operationId": "GetQuotes",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "symbols",
+                        "in": "path",
+                        "description": "1 or more Symbol Names (comma-separated)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/stream\/quote\/changes\/{symbols}": {
+            "get": {
+                "summary": "Stream Quote Changes\n",
+                "description": "Streams the latest Quote information for the given Symbols. The first chunk in the stream is a full quote snapshot - subsequent chunks only contain fields of the quote object that have changed since the last chunk.\n\nAn invalid symbol name will result in a response of this form - {\"Symbol\":\"BADEXAMPLESYMBOL\",\"Error\":\"FAILED, EX_INVALID_SYMBOL\"}\n\nIf the user is not entitled for the symbol requested, response will be of this form - {\"Symbol\":\"EXAMPLESYMBOL\",\"Error\":\"FAILED, EX_NOT_ENTITLED\"}\n",
+                "operationId": "StreamQuotesChanges",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "symbols",
+                        "in": "path",
+                        "description": "1 or more Symbol Names (comma-separated)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/stream\/quote\/snapshots\/{symbols}": {
+            "get": {
+                "summary": "Stream Quote Snapshots\n",
+                "description": "Streams the latest Quote for the given Symbols. Each chunk is a full quote object.\n\nAn invalid symbol name will result in a response of this form - {\"Symbol\":\"BADSYMBOLEXAMPLE\",\"Error\":\"FAILED, EX_INVALID_SYMBOL\"}\n\nIf the user is not entitled for the symbol requested, response will be of this form - {\"Symbol\":\"EXAMPLESYMBOL\",\"Error\":\"FAILED, EX_NOT_ENTITLED\"}\n",
+                "operationId": "StreamQuotesSnapshots",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "symbols",
+                        "in": "path",
+                        "description": "1 or more Symbol Names (comma-separated)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/stream\/barchart\/{symbol}\/{interval}\/{unit}\/{startDate}": {
+            "get": {
+                "summary": "Stream BarChart - Starting on Date\n",
+                "description": "Streams barchart data starting from startDate, each bar filling quantity of unit.\n",
+                "operationId": "StreamBarchartsFromStartDate",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "SessionTemplate",
+                        "in": "query",
+                        "description": "United States (US) stock market session templates, that extend bars returned to include those outside of the regular trading session. Ignored for non-US equity symbols."
+                    },
+                    {
+                        "name": "symbol",
+                        "in": "path",
+                        "description": "Symbol to lookup"
+                    },
+                    {
+                        "name": "interval",
+                        "in": "path",
+                        "description": "Interval that each bar will consist of. **For Daily, Weekly, and Monthly units this value must be 1.**"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "path",
+                        "description": "Unit of time for each bar interval."
+                    },
+                    {
+                        "name": "startDate",
+                        "in": "path",
+                        "description": "The starting date to begin streaming bars from. Date is of form MM-DD-YYYY, and optionally can specify a starting time with format MM-DD-YYYYt08:00:00 and even further UTC offset with format MM-DD-YYYYt12:00:00-0600"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/stream\/barchart\/{symbol}\/{interval}\/{unit}\/{startDate}\/{endDate}": {
+            "get": {
+                "summary": "Stream BarChart - Date Range\n",
+                "description": "Streams barchart data starting from startDate to end date, each bar filling interval of unit.\n",
+                "operationId": "StreamBarchartsFromStartDateToEndDate",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "SessionTemplate",
+                        "in": "query",
+                        "description": "United States (US) stock market session templates, that extend bars returned to include those outside of the regular trading session. Ignored for non-US equity symbols."
+                    },
+                    {
+                        "name": "symbol",
+                        "in": "path",
+                        "description": "Symbol to lookup"
+                    },
+                    {
+                        "name": "interval",
+                        "in": "path",
+                        "description": "Interval that each bar will consist of. **For Daily, Weekly, and Monthly units this value must be 1.**"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "path",
+                        "description": "Unit of time for each bar interval."
+                    },
+                    {
+                        "name": "startDate",
+                        "in": "path",
+                        "description": "The starting date to begin streaming bars from. Date is of form MM-DD-YYYY, and optionally can specify a starting time with format MM-DD-YYYYt08:00:00 and even further UTC offset with format MM-DD-YYYYt12:00:00-0600"
+                    },
+                    {
+                        "name": "endDate",
+                        "in": "path",
+                        "description": "The ending date for bars streamed. Date is of form MM-DD-YYYY, and optionally can specify a starting time with format MM-DD-YYYYt08:00:00 and even further UTC offset with format MM-DD-YYYYt12:00:00-0600"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/stream\/barchart\/{symbol}\/{interval}\/{unit}\/{barsBack}\/{lastDate}\/...": {
+            "get": {
+                "summary": "Stream BarChart - Bars Back\n",
+                "description": "Streams barchart data starting from a number of bars back from last date, each bar filling interval of unit.\n",
+                "operationId": "StreamBarchartsBarsBack",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "SessionTemplate",
+                        "in": "query",
+                        "description": "United States (US) stock market session templates, that extend bars returned to include those outside of the regular trading session. Ignored for non-US equity symbols."
+                    },
+                    {
+                        "name": "symbol",
+                        "in": "path",
+                        "description": "Symbol to lookup"
+                    },
+                    {
+                        "name": "interval",
+                        "in": "path",
+                        "description": "Interval that each bar will consist of. **For Daily, Weekly, and Monthly units this value must be 1.**"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "path",
+                        "description": "Unit of time for each bar interval."
+                    },
+                    {
+                        "name": "barsBack",
+                        "in": "path",
+                        "description": "The number of bars to stream, going back from time 00:00:00 of the day specified in lastDate"
+                    },
+                    {
+                        "name": "lastDate",
+                        "in": "path",
+                        "description": "The date to use as the end point when getting bars back. Date is of form MM-DD-YYYY, and is for time 00:00:00 of that day."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/stream\/barchart\/{symbol}\/{interval}\/{unit}": {
+            "get": {
+                "summary": "Stream BarChart - Days Back\n",
+                "description": "Streams barchart data starting from a number of days back from last date, each bar filling interval of unit.\n",
+                "operationId": "StreamBarchartsDaysBack",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "SessionTemplate",
+                        "in": "query",
+                        "description": "United States (US) stock market session templates, that extend bars returned to include those outside of the regular trading session. Ignored for non-US equity symbols."
+                    },
+                    {
+                        "name": "symbol",
+                        "in": "path",
+                        "description": "Symbol to lookup"
+                    },
+                    {
+                        "name": "interval",
+                        "in": "path",
+                        "description": "Interval that each bar will consist of. **For Daily, Weekly, and Monthly units this value must be 1.**"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "path",
+                        "description": "Unit of time for each bar interval."
+                    },
+                    {
+                        "name": "daysBack",
+                        "in": "query",
+                        "description": "The number of bars to stream, going back from time 00:00:00 of the day specified in lastDate. Cannot exceed greater than 57600 if unit is Minute."
+                    },
+                    {
+                        "name": "lastDate",
+                        "in": "query",
+                        "description": "The date to use as the end point when getting days back. Date is of form MM-DD-YYYY, and optionally can specify a starting time with format MM-DD-YYYYt08:00:00 and even further UTC offset with format MM-DD-YYYYt12:00:00-0600"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/stream\/tickbars\/{symbol}\/{interval}\/{barsBack}": {
+            "get": {
+                "summary": "Stream Tick Bars\n",
+                "description": "Streams tick bars data from a number of bars back, each bar returned separated by interval number of ticks.\n",
+                "operationId": "StreamTickBars",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "symbol",
+                        "in": "path",
+                        "description": "Symbol to lookup"
+                    },
+                    {
+                        "name": "interval",
+                        "in": "path",
+                        "description": "Interval that each bar will consist of. **For Daily, Weekly, and Monthly units this value must be 1.**"
+                    },
+                    {
+                        "name": "barsBack",
+                        "in": "path",
+                        "description": "The number of bars to stream, going back from time 00:00:00 of the day specified in lastDate"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/data\/symbollists": {
+            "get": {
+                "summary": "Get all Symbol Lists\n",
+                "description": "Gets a list of all Symbol Lists\n",
+                "operationId": "GetSymbolLists",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/data\/symbollists\/{symbol_list_id}": {
+            "get": {
+                "summary": "Get Symbol List\n",
+                "description": "Gets a specific Symbol List\n",
+                "operationId": "GetSymbolListByID",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "symbol_list_id",
+                        "in": "path",
+                        "description": "A valid Symbol List ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/data\/symbollists\/{symbol_list_id}\/symbols": {
+            "get": {
+                "summary": "Get Symbols in a Symbol List\n",
+                "description": "Gets the Symbols for a specific Symbol List\n",
+                "operationId": "GetSymbolListSymbolsByID",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "symbol_list_id",
+                        "in": "path",
+                        "description": "A valid Symbol List ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/users\/{user_id}\/accounts": {
+            "get": {
+                "summary": "Get User Accounts\n",
+                "description": "Returns all accounts for the given user\n",
+                "operationId": "GetAccountsByUserID",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "User ID for Accounts Lookup"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/accounts\/{account_keys}\/balances": {
+            "get": {
+                "summary": "Get Account Balances\n",
+                "description": "Returns the Balance for the given accounts\n",
+                "operationId": "GetBalancesByAccounts",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "account_keys",
+                        "in": "path",
+                        "description": "1 to 25 account keys can be specified, comma separated. Recommended batch size is 10."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/accounts\/{account_keys}\/positions": {
+            "get": {
+                "summary": "Get Account Positions\n",
+                "description": "Returns the Positions for the given accounts\n",
+                "operationId": "GetPositionsByAccounts",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "account_keys",
+                        "in": "path",
+                        "description": "1 to 25 account keys can be specified, comma separated. Recommended batch size is 10."
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "An OData filter to apply to the results"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/accounts\/{account_keys}\/orders": {
+            "get": {
+                "summary": "Get Account Orders\n",
+                "description": "Returns the Orders for the given accounts sorted descending, most recent order first.\n\nNote: Intermediate order state changes are not available.\n",
+                "operationId": "GetOrdersByAccounts",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "since",
+                        "in": "query",
+                        "description": "Start Date from which to pull older orders. `MM-DD-YYYY` format. Limited to 14 days prior to the current date.\n"
+                    },
+                    {
+                        "name": "account_keys",
+                        "in": "path",
+                        "description": "1 to 25 account keys can be specified, comma separated. Recommended batch size is 10."
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Conveys the number of order items to return in the request. (Default page size is 600).\nNote that an empty set will be returned for a pageNum\/pageSize combination that doesn't contain orders.  Pagination applies to current and historical orders separately when a value for \"since\" is specified.\n"
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "Conveys the page number to return, given a set of orders and a page size.\nNote that an empty set will be returned for a pageNum\/pageSize combination that doesn't contain orders.\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/orders\/confirm": {
+            "post": {
+                "summary": "Confirm Order\n",
+                "description": "Returns estimated cost and commission information for an order without the order actually being placed. The fields that are returned in the response depend on the order type.\nThe following shows the different fields that will be returned.\n\n**Base Confirmation**  (All confirmations will have these fields)\n* Route\n* Duration\n* Account\n* SummaryMessage\n* OrderConfirmId\n\n**Equity Confirmation** (Base Confirmation fields + the following)\n* EstimatedPrice\n* EstimatedPriceDisplay\n* EstimatedCost\n* Esti",
+                "operationId": "PostOrderConfirm",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/orders": {
+            "post": {
+                "summary": "Submit Order\n",
+                "description": "Submits 1 or more orders\n",
+                "operationId": "PostOrder",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/orders\/{order_id}": {
+            "delete": {
+                "summary": "Cancel Order\n",
+                "description": "Cancels an open order. You cannot cancel an order that has been filled.\n",
+                "operationId": "CancelOrder",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "order_id",
+                        "in": "path",
+                        "description": "An existing Order ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Order\n",
+                "description": "Updates (Cancels & Replaces) an open order. You cannot update an order\nthat has been filled.\n\nRules:\n\n | Original order type              | Fields to update                 | Can only change order type to |\n | -------------------------------- | -------------------------------- | ----------------------------- |\n | Limit Orders                     | Quantity, Stop Price             | Market                        |\n | Stop Orders                      | Quantity, Stop Price             | Market    ",
+                "operationId": "CancelReplaceOrder",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    },
+                    {
+                        "name": "order_id",
+                        "in": "path",
+                        "description": "An existing Order ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/orders\/groups\/confirm": {
+            "post": {
+                "summary": "Confirm Group Order\n",
+                "description": "Returns estimated cost and commission information for a group of orders (OCO, BRK) without the orders actually being placed\n\n**Base Confirmation**  (All confirmations will have these fields)\n* Route\n* Duration\n* Account\n* SummaryMessage\n* OrderConfirmId\n\n**Equity Confirmation** (Base Confirmation fields + the following)\n* EstimatedPrice\n* EstimatedPriceDisplay\n* EstimatedCost\n* EstimatedCostDisplay\n* EstimatedCommission\n* EstimatedCommissionDisplay\n\n**Forex Confirmation** (Base Confirmation fiel",
+                "operationId": "PostOrderGroupsConfirm",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/orders\/groups": {
+            "post": {
+                "summary": "Submit Group Order\n",
+                "description": "Submits a group order such as Bracket and OCO Orders.\n\n#### Order Cancels Order (OCO)\nAn OCO order is a group of orders whereby if one of the orders is filled\nor partially-filled, then all of the other orders in the group are\ncancelled.\n\n#### Bracket OCO Orders\nA bracket order is a special instance of an OCO (Order Cancel Order).\nBracket orders are used to exit an existing position. They are designed\nto limit loss and lock in profit by \u201cbracketing\u201d an order with a\nsimultaneous stop and limit",
+                "operationId": "PostOrderGroup",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/orderexecution\/activationtriggers": {
+            "get": {
+                "summary": "\nRequest Available Activation Triggers\n",
+                "description": "To place orders with activation triggers, a valid TriggerKey must be sent with the order.  This resource provides the available trigger methods with their corresponding key.\n",
+                "operationId": "GetActivationTriggers",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/orderexecution\/exchanges": {
+            "get": {
+                "summary": "Request Available Exchanges\n",
+                "description": "Returns a list of valid exchanges that a client can specify when posting an order.\n",
+                "operationId": "GetExchanges",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "access_token",
+                        "in": "query",
+                        "description": "A valid OAuth2 token used to authorize access to the resource"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "symbol response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/SymbolDefinition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "TraceId": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "StatusCode": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "Message": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "BarchartError400": {
+                "type": "object",
+                "properties": {
+                    "StatusCode": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "Message": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "BarchartError404": {
+                "type": "object",
+                "properties": {
+                    "StatusCode": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "Message": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "SymbolDefinition": {
+                "type": "object",
+                "properties": {
+                    "Category": {
+                        "description": "The type of financial instrument that the symbol represents, such as a stock, index, or mutual fund.",
+                        "type": "string"
+                    },
+                    "Country": {
+                        "description": "The country of the exchange where the symbol is listed.",
+                        "type": "string"
+                    },
+                    "Currency": {
+                        "description": "Displays the type of base currency for the selected symbol.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Displays the full name of the symbol.",
+                        "type": "string"
+                    },
+                    "DisplayType": {
+                        "description": "Symbol's price display type based on the following list:\n\n* `0` \"Automatic\" Not used\n* `1` 0 Decimals => 1\n* `2` 1 Decimals => .1\n* `3` 2 Decimals => .01\n* `4` 3 Decimals => .001\n* `5` 4 Decimals => .0001\n* `6` 5 Decimals => .00001\n* `7` Simplest Fraction\n* `8` 1\/2-Halves => .5\n* `9` 1\/4-Fourths => .25\n* `10` 1\/8-Eights => .125\n* `11` 1\/16-Sixteenths => .0625\n* `12` 1\/32-ThirtySeconds => .03125\n* `13` 1\/64-SixtyFourths => .015625\n* `14` 1\/128-OneTwentyEigths => .0078125\n* `15` 1\/256-TwoFiftySixths => .003906250\n* `16` 10ths and Quarters => .025\n* `17` 32nds and Halves => .015625\n* `18` 32nds and Quarters => .0078125\n* `19` 32nds and Eights => .00390625\n* `20` 32nds and Tenths => .003125\n* `21` 64ths and Halves => .0078125\n* `22` 64ths and Tenths => .0015625\n* `23` 6 Decimals => .000001\n",
+                        "type": "number"
+                    },
+                    "Error": {
+                        "description": "Element that references error.",
+                        "type": "string"
+                    },
+                    "Exchange": {
+                        "description": "Name of exchange where this symbol is traded in.",
+                        "type": "string"
+                    },
+                    "ExchangeID": {
+                        "description": "A unique numerical identifier for the Exchange.",
+                        "type": "number"
+                    },
+                    "ExpirationDate": {
+                        "description": "Displays the expiration date for a futures or options contract in UTC formatted time.",
+                        "type": "string"
+                    },
+                    "ExpirationType": {
+                        "description": "For options only. It indicates whether the option is a monthly, weekly, quarterly or end of month expiration.\n* W - Weekly\n* M - Monthly\n* Q - Quartely\n* E - End of the month\n* \"\" - The term not be identified\n",
+                        "type": "string"
+                    },
+                    "FutureType": {
+                        "description": "Displays the type of future contract the symbol represents",
+                        "type": "string"
+                    },
+                    "IndustryCode": {
+                        "description": "(Japan Only) Displays a digit code that categorize companies by the type of business activities they engage in.",
+                        "type": "string"
+                    },
+                    "IndustryName": {
+                        "description": "(Japan Only) Displays the Reuters assigned industry name to which the equity symbol belongs.",
+                        "type": "string"
+                    },
+                    "LotSize": {
+                        "description": "(Japan Only) The currency amount associated with a lot (contract) in the specified account.",
+                        "type": "number"
+                    },
+                    "MinMove": {
+                        "description": "Multiplying factor using the display type to determine the minimum price increment the asset trades in. For options the MinMove may vary. If the MinMove is negative, then the MinMove is dependent on the price. The whole number portion of the min move is the threshold. The leftmost two digits to the right of the decimal (X.XXXX) indicate the min move beneath the threshold, and the rightmost two digits (X.XXXX) indicate the min move above the threshold.",
+                        "type": "number"
+                    },
+                    "Name": {
+                        "description": "A unique series of letters assigned to a security for trading purposes.",
+                        "type": "string"
+                    },
+                    "OptionType": {
+                        "description": "Displays the type of options contract the symbol represents. Valid options include: Puts, Calls.",
+                        "type": "string"
+                    },
+                    "PointValue": {
+                        "description": "Symbol`s point value.",
+                        "type": "number"
+                    },
+                    "Root": {
+                        "description": "Displays the symbol of the stock on the stock exchange.",
+                        "type": "string"
+                    },
+                    "SectorName": {
+                        "description": "(Japan Only) Displays the assigned economic sector to which the equity symbol belongs.",
+                        "type": "string"
+                    },
+                    "StrikePrice": {
+                        "description": "Displays strike price of an options contract; For Options symbols only.",
+                        "type": "number"
+                    },
+                    "Underlying": {
+                        "description": "The financial instrument on which an option contract is based or derived.",
+                        "type": "string"
+                    }
+                }
+            },
+            "SymbolSuggestDefinition": {
+                "type": "object"
+            },
+            "SymbolSearchDefinition": {
+                "type": "object"
+            },
+            "QuoteDefinition": {
+                "type": "object"
+            },
+            "SymbolListsDefinition": {
+                "type": "object"
+            },
+            "SymbolListDefinition": {
+                "type": "object",
+                "properties": {
+                    "Category": {
+                        "description": "The type of financial instrument that the symbol represents, such as a stock, index, or mutual fund.",
+                        "type": "string"
+                    },
+                    "ID": {
+                        "description": "Unique symbol list identifier.",
+                        "type": "string"
+                    },
+                    "Name": {
+                        "description": "A unique series of letters assigned to a security for trading purposes.",
+                        "type": "string"
+                    },
+                    "Path": {
+                        "description": "Full hierarchy path including name.",
+                        "type": "string"
+                    },
+                    "RootCategory": {
+                        "description": "First Level of Symbol List Hierarchy.",
+                        "type": "string"
+                    },
+                    "Subcategory": {
+                        "description": "Thrid Level of Symbol List Hierarchy.",
+                        "type": "string"
+                    }
+                }
+            },
+            "SymbolListSymbolsDefinition": {
+                "type": "object"
+            },
+            "UserAccountsDefinition": {
+                "type": "object"
+            },
+            "AccountBalancesDefinition": {
+                "type": "object"
+            },
+            "AccountPositionsDefinition": {
+                "type": "object"
+            },
+            "AccountOrdersDefinition": {
+                "type": "object"
+            },
+            "OrderConfirmRequestDefinition": {
+                "type": "object",
+                "properties": {
+                    "AccountKey": {
+                        "description": "Must be a valid Account Key for that user and Asset Type\n",
+                        "type": "string"
+                    },
+                    "AdvancedOptions": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "AssetType": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "Duration": {
+                        "description": "Allowed durations vary by Asset Type\n* DAY - Day, valid until the end of the regular trading session.\n* DYP - Day Plus; valid until the end of the extended trading session\n* GTC - Good till canceled\n* GCP - Good till canceled plus\n* GTD - Good through date\n* GDP - Good through date plus\n* OPG - At the opening; only valid for listed stocks at the opening session Price\n* CLO - On Close; orders that target the closing session of an exchange.\n* IOC - Immediate or Cancel; filled immediately or canceled, partial fills are accepted\n* FOK - Fill or Kill; orders are filled entirely or canceled, partial fills are not accepted\n* 1 or 1 MIN - 1 minute; expires after the 1 minute\n* 3 or 3 MIN - 3 minutes; expires after the 3 minutes\n* 5 or 5 MIN - 5 minutes; expires after the 5 minutes\n",
+                        "type": "string"
+                    },
+                    "GTDDate": {
+                        "description": "Date that Order is valid through. Input Format: MM\/DD\/YYYY\nRequired for orders with Duration = GTD.\n",
+                        "type": "string"
+                    },
+                    "LimitPrice": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "StopPrice": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "OrderType": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "Quantity": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "Route": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "Symbol": {
+                        "description": "Must be UPPERCASE",
+                        "type": "string"
+                    },
+                    "TradeAction": {
+                        "description": "Conveys the intent of the trade\n* BUY - `equities` and `futures`\n* SELL - `equities` and `futures`\n* BUYTOCOVER - `equities`\n* SELLSHORT - `equities`\n* BUYTOOPEN - `options`\n* BUYTOCLOSE - `options`\n* SELLTOOPEN - `options`\n* SELLTOCLOSE - `options`\n",
+                        "type": "string"
+                    },
+                    "OSOs": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "Legs": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "AdvancedOptionsDefinition": {
+                        "description": "Advanced Options for an order",
+                        "type": "object"
+                    }
+                }
+            },
+            "AdvancedOptions": {
+                "type": "object"
+            },
+            "OSOs": {
+                "type": "array"
+            },
+            "Legs": {
+                "type": "array"
+            },
+            "OrderRequestDefinition": {
+                "type": "object",
+                "properties": {
+                    "AccountKey": {
+                        "description": "Must be a valid Account Key for that user and Asset Type\n",
+                        "type": "string"
+                    },
+                    "AdvancedOptions": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "AssetType": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "Duration": {
+                        "description": "Allowed durations vary by Asset Type\n* DAY - Day, valid until the end of the regular trading session.\n* DYP - Day Plus; valid until the end of the extended trading session\n* GTC - Good till canceled\n* GCP - Good till canceled plus\n* GTD - Good through date\n* GDP - Good through date plus\n* OPG - At the opening; only valid for listed stocks at the opening session Price\n* CLO - On Close; orders that target the closing session of an exchange.\n* IOC - Immediate or Cancel; filled immediately or canceled, partial fills are accepted\n* FOK - Fill or Kill; orders are filled entirely or canceled, partial fills are not accepted\n* 1 or 1 MIN - 1 minute; expires after the 1 minute\n* 3 or 3 MIN - 3 minutes; expires after the 3 minutes\n* 5 or 5 MIN - 5 minutes; expires after the 5 minutes\n",
+                        "type": "string"
+                    },
+                    "GTDDate": {
+                        "description": "Date that Order is valid through. Input Format: MM\/DD\/YYYY\nRequired for orders with Duration = GTD.\n",
+                        "type": "string"
+                    },
+                    "LimitPrice": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "StopPrice": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "OrderConfirmId": {
+                        "description": "A unique identifier regarding an order used to prevent duplicates.\n\nMust be unique per API key, per order, per user.\n",
+                        "type": "string"
+                    },
+                    "OrderType": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "Quantity": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "Route": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "Symbol": {
+                        "description": "Must be UPPERCASE",
+                        "type": "string"
+                    },
+                    "TradeAction": {
+                        "description": "Conveys the intent of the trade\n* BUY - `equities` and `futures`\n* SELL - `equities` and `futures`\n* BUYTOCOVER - `equities`\n* SELLSHORT - `equities`\n* BUYTOOPEN - `options`\n* BUYTOCLOSE - `options`\n* SELLTOOPEN - `options`\n* SELLTOCLOSE - `options`\n",
+                        "type": "string"
+                    },
+                    "OSOs": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "Legs": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "AdvancedOptionsDefinition": {
+                        "description": "Advanced Options for an order",
+                        "type": "object"
+                    }
+                }
+            },
+            "CancelReplaceDefinition": {
+                "type": "object",
+                "properties": {
+                    "LimitPrice": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "StopPrice": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "OrderType": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "Quantity": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "Symbol": {
+                        "description": "Must be UPPERCASE",
+                        "type": "string"
+                    },
+                    "AdvancedOptions": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "CancelReplaceAdvancedOptionsDefinition": {
+                        "description": "Advanced Options for an order",
+                        "type": "object"
+                    }
+                }
+            },
+            "CancelReplaceAdvancedOptionsDefinition": {
+                "type": "object",
+                "properties": {
+                    "TrailingStop": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "MarketActivationRules": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "TimeActivationRules": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "ShowOnlyQuantity": {
+                        "description": "Number of shares to submit to market at a time for this order. Valid for futures and equities orders. For equities, must be multiple of 100.\nCannot be added if original order did not have ShowOnlyQuantity.\n",
+                        "type": "integer"
+                    },
+                    "TrailingStopDefinition": {
+                        "description": "Trailing Stop offset; amount or percent",
+                        "type": "object"
+                    },
+                    "CancelReplaceMarketActivationRuleDefinition": {
+                        "description": "Advanced Options for an order",
+                        "type": "object"
+                    },
+                    "CancelReplaceTimeActivationRuleDefinition": {
+                        "description": "Advanced Options for an order",
+                        "type": "object"
+                    }
+                }
+            },
+            "TrailingStop": {
+                "type": "object"
+            },
+            "MarketActivationRules": {
+                "type": "array"
+            },
+            "TimeActivationRules": {
+                "type": "array"
+            },
+            "CancelReplaceMarketActivationRuleDefinition": {
+                "type": "object",
+                "properties": {
+                    "ClearAll": {
+                        "description": "If 'True', removes all activation rules when replacing the order and ignores any rules sent in `Rules`.\n",
+                        "type": "boolean"
+                    },
+                    "Rules": {
+                        "description": "Set of market-based activation rules that must be met before order is sent to the exchange. Max 4 rules.\n",
+                        "type": "array"
+                    }
+                }
+            },
+            "Rules": {
+                "type": "array"
+            },
+            "CancelReplaceTimeActivationRuleDefinition": {
+                "type": "object",
+                "properties": {
+                    "ClearAll": {
+                        "description": "If 'True', removes all activation rules when replacing the order and ignores any rules sent in `Rules`.\n",
+                        "type": "boolean"
+                    },
+                    "Rules": {
+                        "description": "Set of market-based activation rules that must be met before order is sent to the exchange. Max 4 rules.\n",
+                        "type": "array"
+                    }
+                }
+            },
+            "AdvancedOptionsDefinition": {
+                "type": "object",
+                "properties": {
+                    "TrailingStop": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "MarketActivationRules": {
+                        "description": "Set of market-based activation rules that must be met before order is sent to the exchange. Max 4 rules.\n",
+                        "type": "array"
+                    },
+                    "TimeActivationRules": {
+                        "description": "Set of time-based activation rules that must be met before order is sent to the exchange. Max 1 rule.\n",
+                        "type": "array"
+                    },
+                    "ShowOnlyQuantity": {
+                        "description": "Number of shares to submit to market at a time for this order. Valid for futures and equities orders. For equities, must be multiple of 100.\nCannot be added if original order did not have ShowOnlyQuantity.\n",
+                        "type": "integer"
+                    },
+                    "TrailingStopDefinition": {
+                        "description": "Trailing Stop offset; amount or percent",
+                        "type": "object"
+                    }
+                }
+            },
+            "MarketActivationRuleDefinition": {
+                "type": "object",
+                "properties": {
+                    "RuleType": {
+                        "description": "Type of the activation rule. Currently only support \"Price\"\n",
+                        "type": "string"
+                    },
+                    "Symbol": {
+                        "description": "Must be UPPERCASE",
+                        "type": "string"
+                    },
+                    "Predicate": {
+                        "description": "The predicate comparison for the market rule type. E.g. Lt (less than).\n",
+                        "type": "string"
+                    },
+                    "TriggerKey": {
+                        "description": "The ticks behavior for the activation rule.\n",
+                        "type": "string"
+                    },
+                    "Price": {
+                        "description": "Valid only for Type=\"Price\", the price at which the rule will trigger when the price hits ticks as specified by TriggerType\n",
+                        "type": "string"
+                    },
+                    "LogicOperator": {
+                        "description": "Relation with the previous activation rule when given a list of MarketActivationRules. Ignored for the first MarketActivationRule.\n",
+                        "type": "string"
+                    }
+                }
+            },
+            "TimeActivationRuleDefinition": {
+                "type": "object",
+                "properties": {
+                    "TimeUtc": {
+                        "description": "Order is activated once current UTC time is greater thans or equal to TimeUtc. hh:mm:ss\n",
+                        "type": "string"
+                    }
+                }
+            },
+            "TrailingStopDefinition": {
+                "type": "object",
+                "properties": {
+                    "Amount": {
+                        "description": "Currency Offset from current price.\nNote: Mutually exclusive with Percent.\n",
+                        "type": "number"
+                    },
+                    "Percent": {
+                        "description": "Percentage offset from current price.\nNote: Mutually exclusive with Amount.\n",
+                        "type": "number"
+                    }
+                }
+            },
+            "OrderConfirmResponseDefinition": {
+                "type": "object",
+                "properties": {
+                    "Route": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "Duration": {
+                        "description": "Allowed durations vary by Asset Type\n* DAY - Day, valid until the end of the regular trading session.\n* DYP - Day Plus; valid until the end of the extended trading session\n* GTC - Good till canceled\n* GCP - Good till canceled plus\n* GTD - Good through date\n* GDP - Good through date plus\n* OPG - At the opening; only valid for listed stocks at the opening session Price\n* CLO - On Close; orders that target the closing session of an exchange.\n* IOC - Immediate or Cancel; filled immediately or canceled, partial fills are accepted\n* FOK - Fill or Kill; orders are filled entirely or canceled, partial fills are not accepted\n* 1 or 1 MIN - 1 minute; expires after the 1 minute\n* 3 or 3 MIN - 3 minutes; expires after the 3 minutes\n* 5 or 5 MIN - 5 minutes; expires after the 5 minutes\n",
+                        "type": "string"
+                    },
+                    "Account": {
+                        "description": "The number that identifies a specific TradeStation account that is being used for a particular order.",
+                        "type": "string"
+                    },
+                    "OrderConfirmId": {
+                        "description": "A unique identifier regarding an order used to prevent duplicates.\n\nMust be unique per API key, per order, per user.\n",
+                        "type": "string"
+                    },
+                    "EstimatedPrice": {
+                        "description": "An estimated value that is calculated using current market information. The actual cost for Market orders and orders with conditions, such as Trailing Stop or Activation Rule orders, may differ significantly from this estimate.",
+                        "type": "number"
+                    },
+                    "EstimatedPriceDisplay": {
+                        "description": "Equity and Futures Orders; Estimated price formatted for display",
+                        "type": "string"
+                    },
+                    "EstimatedCost": {
+                        "description": "The actual cost for Market orders and orders with conditions, such as Trailing Stop or Activation Rule orders.",
+                        "type": "number"
+                    },
+                    "EstimatedCostDisplay": {
+                        "description": "Equity Orders; Estimated cost formatted for display",
+                        "type": "string"
+                    },
+                    "DebitCreditEstimatedCost": {
+                        "description": "The actual cost for Market orders and orders with conditions, such as Trailing Stop or Activation Rule orders. Takes into account wheather or not the transaction will result in a debit or credit to the user.",
+                        "type": "number"
+                    },
+                    "DebitCreditEstimatedCostDisplay": {
+                        "description": "Equity Orders; Debit credit estimated cost formatted for display",
+                        "type": "string"
+                    },
+                    "EstimatedCommission": {
+                        "description": "An estimated value that is calculated using the published TradeStation commission schedule. Equity and Futures Orders",
+                        "type": "number"
+                    },
+                    "EstimatedCommissionDisplay": {
+                        "description": "Equity and Futures Orders; Estimated commission formatted for display",
+                        "type": "string"
+                    },
+                    "BaseCurrency": {
+                        "description": "Forex Orders; ",
+                        "type": "string"
+                    },
+                    "CounterCurrency": {
+                        "description": "Forex Orders; Estimated cost formatted for display",
+                        "type": "string"
+                    },
+                    "InitialMarginDisplay": {
+                        "description": "Forex and Futures Orders; Initial margin cost formatted for display in currency of asset",
+                        "type": "string"
+                    },
+                    "ProductCurrency": {
+                        "description": "Futures Orders; ",
+                        "type": "string"
+                    },
+                    "AccountCurrency": {
+                        "description": "Futures Orders; ",
+                        "type": "string"
+                    },
+                    "TrailingStopDefinition": {
+                        "description": "Trailing Stop offset; amount or percent",
+                        "type": "object"
+                    },
+                    "TrailingStop": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "MarketActivationRules": {
+                        "description": "Set of market-based activation rules that must be met before order is sent to the exchange. Max 4 rules.\n",
+                        "type": "array"
+                    },
+                    "TimeActivationRules": {
+                        "description": "Set of time-based activation rules that must be met before order is sent to the exchange. Max 1 rule.\n",
+                        "type": "array"
+                    },
+                    "ShowOnlyQuantity": {
+                        "description": "Number of shares to submit to market at a time for this order. Valid for futures and equities orders. For equities, must be multiple of 100.\nCannot be added if original order did not have ShowOnlyQuantity.\n",
+                        "type": "integer"
+                    }
+                }
+            },
+            "GroupOrderConfirmRequestDefinition": {
+                "type": "object",
+                "properties": {
+                    "Orders": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "Type": {
+                        "description": "Indicates how Order Execution should treat this group of orders.\n",
+                        "type": "string"
+                    }
+                }
+            },
+            "Orders": {
+                "type": "array"
+            },
+            "GroupOrderConfirmResponseDefinition": {
+                "type": "object"
+            },
+            "OrderResponseDefinition": {
+                "type": "object",
+                "properties": {
+                    "Message": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "OrderID": {
+                        "description": "Identifier for order.",
+                        "type": "string"
+                    },
+                    "OrderStatus": {
+                        "description": "Returns the status of the order operation",
+                        "type": "string"
+                    }
+                }
+            },
+            "GroupOrderRequestDefinition": {
+                "type": "object",
+                "properties": {
+                    "Orders": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "Type": {
+                        "description": "Indicates how Order Execution should treat this group of orders.\n",
+                        "type": "string"
+                    }
+                }
+            },
+            "GroupOrderResponseDefinition": {
+                "type": "object"
+            },
+            "ActivationTriggerDefinition": {
+                "type": "object",
+                "properties": {
+                    "Description": {
+                        "description": "Displays the full name of the symbol.",
+                        "type": "string"
+                    },
+                    "Key": {
+                        "description": "* STT - Single Trade Tick; One trade tick must print within your stop price to trigger your stop.\n* STTN - Single Trade Tick within NBBO;    One trade tick within the National Best Bid or Offer must print within your stop price to trigger your stop.\n* SBA - Single Bid\/Ask Tick;    Buy\/Cover Orders - One Ask tick must print within your stop price to trigger your stop. Sell\/Short Orders - One Bid tick must print within your stop price to trigger your stop.\n* SAB - Single Ask\/Bid Tick; Buy\/Cover Orders - One Bid tick must print within your stop price to trigger your stop. Sell\/Short Orders - One Ask tick must print within your stop price to trigger your stop.\n* DTT - Double Trade Tick; Two consecutive trade ticks must print within your stop price to trigger your stop.\n* DTTN - Double Trade Tick within NBBO; Two consecutive trade ticks within the National Best Bid or Offer must print within your stop price to trigger your stop.\n* DBA - Double Bid\/Ask Tick; Buy\/Cover Orders - Two consecutive Ask ticks must print within your stop price to trigger your stop. Sell\/Short Orders - Two consecutive Bid ticks must print within your stop price to trigger your stop\n* DAB - Double Ask\/Bid Tick;     Buy\/Cover Orders - Two consecutive Bid ticks must print within your stop price to trigger your stop. Sell\/Short Orders - Two consecutive Ask ticks must print within your stop price to trigger your stop.\n* TTT - Twice Trade Tick; Two trade ticks must print within your stop price to trigger your sto",
+                        "type": "string"
+                    },
+                    "Name": {
+                        "description": "A unique series of letters assigned to a security for trading purposes.",
+                        "type": "string"
+                    }
+                }
+            },
+            "ExchangeDefinition": {
+                "type": "object",
+                "properties": {
+                    "AssetType": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "ID": {
+                        "description": "Unique symbol list identifier.",
+                        "type": "string"
+                    },
+                    "Name": {
+                        "description": "A unique series of letters assigned to a security for trading purposes.",
+                        "type": "string"
+                    }
+                }
+            },
+            "BarchartDefinition": {
+                "type": "object",
+                "properties": {
+                    "Close": {
+                        "description": "Close price of current bar.",
+                        "type": "number"
+                    },
+                    "DownTicks": {
+                        "description": "A trade made at a price less than the previous trade price or at a price equal to the previous trade price..",
+                        "type": "number"
+                    },
+                    "DownVolume": {
+                        "description": "The volume of securities with a current price that is below the previous day`s close",
+                        "type": "number"
+                    },
+                    "High": {
+                        "description": "High price of current bar.",
+                        "type": "number"
+                    },
+                    "Low": {
+                        "description": "Low price of current bar.",
+                        "type": "number"
+                    },
+                    "Open": {
+                        "description": "Open price of current bar.",
+                        "type": "number"
+                    },
+                    "OpenInterest": {
+                        "description": "Number of open contracts.",
+                        "type": "number"
+                    },
+                    "Status": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "TimeStamp": {
+                        "description": "Epoch timestamp.",
+                        "type": "string"
+                    },
+                    "TotalTicks": {
+                        "description": "Total number of ticks (upticks and downticks together).",
+                        "type": "number"
+                    },
+                    "TotalVolume": {
+                        "description": "The total volume of all securities trading on a specific exchange.",
+                        "type": "number"
+                    },
+                    "UnchangedTicks": {
+                        "description": "The number of securities with a current price that is the same as the previous day`s close",
+                        "type": "number"
+                    },
+                    "UnchangedVolume": {
+                        "description": "The volume of securities with a current price that is the same as the previous day`s close.",
+                        "type": "number"
+                    },
+                    "UpTicks": {
+                        "description": "A trade made at a price greater than the previous trade price, or at a price equal to the previous trade price.",
+                        "type": "number"
+                    },
+                    "UpVolume": {
+                        "description": "The volume of securities with a current price that is above the previous day`s close.",
+                        "type": "number"
+                    },
+                    "StatusDefinition": {
+                        "description": "Status value for Barcharts and Tickbars. Integer value represeting values through bit mappings",
+                        "type": "object"
+                    }
+                }
+            },
+            "Status": {
+                "type": "object"
+            },
+            "StatusDefinition": {
+                "type": "object",
+                "properties": {
+                    "bit0": {
+                        "description": "`NEW`: Set on the first time the bar is sent",
+                        "type": "integer"
+                    },
+                    "bit1": {
+                        "description": "`REAL_TIME_DATA`: Set when there is data in the bar and the data is being built in \"real time\"\" from a trade",
+                        "type": "integer"
+                    },
+                    "bit2": {
+                        "description": "`HISTORICAL_DATA`: Set when there is data in the bar and the data is historical data, or is built from historical data",
+                        "type": "integer"
+                    },
+                    "bit3": {
+                        "description": "`STANDARD_CLOSE`: Set when the bar is closed \"normally\" (e.g. a 2 tick tickchart bar was closed because of the second tick, a 10-min barchart was closed due to time, etc.)",
+                        "type": "integer"
+                    },
+                    "bit4": {
+                        "description": "`END_OF_SESSION_CLOSE`: Set when the bar was closed \"prematurely\" due to the end of the trading session and the particular bar type is not meant to span trading sessions",
+                        "type": "integer"
+                    },
+                    "bit5": {
+                        "description": "`UPDATE_CORPACTION`: Set when there was an update due to corporate action",
+                        "type": "integer"
+                    },
+                    "bit6": {
+                        "description": "`UPDATE_CORRECTION`:",
+                        "type": "integer"
+                    },
+                    "bit7": {
+                        "description": "`ANALYSIS_BAR`: Set when the bar should not be considered except for analysis purposes",
+                        "type": "integer"
+                    },
+                    "bit8": {
+                        "description": "`EXTENDED_BAR`",
+                        "type": "integer"
+                    },
+                    "bit19": {
+                        "description": "`PREV_DAY_CORRECTION`",
+                        "type": "integer"
+                    },
+                    "bit23": {
+                        "description": "`AFTER_MARKET_CORRECTION`",
+                        "type": "integer"
+                    },
+                    "bit24": {
+                        "description": "`PHANTOM_BAR`: Set when the bar is synthetic - thus created only to fill gaps",
+                        "type": "integer"
+                    },
+                    "bit25": {
+                        "description": "`EMPTY_BAR`",
+                        "type": "integer"
+                    },
+                    "bit26": {
+                        "description": "`BACKFILL_DATA`",
+                        "type": "integer"
+                    },
+                    "bit27": {
+                        "description": "`ARCHIVE_DATA`",
+                        "type": "integer"
+                    },
+                    "bit28": {
+                        "description": "`GHOST_BAR`: Set when the bar is empty but specifically for the end session",
+                        "type": "integer"
+                    },
+                    "bit29": {
+                        "description": "`END_OF_HISTORY_STREAM`: Set on a bar to convey to consumer that all historical bars have been sent.  Historical bars are not guaranteed to be returned in order",
+                        "type": "integer"
+                    }
+                }
+            },
+            "TickbarDefinition": {
+                "type": "object",
+                "properties": {
+                    "Close": {
+                        "description": "Close price of current bar.",
+                        "type": "number"
+                    },
+                    "StatusDefinition": {
+                        "description": "Status value for Barcharts and Tickbars. Integer value represeting values through bit mappings",
+                        "type": "object"
+                    },
+                    "Status": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "TimeStamp": {
+                        "description": "Epoch timestamp.",
+                        "type": "string"
+                    },
+                    "TotalVolume": {
+                        "description": "The total volume of all securities trading on a specific exchange.",
+                        "type": "number"
+                    }
+                }
+            },
+            "account_keys": {
+                "type": "array"
+            }
+        }
+    }
+}

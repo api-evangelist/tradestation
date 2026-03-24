@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/tradestation/order.json",
+  "title": "TradeStation Order",
+  "description": "Schema for TradeStation order submission, modification, and group order operations. Covers single orders, bracket orders (OCO), and order-sends-order (OSO) strategies.",
+  "type": "object",
+  "required": [
+    "AccountID",
+    "Symbol",
+    "Quantity",
+    "OrderType",
+    "TradeAction",
+    "TimeInForce"
+  ],
+  "properties": {
+    "AccountID": {
+      "type": "string",
+      "description": "The brokerage account identifier to place the order in."
+    },
+    "Symbol": {
+      "type": "string",
+      "description": "The symbol to trade, such as a stock ticker, option symbol, or futures contract."
+    },
+    "Quantity": {
+      "type": "number",
+      "minimum": 1,
+      "description": "The number of shares, contracts, or units to trade."
+    },
+    "OrderType": {
+      "type": "string",
+      "description": "The type of order determining execution behavior.",
+      "enum": [
+        "Market",
+        "Limit",
+        "StopMarket",
+        "StopLimit",
+        "TrailingStop",
+        "TrailingStopLimit"
+      ]
+    },
+    "TradeAction": {
+      "type": "string",
+      "description": "The direction and intent of the trade.",
+      "enum": [
+        "Buy",
+        "Sell",
+        "BuyToOpen",
+        "BuyToClose",
+        "SellToOpen",
+        "SellToClose",
+        "SellShort",
+        "BuyToCover"
+      ]
+    },
+    "TimeInForce": {
+      "type": "string",
+      "description": "How long the order remains active before expiring.",
+      "enum": [
+        "Day",
+        "GTC",
+        "GTD",
+        "IOC",
+        "FOK",
+        "OPG",
+        "CLO"
+      ]
+    },
+    "LimitPrice": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The limit price for Limit and StopLimit order types."
+    },
+    "StopPrice": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The stop trigger price for StopMarket, StopLimit, and TrailingStop order types."
+    },
+    "Route": {
+      "type": "string",
+      "description": "The routing destination for order execution. Use the routes endpoint to retrieve valid values."
+    },
+    "GTDDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The good-til-date expiration date when TimeInForce is GTD."
+    },
+    "AdvancedOptions": {
+      "$ref": "#/$defs/AdvancedOptions"
+    },
+    "Legs": {
+      "type": "array",
+      "description": "Option legs for multi-leg option orders.",
+      "items": {
+        "$ref": "#/$defs/OptionLeg"
+      }
+    }
+  },
+  "$defs": {
+    "AdvancedOptions": {
+      "type": "object",
+      "description": "Advanced order options including trailing stop configuration.",
+      "properties": {
+        "TrailingStop": {
+          "$ref": "#/$defs/TrailingStopOptions"
+        }
+      }
+    },
+    "TrailingStopOptions": {
+      "type": "object",
+      "description": "Configuration for trailing stop orders.",
+      "properties": {
+        "Amount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "The trailing amount in dollars. Mutually exclusive with Percent."
+        },
+        "Percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "The trailing amount as a percentage. Mutually exclusive with Amount."
+        }
+      }
+    },
+    "OptionLeg": {
+      "type": "object",
+      "description": "A single leg of a multi-leg option order.",
+      "required": [
+        "Symbol",
+        "Quantity",
+        "TradeAction"
+      ],
+      "properties": {
+        "Symbol": {
+          "type": "string",
+          "description": "The option contract symbol."
+        },
+        "Quantity": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The number of option contracts."
+        },
+        "TradeAction": {
+          "type": "string",
+          "description": "The trade action for this option leg.",
+          "enum": [
+            "BuyToOpen",
+            "BuyToClose",
+            "SellToOpen",
+            "SellToClose"
+          ]
+        }
+      }
+    },
+    "GroupOrder": {
+      "type": "object",
+      "description": "A group of related orders such as bracket (OCO), order-sends-order (OSO), or one-cancels-other strategies.",
+      "required": [
+        "Type",
+        "Orders"
+      ],
+      "properties": {
+        "Type": {
+          "type": "string",
+          "description": "The group order relationship type.",
+          "enum": [
+            "OCO",
+            "BRK",
+            "OSO"
+          ]
+        },
+        "Orders": {
+          "type": "array",
+          "description": "The individual orders that make up the group.",
+          "minItems": 2,
+          "items": {
+            "$ref": "#"
+          }
+        }
+      }
+    },
+    "OrderResult": {
+      "type": "object",
+      "description": "The result of an order submission, modification, or cancellation.",
+      "properties": {
+        "OrderID": {
+          "type": "string",
+          "description": "The unique order identifier assigned by TradeStation."
+        },
+        "Message": {
+          "type": "string",
+          "description": "A human-readable message about the order result."
+        },
+        "OrderStatus": {
+          "type": "string",
+          "description": "The current status of the order.",
+          "enum": [
+            "Open",
+            "Filled",
+            "PartiallyFilled",
+            "Cancelled",
+            "Rejected",
+            "Expired",
+            "Queued",
+            "Received"
+          ]
+        }
+      }
+    },
+    "OrderConfirmation": {
+      "type": "object",
+      "description": "Pre-submission confirmation details including estimated costs.",
+      "properties": {
+        "EstimatedCommission": {
+          "type": "number",
+          "description": "The estimated commission for the order."
+        },
+        "EstimatedCost": {
+          "type": "number",
+          "description": "The estimated total cost of the order."
+        },
+        "EstimatedPrice": {
+          "type": "number",
+          "description": "The estimated execution price."
+        },
+        "MarginRequirement": {
+          "type": "number",
+          "description": "The margin requirement for the order."
+        }
+      }
+    }
+  }
+}

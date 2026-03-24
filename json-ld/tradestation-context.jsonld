@@ -1,0 +1,234 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ts": "https://api.tradestation.com/vocab/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "fibo": "https://spec.edmcouncil.org/fibo/ontology/",
+
+    "Account": {
+      "@id": "ts:Account",
+      "@context": {
+        "accountId": "ts:accountId",
+        "accountType": "ts:accountType",
+        "status": "schema:status",
+        "statusDescription": "schema:description"
+      }
+    },
+
+    "Balance": {
+      "@id": "ts:Balance",
+      "@context": {
+        "accountId": "ts:accountId",
+        "cashBalance": {
+          "@id": "ts:cashBalance",
+          "@type": "xsd:decimal"
+        },
+        "equity": {
+          "@id": "ts:equity",
+          "@type": "xsd:decimal"
+        },
+        "marketValue": {
+          "@id": "ts:marketValue",
+          "@type": "xsd:decimal"
+        },
+        "buyingPower": {
+          "@id": "ts:buyingPower",
+          "@type": "xsd:decimal"
+        },
+        "realizedProfitLoss": {
+          "@id": "ts:realizedProfitLoss",
+          "@type": "xsd:decimal"
+        },
+        "unrealizedProfitLoss": {
+          "@id": "ts:unrealizedProfitLoss",
+          "@type": "xsd:decimal"
+        }
+      }
+    },
+
+    "Position": {
+      "@id": "ts:Position",
+      "@context": {
+        "symbol": "schema:tickerSymbol",
+        "quantity": {
+          "@id": "ts:quantity",
+          "@type": "xsd:decimal"
+        },
+        "averagePrice": {
+          "@id": "ts:averagePrice",
+          "@type": "xsd:decimal"
+        },
+        "marketValue": {
+          "@id": "ts:marketValue",
+          "@type": "xsd:decimal"
+        },
+        "unrealizedProfitLoss": {
+          "@id": "ts:unrealizedProfitLoss",
+          "@type": "xsd:decimal"
+        },
+        "assetType": "ts:assetType",
+        "longShort": "ts:longShort"
+      }
+    },
+
+    "Order": {
+      "@id": "ts:Order",
+      "@context": {
+        "orderId": "ts:orderId",
+        "accountId": "ts:accountId",
+        "symbol": "schema:tickerSymbol",
+        "quantity": {
+          "@id": "ts:quantity",
+          "@type": "xsd:decimal"
+        },
+        "orderType": "ts:orderType",
+        "tradeAction": "ts:tradeAction",
+        "status": "schema:orderStatus",
+        "limitPrice": {
+          "@id": "ts:limitPrice",
+          "@type": "xsd:decimal"
+        },
+        "stopPrice": {
+          "@id": "ts:stopPrice",
+          "@type": "xsd:decimal"
+        },
+        "filledPrice": {
+          "@id": "ts:filledPrice",
+          "@type": "xsd:decimal"
+        },
+        "timeInForce": "ts:timeInForce",
+        "openedDateTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "closedDateTime": {
+          "@id": "ts:closedDateTime",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Quote": {
+      "@id": "ts:Quote",
+      "@context": {
+        "symbol": "schema:tickerSymbol",
+        "last": {
+          "@id": "ts:lastPrice",
+          "@type": "xsd:decimal"
+        },
+        "bid": {
+          "@id": "ts:bidPrice",
+          "@type": "xsd:decimal"
+        },
+        "ask": {
+          "@id": "ts:askPrice",
+          "@type": "xsd:decimal"
+        },
+        "volume": {
+          "@id": "ts:volume",
+          "@type": "xsd:integer"
+        },
+        "open": {
+          "@id": "ts:openPrice",
+          "@type": "xsd:decimal"
+        },
+        "high": {
+          "@id": "ts:highPrice",
+          "@type": "xsd:decimal"
+        },
+        "low": {
+          "@id": "ts:lowPrice",
+          "@type": "xsd:decimal"
+        },
+        "close": {
+          "@id": "ts:closePrice",
+          "@type": "xsd:decimal"
+        },
+        "tradeTime": {
+          "@id": "ts:tradeTime",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Symbol": {
+      "@id": "ts:Symbol",
+      "@context": {
+        "name": "schema:tickerSymbol",
+        "description": "schema:description",
+        "exchange": "schema:exchange",
+        "category": "ts:category",
+        "currency": {
+          "@id": "schema:priceCurrency",
+          "@type": "xsd:string"
+        },
+        "country": "schema:countryOfOrigin",
+        "pointValue": {
+          "@id": "ts:pointValue",
+          "@type": "xsd:decimal"
+        },
+        "minMove": {
+          "@id": "ts:minMove",
+          "@type": "xsd:decimal"
+        },
+        "expirationDate": {
+          "@id": "ts:expirationDate",
+          "@type": "xsd:date"
+        },
+        "strikePrice": {
+          "@id": "ts:strikePrice",
+          "@type": "xsd:decimal"
+        },
+        "optionType": "ts:optionType",
+        "underlying": "ts:underlying"
+      }
+    },
+
+    "Bar": {
+      "@id": "ts:Bar",
+      "@context": {
+        "open": {
+          "@id": "ts:openPrice",
+          "@type": "xsd:decimal"
+        },
+        "high": {
+          "@id": "ts:highPrice",
+          "@type": "xsd:decimal"
+        },
+        "low": {
+          "@id": "ts:lowPrice",
+          "@type": "xsd:decimal"
+        },
+        "close": {
+          "@id": "ts:closePrice",
+          "@type": "xsd:decimal"
+        },
+        "volume": {
+          "@id": "ts:volume",
+          "@type": "xsd:integer"
+        },
+        "timeStamp": {
+          "@id": "dcterms:date",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Wallet": {
+      "@id": "ts:Wallet",
+      "@context": {
+        "currency": "schema:priceCurrency",
+        "balance": {
+          "@id": "ts:balance",
+          "@type": "xsd:decimal"
+        },
+        "available": {
+          "@id": "ts:available",
+          "@type": "xsd:decimal"
+        }
+      }
+    }
+  }
+}

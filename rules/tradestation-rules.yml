@@ -1,0 +1,101 @@
+extends: spectral:oas
+rules:
+  tradestation-operation-summary-title-case:
+    description: Operation summaries must use Title Case.
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9]*(\\s[A-Z][a-zA-Z0-9]*)*$"
+
+  tradestation-operation-ids-required:
+    description: All operations must have an operationId.
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: defined
+
+  tradestation-operation-description-required:
+    description: All operations must have a description.
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: description
+      function: defined
+
+  tradestation-oauth2-required:
+    description: API must use OAuth2 authorization code authentication.
+    severity: error
+    given: "$.components.securitySchemes.oauth2AuthCode"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            type:
+              const: oauth2
+
+  tradestation-versioned-paths:
+    description: All API paths must use the /v3/ version prefix.
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/v3/"
+
+  tradestation-tags-required:
+    description: All operations must be tagged.
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: defined
+
+  tradestation-pascal-case-schema-properties:
+    description: Schema property names must use PascalCase to match TradeStation API conventions.
+    severity: warn
+    given: "$.components.schemas[*].properties[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9]*$"
+
+  tradestation-response-200-defined:
+    description: All operations must define a 200 success response.
+    severity: error
+    given: "$.paths[*][*].responses"
+    then:
+      field: "200"
+      function: defined
+
+  tradestation-response-401-defined:
+    description: All operations must define a 401 unauthorized response.
+    severity: warn
+    given: "$.paths[*][*].responses"
+    then:
+      field: "401"
+      function: defined
+
+  tradestation-post-request-body:
+    description: POST operations must define a requestBody.
+    severity: error
+    given: "$.paths[*][post]"
+    then:
+      field: requestBody
+      function: defined
+
+  tradestation-order-required-fields:
+    description: OrderRequest must define AccountID, Symbol, Quantity, OrderType, TradeAction, TimeInForce as required.
+    severity: error
+    given: "$.components.schemas.OrderRequest.required"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            const: AccountID

@@ -1,0 +1,35 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.tradestation.com/v3/orderexecution/orders",
+    "headers": {
+      "Authorization": "Bearer {{TRADESTATION_ACCESS_TOKEN}}",
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    "body": {
+      "AccountID": "123456789",
+      "Symbol": "AAPL",
+      "Quantity": 10,
+      "OrderType": "Limit",
+      "TradeAction": "Buy",
+      "TimeInForce": "Day",
+      "LimitPrice": 188.50,
+      "Route": "Intelligent"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "Orders": [
+        {
+          "OrderID": "ORDER-20260503-ABC123",
+          "Message": "Order successfully placed"
+        }
+      ]
+    }
+  }
+}

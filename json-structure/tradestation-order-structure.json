@@ -1,0 +1,37 @@
+{
+  "name": "TradeStation Order",
+  "description": "Structure of a TradeStation order for submission and management",
+  "fields": [
+    { "name": "AccountID", "type": "string", "description": "Brokerage account identifier", "required": true },
+    { "name": "Symbol", "type": "string", "description": "Symbol to trade", "required": true },
+    { "name": "Quantity", "type": "number", "description": "Number of shares or contracts", "required": true },
+    { "name": "OrderType", "type": "string", "description": "Order type", "required": true, "enum": ["Market", "Limit", "StopMarket", "StopLimit", "TrailingStop", "TrailingStopLimit"] },
+    { "name": "TradeAction", "type": "string", "description": "Trade direction", "required": true, "enum": ["Buy", "Sell", "BuyToOpen", "BuyToClose", "SellToOpen", "SellToClose", "SellShort", "BuyToCover"] },
+    { "name": "TimeInForce", "type": "string", "description": "Order duration", "required": true, "enum": ["Day", "GTC", "GTD", "IOC", "FOK", "OPG", "CLO"] },
+    { "name": "LimitPrice", "type": "number", "description": "Limit price for limit/stop-limit orders" },
+    { "name": "StopPrice", "type": "number", "description": "Stop price for stop orders" },
+    { "name": "Route", "type": "string", "description": "Routing destination" },
+    {
+      "name": "AdvancedOptions", "type": "object", "description": "Advanced order parameters",
+      "fields": [
+        {
+          "name": "TrailingStop", "type": "object",
+          "fields": [
+            { "name": "Amount", "type": "number", "description": "Trailing stop dollar amount" },
+            { "name": "Percent", "type": "number", "description": "Trailing stop percentage" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Legs", "type": "array", "description": "Option legs for multi-leg orders",
+      "items": {
+        "fields": [
+          { "name": "Symbol", "type": "string" },
+          { "name": "Quantity", "type": "integer" },
+          { "name": "TradeAction", "type": "string", "enum": ["BuyToOpen", "BuyToClose", "SellToOpen", "SellToClose"] }
+        ]
+      }
+    }
+  ]
+}

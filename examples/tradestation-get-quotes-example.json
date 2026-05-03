@@ -1,0 +1,68 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.tradestation.com/v3/marketdata/quotes/AAPL,MSFT,TSLA",
+    "headers": {
+      "Authorization": "Bearer {{TRADESTATION_ACCESS_TOKEN}}",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "Quotes": [
+        {
+          "Symbol": "AAPL",
+          "Last": 189.84,
+          "Bid": 189.82,
+          "Ask": 189.86,
+          "BidSize": 500,
+          "AskSize": 300,
+          "Volume": 52483200,
+          "Open": 188.45,
+          "High": 190.23,
+          "Low": 188.12,
+          "Close": 188.32,
+          "NetChange": 1.52,
+          "NetChangePct": 0.81,
+          "TradeTime": "2026-05-03T19:59:58Z"
+        },
+        {
+          "Symbol": "MSFT",
+          "Last": 412.35,
+          "Bid": 412.30,
+          "Ask": 412.40,
+          "BidSize": 200,
+          "AskSize": 150,
+          "Volume": 18924300,
+          "Open": 410.50,
+          "High": 413.10,
+          "Low": 409.80,
+          "Close": 411.20,
+          "NetChange": 1.15,
+          "NetChangePct": 0.28,
+          "TradeTime": "2026-05-03T19:59:57Z"
+        },
+        {
+          "Symbol": "TSLA",
+          "Last": 234.56,
+          "Bid": 234.50,
+          "Ask": 234.62,
+          "BidSize": 800,
+          "AskSize": 600,
+          "Volume": 89102400,
+          "Open": 231.00,
+          "High": 236.80,
+          "Low": 229.50,
+          "Close": 232.40,
+          "NetChange": 2.16,
+          "NetChangePct": 0.93,
+          "TradeTime": "2026-05-03T19:59:59Z"
+        }
+      ]
+    }
+  }
+}

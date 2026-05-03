@@ -1,55 +1,97 @@
-# TradeStation (tradestation)
-TradeStation is an online brokerage and trading technology company that provides a platform for trading stocks, options, and futures. Their developer platform offers a comprehensive RESTful API for building trading applications, with support for account management, order execution, real-time and historical market data, and HTTP streaming capabilities.
+# TradeStation
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/tradestation/refs/heads/main/apis.yml)
+TradeStation is a financial brokerage and trading platform offering RESTful brokerage and market data services for building trading applications for stocks, options, futures, and cryptocurrency. The API supports account management, order execution, real-time and historical market data, option chains, and HTTP streaming.
 
-## Scope
+**URL:** [apis.yml](https://raw.githubusercontent.com/api-evangelist/tradestation/refs/heads/main/apis.yml)
 
-- **Type:** Contract
-- **Position:** Consuming
-- **Access:** 3rd-Party
+## Tags
 
-## Tags:
-
- - Trading, Brokerage, Market Data, Stocks, Options, Futures, Streaming, Financial Services
-
-## Timestamps
-
-- **Created:** 2026-03-24
-- **Modified:** 2026-03-24
+- Brokerage
+- Cryptocurrency
+- Finance
+- Futures
+- Market Data
+- Options
+- Stocks
+- Trading
 
 ## APIs
 
 ### TradeStation API
-The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, and futures. The API provides endpoints for account management, order placement and execution, real-time and historical market data, and HTTP streaming for quotes, positions, and order updates. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and is available in version 3, which is the recommended version for new integrations.
+
+RESTful brokerage and market data API covering accounts, orders, quotes, bar charts, options, symbols, and reference data. Supports OAuth2 authentication with production and simulator environments.
 
 **Human URL:** [https://api.tradestation.com/docs/](https://api.tradestation.com/docs/)
 
+**Base URL:** https://api.tradestation.com
 
-#### Tags:
+#### Tags
 
- - Trading, Brokerage, Market Data, Stocks, Options, Futures, Streaming, Financial Services
+- Accounts
+- Brokerage
+- Cryptocurrency
+- Market Data
+- Options
+- Order Execution
+- Stocks
+- Trading
 
 #### Properties
 
-- [Documentation](https://api.tradestation.com/docs/)
-- [OpenAPI](https://api.tradestation.com/docs/specification/)
-- [OpenAPI](openapi/tradestation-api-openapi.yml)
-- [AsyncAPI](asyncapi/tradestation-streaming-asyncapi.yml)
-- [JSONSchema](json-schema/tradestation-order-schema.json)
+| Type | URL |
+|------|-----|
+| Documentation | [https://api.tradestation.com/docs/](https://api.tradestation.com/docs/) |
+| OpenAPI | [openapi/tradestation-api-openapi.yml](openapi/tradestation-api-openapi.yml) |
+| AsyncAPI | [asyncapi/tradestation-streaming-asyncapi.yml](asyncapi/tradestation-streaming-asyncapi.yml) |
+| JSON Schema | [json-schema/tradestation-order-schema.json](json-schema/tradestation-order-schema.json) |
+| JSON Structure | [json-structure/tradestation-order-structure.json](json-structure/tradestation-order-structure.json) |
+| JSON-LD | [json-ld/tradestation-context.jsonld](json-ld/tradestation-context.jsonld) |
+| Spectral Rules | [rules/tradestation-rules.yml](rules/tradestation-rules.yml) |
+| Vocabulary | [vocabulary/tradestation-vocabulary.yml](vocabulary/tradestation-vocabulary.yml) |
+| GitHub | [https://github.com/tradestation](https://github.com/tradestation) |
+| API Specification | [https://tradestation.github.io/api-docs/](https://tradestation.github.io/api-docs/) |
+
+### TradeStation Streaming API
+
+Real-time HTTP streaming for market data and brokerage events using chunked transfer encoding with newline-delimited JSON.
+
+**Human URL:** [https://api.tradestation.com/docs/](https://api.tradestation.com/docs/)
+
+#### Properties
+
+| Type | URL |
+|------|-----|
+| AsyncAPI | [asyncapi/tradestation-streaming-asyncapi.yml](asyncapi/tradestation-streaming-asyncapi.yml) |
+
+## Capabilities
+
+### Trading and Market Data
+
+Unified trading and market data workflow covering account management, order execution, real-time quotes, historical bar data, and options analysis.
+
+| File | Description |
+|------|-------------|
+| [capabilities/trading-and-market-data.yaml](capabilities/trading-and-market-data.yaml) | Workflow capability: 17 MCP tools for trading and market data |
+| [capabilities/shared/tradestation-api.yaml](capabilities/shared/tradestation-api.yaml) | Shared per-API consumed definition |
+
+## Examples
+
+| File | Description |
+|------|-------------|
+| [examples/tradestation-get-quotes-example.json](examples/tradestation-get-quotes-example.json) | Get Quotes request/response example |
+| [examples/tradestation-place-order-example.json](examples/tradestation-place-order-example.json) | Place Order request/response example |
 
 ## Common Properties
 
-- [Website](https://www.tradestation.com)
-- [Developer Portal](https://api.tradestation.com/docs/)
-- [GitHub](https://github.com/tradestation/api-docs)
-- [Authentication](https://api.tradestation.com/docs/fundamentals/authentication/auth-overview/)
-- [Rate Limiting](https://api.tradestation.com/docs/fundamentals/rate-limiting/)
-- [FAQ](https://api.tradestation.com/docs/faq/)
-- [JSON-LD](json-ld/tradestation-context.jsonld)
+| Type | URL |
+|------|-----|
+| Website | [https://www.tradestation.com](https://www.tradestation.com) |
+| Developer | [https://developer.tradestation.com](https://developer.tradestation.com) |
+| Documentation | [https://api.tradestation.com/docs/](https://api.tradestation.com/docs/) |
+| Authentication | [https://api.tradestation.com/docs/fundamentals/authentication/](https://api.tradestation.com/docs/fundamentals/authentication/) |
+| GitHub | [https://github.com/tradestation](https://github.com/tradestation) |
+| Rate Limiting | [https://api.tradestation.com/docs/fundamentals/rate-limiting/](https://api.tradestation.com/docs/fundamentals/rate-limiting/) |
+| Terms of Service | [https://www.tradestation.com/important-information/](https://www.tradestation.com/important-information/) |
 
-## Maintainers
-
-**FN:** API Evangelist
-
-**Email:** info@apievangelist.com
+---
+*Maintained by Kin Lane (kin@apievangelist.com)*

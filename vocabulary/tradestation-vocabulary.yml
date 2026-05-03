@@ -1,0 +1,142 @@
+name: TradeStation API Vocabulary
+description: >-
+  Domain vocabulary for the TradeStation brokerage and trading API covering
+  order management, market data, options trading, and brokerage account
+  concepts for building automated trading applications.
+tags:
+  - Brokerage
+  - Cryptocurrency
+  - Finance
+  - Market Data
+  - Options
+  - Order Execution
+  - Trading
+terms:
+  - term: Order Type
+    description: >-
+      The mechanism by which an order is executed. TradeStation supports
+      Market, Limit, StopMarket, StopLimit, TrailingStop, and
+      TrailingStopLimit order types.
+    values:
+      - Market: Execute immediately at current market price
+      - Limit: Execute only at specified price or better
+      - StopMarket: Become market order when stop price is reached
+      - StopLimit: Become limit order when stop price is reached
+      - TrailingStop: Stop price trails market price by specified amount
+      - TrailingStopLimit: Trailing stop that becomes a limit order
+  - term: Time in Force
+    abbreviation: TIF
+    description: >-
+      An instruction specifying how long an order remains active before
+      being cancelled if not filled.
+    values:
+      - Day: Active only during the current trading session
+      - GTC: Good Till Cancelled — remains active until filled or cancelled
+      - GTD: Good Till Date — active until specified expiration date
+      - IOC: Immediate Or Cancel — fill immediately or cancel
+      - FOK: Fill Or Kill — fill entire quantity immediately or cancel
+      - OPG: At The Opening — execute at market open
+      - CLO: At The Closing — execute at market close
+  - term: Trade Action
+    description: >-
+      The direction and intent of an order specifying whether buying or
+      selling, and for options, whether opening or closing a position.
+    values:
+      - Buy: Purchase shares, futures, or crypto
+      - Sell: Sell existing long position
+      - BuyToOpen: Purchase options to open new long position
+      - BuyToClose: Purchase options to close existing short position
+      - SellToOpen: Sell options to open new short position
+      - SellToClose: Sell options to close existing long position
+      - SellShort: Sell borrowed shares to open short position
+      - BuyToCover: Buy shares to close existing short position
+  - term: OCO Order
+    description: >-
+      One Cancels the Other — a paired order where the execution of one
+      order automatically cancels the other. Used for bracket orders to
+      set both a profit target and stop loss simultaneously.
+    synonyms:
+      - One Cancels Other
+  - term: OSO Order
+    description: >-
+      Order Sends Order — a conditional order where the execution of a
+      primary order triggers the submission of one or more secondary orders.
+    synonyms:
+      - Order Sends Order
+  - term: Bracket Order
+    description: >-
+      A group order strategy that combines an entry order with a profit
+      target and a stop loss order, automatically managing risk around
+      a position.
+    synonyms:
+      - BRK
+  - term: OAuth2 Authorization Code
+    description: >-
+      The authentication flow used by TradeStation where users authorize
+      the application via the TradeStation sign-in page and receive an
+      access token for API calls.
+  - term: Bar Chart
+    description: >-
+      A representation of price history in OHLC format (Open, High, Low,
+      Close) aggregated over time intervals such as minute, daily, weekly,
+      or monthly.
+    synonyms:
+      - OHLC Bar
+      - Candlestick Data
+  - term: Session Template
+    description: >-
+      A configuration option for bar chart data that controls which
+      trading session data is included (regular hours, pre-market,
+      after-hours, or combined).
+    values:
+      - Default: Regular trading hours only
+      - USEQPre: Pre-market session
+      - USEQPost: After-hours session
+      - USEQPreAndPost: Pre and post-market combined
+  - term: Route
+    description: >-
+      The trading destination to which an order is directed for execution.
+      TradeStation supports intelligent routing (automatic best execution)
+      and direct market routing to specific exchanges or ECNs.
+    values:
+      - Intelligent: Automatic best execution routing
+  - term: OHLC
+    description: >-
+      Open, High, Low, Close — the four price data points for a bar in a
+      bar chart representing the opening price, highest price, lowest price,
+      and closing price for a given time interval.
+  - term: Underlying Symbol
+    description: >-
+      The financial instrument upon which an option or futures contract is
+      based. For stock options, the underlying is the stock itself.
+  - term: Expiration Date
+    description: >-
+      The date on which an options contract expires. After this date the
+      option becomes worthless if not exercised.
+    types:
+      - Monthly: Standard third Friday monthly expiration
+      - Weekly: Short-term weekly expiration
+      - Quarterly: End-of-quarter expiration
+      - EOM: End-of-month expiration
+  - term: Strike Price
+    description: >-
+      The fixed price at which the holder of an option can buy (call) or
+      sell (put) the underlying security.
+  - term: Simulator Server
+    description: >-
+      TradeStation's paper trading environment that mirrors production
+      functionality but uses simulated funds. Available at
+      sim-api.tradestation.com for testing without financial risk.
+    synonyms:
+      - Paper Trading
+      - SIM
+  - term: Buying Power
+    description: >-
+      The amount of capital available in a brokerage account to purchase
+      additional securities, factoring in cash balance, margin capacity,
+      and existing positions.
+  - term: Unrealized P/L
+    description: >-
+      Unrealized Profit/Loss — the gain or loss on open positions based
+      on current market value versus average entry price. Not realized
+      until the position is closed.

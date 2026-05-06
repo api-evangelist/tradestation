@@ -1,447 +1,783 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "TradeStation Trading and Market Data"
-  description: "Unified trading and market data workflow combining account management, order execution, real-time quotes, historical bar data, and options analysis. Used by algorithmic traders and application developers to build complete trading applications covering market data access and order lifecycle management."
+  label: TradeStation Trading and Market Data
+  description: Unified trading and market data workflow combining account management, order execution, real-time quotes, historical
+    bar data, and options analysis. Used by algorithmic traders and application developers to build complete trading applications
+    covering market data access and order lifecycle management.
   tags:
-    - Accounts
-    - Brokerage
-    - Cryptocurrency
-    - Finance
-    - Market Data
-    - Options
-    - Order Execution
-    - Trading
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Accounts
+  - Brokerage
+  - Cryptocurrency
+  - Finance
+  - Market Data
+  - Options
+  - Order Execution
+  - Trading
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      TRADESTATION_ACCESS_TOKEN: TRADESTATION_ACCESS_TOKEN
-
+- namespace: env
+  keys:
+    TRADESTATION_ACCESS_TOKEN: TRADESTATION_ACCESS_TOKEN
 capability:
   consumes:
-    - import: tradestation-api
-      location: ./shared/tradestation-api.yaml
-
+  - type: http
+    namespace: tradestation-api
+    baseUri: https://api.tradestation.com
+    description: TradeStation REST API for brokerage and market data
+    authentication:
+      type: bearer
+      token: '{{TRADESTATION_ACCESS_TOKEN}}'
+    resources:
+    - name: accounts
+      path: /v3/brokerage/accounts
+      description: Brokerage account management
+      operations:
+      - name: get-accounts
+        method: GET
+        description: Retrieve all brokerage accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-balances
+        method: GET
+        description: Retrieve account balances
+        inputParameters:
+        - name: accountIds
+          in: path
+          type: string
+          required: true
+          description: Comma-separated account identifiers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-balances-bod
+        method: GET
+        description: Retrieve beginning-of-day account balances
+        inputParameters:
+        - name: accountIds
+          in: path
+          type: string
+          required: true
+          description: Comma-separated account identifiers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-positions
+        method: GET
+        description: Retrieve account positions
+        inputParameters:
+        - name: accountIds
+          in: path
+          type: string
+          required: true
+          description: Comma-separated account identifiers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-orders
+        method: GET
+        description: Retrieve active account orders
+        inputParameters:
+        - name: accountIds
+          in: path
+          type: string
+          required: true
+          description: Comma-separated account identifiers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-historical-orders
+        method: GET
+        description: Retrieve historical orders
+        inputParameters:
+        - name: accountIds
+          in: path
+          type: string
+          required: true
+          description: Comma-separated account identifiers
+        - name: since
+          in: query
+          type: string
+          required: false
+          description: Filter since date (MM-DD-YYYY)
+        - name: pageSize
+          in: query
+          type: integer
+          required: false
+          description: Number of orders per page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-wallets
+        method: GET
+        description: Retrieve cryptocurrency wallets
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          required: true
+          description: Account identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: market-data
+      path: /v3/marketdata
+      description: Real-time and historical market data
+      operations:
+      - name: get-quotes
+        method: GET
+        description: Retrieve real-time quote snapshots
+        inputParameters:
+        - name: symbols
+          in: path
+          type: string
+          required: true
+          description: Comma-separated symbol identifiers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-bars
+        method: GET
+        description: Retrieve historical bar chart data (OHLC)
+        inputParameters:
+        - name: symbol
+          in: path
+          type: string
+          required: true
+          description: Symbol to retrieve bars for
+        - name: interval
+          in: query
+          type: integer
+          required: false
+          description: Bar interval
+        - name: unit
+          in: query
+          type: string
+          required: false
+          description: Time unit (Minute, Daily, Weekly, Monthly)
+        - name: barsBack
+          in: query
+          type: integer
+          required: false
+          description: Number of bars going back
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-symbols
+        method: GET
+        description: Retrieve detailed symbol information
+        inputParameters:
+        - name: symbols
+          in: path
+          type: string
+          required: true
+          description: Comma-separated symbol identifiers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-crypto-pairs
+        method: GET
+        description: Retrieve cryptocurrency trading pairs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: options
+      path: /v3/marketdata/options
+      description: Options market data
+      operations:
+      - name: get-option-expirations
+        method: GET
+        description: Retrieve option expiration dates
+        inputParameters:
+        - name: underlying
+          in: path
+          type: string
+          required: true
+          description: Underlying symbol
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-option-strikes
+        method: GET
+        description: Retrieve option strike prices
+        inputParameters:
+        - name: underlying
+          in: path
+          type: string
+          required: true
+          description: Underlying symbol
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-option-spread-types
+        method: GET
+        description: Retrieve option spread types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: calculate-option-risk-reward
+        method: POST
+        description: Calculate option risk/reward profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            SpreadPrice: '{{tools.spread_price}}'
+            Legs: '{{tools.legs}}'
+    - name: order-execution
+      path: /v3/orderexecution
+      description: Order placement and management
+      operations:
+      - name: place-order
+        method: POST
+        description: Place a new order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            AccountID: '{{tools.account_id}}'
+            Symbol: '{{tools.symbol}}'
+            Quantity: '{{tools.quantity}}'
+            OrderType: '{{tools.order_type}}'
+            TradeAction: '{{tools.trade_action}}'
+            TimeInForce: '{{tools.time_in_force}}'
+            LimitPrice: '{{tools.limit_price}}'
+      - name: confirm-order
+        method: POST
+        description: Preview order costs before placement
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            AccountID: '{{tools.account_id}}'
+            Symbol: '{{tools.symbol}}'
+            Quantity: '{{tools.quantity}}'
+            OrderType: '{{tools.order_type}}'
+            TradeAction: '{{tools.trade_action}}'
+            TimeInForce: '{{tools.time_in_force}}'
+      - name: replace-order
+        method: PUT
+        description: Modify an existing order
+        inputParameters:
+        - name: orderId
+          in: path
+          type: string
+          required: true
+          description: Order identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            Quantity: '{{tools.quantity}}'
+            LimitPrice: '{{tools.limit_price}}'
+      - name: cancel-order
+        method: DELETE
+        description: Cancel an existing order
+        inputParameters:
+        - name: orderId
+          in: path
+          type: string
+          required: true
+          description: Order identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: place-order-group
+        method: POST
+        description: Place a group order (OCO, bracket, OSO)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            Type: '{{tools.group_type}}'
+            Orders: '{{tools.orders}}'
+    - name: reference-data
+      path: /v3/orderexecution
+      description: Order execution reference data
+      operations:
+      - name: get-activation-triggers
+        method: GET
+        description: Retrieve activation trigger methods
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-routes
+        method: GET
+        description: Retrieve order routing destinations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: trading-and-market-data-api
-      description: "Unified REST API for TradeStation trading and market data workflows."
-      resources:
-        - path: /v1/accounts
-          name: accounts
-          description: "Brokerage account information"
-          operations:
-            - method: GET
-              name: get-accounts
-              description: "Retrieve all brokerage accounts"
-              call: "tradestation-api.get-accounts"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/accounts/{accountIds}/balances
-          name: balances
-          description: "Account balance information"
-          operations:
-            - method: GET
-              name: get-balances
-              description: "Retrieve current account balances"
-              call: "tradestation-api.get-balances"
-              with:
-                accountIds: "rest.accountIds"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/accounts/{accountIds}/positions
-          name: positions
-          description: "Account positions"
-          operations:
-            - method: GET
-              name: get-positions
-              description: "Retrieve open positions"
-              call: "tradestation-api.get-positions"
-              with:
-                accountIds: "rest.accountIds"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/accounts/{accountIds}/orders
-          name: orders
-          description: "Active account orders"
-          operations:
-            - method: GET
-              name: get-orders
-              description: "Retrieve active orders"
-              call: "tradestation-api.get-orders"
-              with:
-                accountIds: "rest.accountIds"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/quotes/{symbols}
-          name: quotes
-          description: "Real-time market quotes"
-          operations:
-            - method: GET
-              name: get-quotes
-              description: "Retrieve real-time quote snapshots"
-              call: "tradestation-api.get-quotes"
-              with:
-                symbols: "rest.symbols"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/bars/{symbol}
-          name: bars
-          description: "Historical bar chart data"
-          operations:
-            - method: GET
-              name: get-bars
-              description: "Retrieve OHLC bar chart history"
-              call: "tradestation-api.get-bars"
-              with:
-                symbol: "rest.symbol"
-                interval: "rest.interval"
-                unit: "rest.unit"
-                barsBack: "rest.barsBack"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/symbols/{symbols}
-          name: symbols
-          description: "Symbol details and metadata"
-          operations:
-            - method: GET
-              name: get-symbols
-              description: "Retrieve symbol information"
-              call: "tradestation-api.get-symbols"
-              with:
-                symbols: "rest.symbols"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/options/{underlying}/expirations
-          name: option-expirations
-          description: "Option expiration dates"
-          operations:
-            - method: GET
-              name: get-option-expirations
-              description: "Retrieve option expiration dates"
-              call: "tradestation-api.get-option-expirations"
-              with:
-                underlying: "rest.underlying"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/options/{underlying}/strikes
-          name: option-strikes
-          description: "Option strike prices"
-          operations:
-            - method: GET
-              name: get-option-strikes
-              description: "Retrieve option strike prices"
-              call: "tradestation-api.get-option-strikes"
-              with:
-                underlying: "rest.underlying"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/orders
-          name: place-orders
-          description: "Order placement and management"
-          operations:
-            - method: POST
-              name: place-order
-              description: "Place a new order"
-              call: "tradestation-api.place-order"
-              with:
-                account_id: "rest.AccountID"
-                symbol: "rest.Symbol"
-                quantity: "rest.Quantity"
-                order_type: "rest.OrderType"
-                trade_action: "rest.TradeAction"
-                time_in_force: "rest.TimeInForce"
-                limit_price: "rest.LimitPrice"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/orders/{orderId}
-          name: order-management
-          description: "Manage existing orders"
-          operations:
-            - method: PUT
-              name: replace-order
-              description: "Modify an existing order"
-              call: "tradestation-api.replace-order"
-              with:
-                orderId: "rest.orderId"
-                quantity: "rest.Quantity"
-                limit_price: "rest.LimitPrice"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: DELETE
-              name: cancel-order
-              description: "Cancel an existing order"
-              call: "tradestation-api.cancel-order"
-              with:
-                orderId: "rest.orderId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/order-confirm
-          name: order-confirm
-          description: "Order cost preview"
-          operations:
-            - method: POST
-              name: confirm-order
-              description: "Preview order costs before placing"
-              call: "tradestation-api.confirm-order"
-              with:
-                account_id: "rest.AccountID"
-                symbol: "rest.Symbol"
-                quantity: "rest.Quantity"
-                order_type: "rest.OrderType"
-                trade_action: "rest.TradeAction"
-                time_in_force: "rest.TimeInForce"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/group-orders
-          name: group-orders
-          description: "Group order placement (bracket, OCO, OSO)"
-          operations:
-            - method: POST
-              name: place-order-group
-              description: "Place a group order"
-              call: "tradestation-api.place-order-group"
-              with:
-                group_type: "rest.Type"
-                orders: "rest.Orders"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/crypto-pairs
-          name: crypto-pairs
-          description: "Cryptocurrency trading pairs"
-          operations:
-            - method: GET
-              name: get-crypto-pairs
-              description: "Retrieve cryptocurrency trading pairs"
-              call: "tradestation-api.get-crypto-pairs"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: trading-and-market-data-mcp
-      transport: http
-      description: "MCP server for AI-assisted TradeStation trading and market data operations."
-      tools:
-        - name: get-accounts
-          description: "Retrieve TradeStation brokerage accounts and account metadata"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "tradestation-api.get-accounts"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-balances
-          description: "Retrieve current cash, equity, buying power, and margin balances for accounts"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "tradestation-api.get-balances"
-          with:
-            accountIds: "tools.account_ids"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-positions
-          description: "Retrieve open positions including market value, unrealized P/L, and asset type"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "tradestation-api.get-positions"
-          with:
-            accountIds: "tools.account_ids"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-orders
-          description: "Retrieve active orders for one or more TradeStation accounts"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "tradestation-api.get-orders"
-          with:
-            accountIds: "tools.account_ids"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-historical-orders
-          description: "Retrieve historical filled, cancelled, and rejected orders"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "tradestation-api.get-historical-orders"
-          with:
-            accountIds: "tools.account_ids"
-            since: "tools.since"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-quotes
-          description: "Retrieve real-time bid, ask, last price, and volume for symbols"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "tradestation-api.get-quotes"
-          with:
-            symbols: "tools.symbols"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-bars
-          description: "Retrieve historical OHLC bar chart data for a symbol"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "tradestation-api.get-bars"
-          with:
-            symbol: "tools.symbol"
-            interval: "tools.interval"
-            unit: "tools.unit"
-            barsBack: "tools.bars_back"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-symbols
-          description: "Retrieve symbol metadata including exchange, category, and contract specifications"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "tradestation-api.get-symbols"
-          with:
-            symbols: "tools.symbols"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-option-expirations
-          description: "Retrieve available option expiration dates for an underlying symbol"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "tradestation-api.get-option-expirations"
-          with:
-            underlying: "tools.underlying"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-option-strikes
-          description: "Retrieve available strike prices for options on an underlying symbol"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "tradestation-api.get-option-strikes"
-          with:
-            underlying: "tools.underlying"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: calculate-option-risk-reward
-          description: "Calculate the risk/reward profile for an option strategy"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "tradestation-api.calculate-option-risk-reward"
-          with:
-            spread_price: "tools.spread_price"
-            legs: "tools.legs"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: confirm-order
-          description: "Preview estimated commissions, costs, and margin requirements before placing an order"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "tradestation-api.confirm-order"
-          with:
-            account_id: "tools.account_id"
-            symbol: "tools.symbol"
-            quantity: "tools.quantity"
-            order_type: "tools.order_type"
-            trade_action: "tools.trade_action"
-            time_in_force: "tools.time_in_force"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: place-order
-          description: "Place a new stock, option, futures, or crypto order on TradeStation"
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: false
-          call: "tradestation-api.place-order"
-          with:
-            account_id: "tools.account_id"
-            symbol: "tools.symbol"
-            quantity: "tools.quantity"
-            order_type: "tools.order_type"
-            trade_action: "tools.trade_action"
-            time_in_force: "tools.time_in_force"
-            limit_price: "tools.limit_price"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: cancel-order
-          description: "Cancel an existing open TradeStation order"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "tradestation-api.cancel-order"
-          with:
-            orderId: "tools.order_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: place-order-group
-          description: "Place a bracket, OCO, or OSO group order on TradeStation"
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: false
-          call: "tradestation-api.place-order-group"
-          with:
-            group_type: "tools.group_type"
-            orders: "tools.orders"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-crypto-pairs
-          description: "Retrieve available cryptocurrency trading pairs on TradeStation"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "tradestation-api.get-crypto-pairs"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-wallets
-          description: "Retrieve cryptocurrency wallet balances for a TradeStation account"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "tradestation-api.get-wallets"
-          with:
-            accountId: "tools.account_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: trading-and-market-data-api
+    description: Unified REST API for TradeStation trading and market data workflows.
+    resources:
+    - path: /v1/accounts
+      name: accounts
+      description: Brokerage account information
+      operations:
+      - method: GET
+        name: get-accounts
+        description: Retrieve all brokerage accounts
+        call: tradestation-api.get-accounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountIds}/balances
+      name: balances
+      description: Account balance information
+      operations:
+      - method: GET
+        name: get-balances
+        description: Retrieve current account balances
+        call: tradestation-api.get-balances
+        with:
+          accountIds: rest.accountIds
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountIds}/positions
+      name: positions
+      description: Account positions
+      operations:
+      - method: GET
+        name: get-positions
+        description: Retrieve open positions
+        call: tradestation-api.get-positions
+        with:
+          accountIds: rest.accountIds
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountIds}/orders
+      name: orders
+      description: Active account orders
+      operations:
+      - method: GET
+        name: get-orders
+        description: Retrieve active orders
+        call: tradestation-api.get-orders
+        with:
+          accountIds: rest.accountIds
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/quotes/{symbols}
+      name: quotes
+      description: Real-time market quotes
+      operations:
+      - method: GET
+        name: get-quotes
+        description: Retrieve real-time quote snapshots
+        call: tradestation-api.get-quotes
+        with:
+          symbols: rest.symbols
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/bars/{symbol}
+      name: bars
+      description: Historical bar chart data
+      operations:
+      - method: GET
+        name: get-bars
+        description: Retrieve OHLC bar chart history
+        call: tradestation-api.get-bars
+        with:
+          symbol: rest.symbol
+          interval: rest.interval
+          unit: rest.unit
+          barsBack: rest.barsBack
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/symbols/{symbols}
+      name: symbols
+      description: Symbol details and metadata
+      operations:
+      - method: GET
+        name: get-symbols
+        description: Retrieve symbol information
+        call: tradestation-api.get-symbols
+        with:
+          symbols: rest.symbols
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/options/{underlying}/expirations
+      name: option-expirations
+      description: Option expiration dates
+      operations:
+      - method: GET
+        name: get-option-expirations
+        description: Retrieve option expiration dates
+        call: tradestation-api.get-option-expirations
+        with:
+          underlying: rest.underlying
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/options/{underlying}/strikes
+      name: option-strikes
+      description: Option strike prices
+      operations:
+      - method: GET
+        name: get-option-strikes
+        description: Retrieve option strike prices
+        call: tradestation-api.get-option-strikes
+        with:
+          underlying: rest.underlying
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/orders
+      name: place-orders
+      description: Order placement and management
+      operations:
+      - method: POST
+        name: place-order
+        description: Place a new order
+        call: tradestation-api.place-order
+        with:
+          account_id: rest.AccountID
+          symbol: rest.Symbol
+          quantity: rest.Quantity
+          order_type: rest.OrderType
+          trade_action: rest.TradeAction
+          time_in_force: rest.TimeInForce
+          limit_price: rest.LimitPrice
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/orders/{orderId}
+      name: order-management
+      description: Manage existing orders
+      operations:
+      - method: PUT
+        name: replace-order
+        description: Modify an existing order
+        call: tradestation-api.replace-order
+        with:
+          orderId: rest.orderId
+          quantity: rest.Quantity
+          limit_price: rest.LimitPrice
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: cancel-order
+        description: Cancel an existing order
+        call: tradestation-api.cancel-order
+        with:
+          orderId: rest.orderId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/order-confirm
+      name: order-confirm
+      description: Order cost preview
+      operations:
+      - method: POST
+        name: confirm-order
+        description: Preview order costs before placing
+        call: tradestation-api.confirm-order
+        with:
+          account_id: rest.AccountID
+          symbol: rest.Symbol
+          quantity: rest.Quantity
+          order_type: rest.OrderType
+          trade_action: rest.TradeAction
+          time_in_force: rest.TimeInForce
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/group-orders
+      name: group-orders
+      description: Group order placement (bracket, OCO, OSO)
+      operations:
+      - method: POST
+        name: place-order-group
+        description: Place a group order
+        call: tradestation-api.place-order-group
+        with:
+          group_type: rest.Type
+          orders: rest.Orders
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/crypto-pairs
+      name: crypto-pairs
+      description: Cryptocurrency trading pairs
+      operations:
+      - method: GET
+        name: get-crypto-pairs
+        description: Retrieve cryptocurrency trading pairs
+        call: tradestation-api.get-crypto-pairs
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: trading-and-market-data-mcp
+    transport: http
+    description: MCP server for AI-assisted TradeStation trading and market data operations.
+    tools:
+    - name: get-accounts
+      description: Retrieve TradeStation brokerage accounts and account metadata
+      hints:
+        readOnly: true
+        openWorld: false
+      call: tradestation-api.get-accounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-balances
+      description: Retrieve current cash, equity, buying power, and margin balances for accounts
+      hints:
+        readOnly: true
+        openWorld: false
+      call: tradestation-api.get-balances
+      with:
+        accountIds: tools.account_ids
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-positions
+      description: Retrieve open positions including market value, unrealized P/L, and asset type
+      hints:
+        readOnly: true
+        openWorld: false
+      call: tradestation-api.get-positions
+      with:
+        accountIds: tools.account_ids
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-orders
+      description: Retrieve active orders for one or more TradeStation accounts
+      hints:
+        readOnly: true
+        openWorld: false
+      call: tradestation-api.get-orders
+      with:
+        accountIds: tools.account_ids
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-historical-orders
+      description: Retrieve historical filled, cancelled, and rejected orders
+      hints:
+        readOnly: true
+        openWorld: false
+      call: tradestation-api.get-historical-orders
+      with:
+        accountIds: tools.account_ids
+        since: tools.since
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-quotes
+      description: Retrieve real-time bid, ask, last price, and volume for symbols
+      hints:
+        readOnly: true
+        openWorld: true
+      call: tradestation-api.get-quotes
+      with:
+        symbols: tools.symbols
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-bars
+      description: Retrieve historical OHLC bar chart data for a symbol
+      hints:
+        readOnly: true
+        openWorld: true
+      call: tradestation-api.get-bars
+      with:
+        symbol: tools.symbol
+        interval: tools.interval
+        unit: tools.unit
+        barsBack: tools.bars_back
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-symbols
+      description: Retrieve symbol metadata including exchange, category, and contract specifications
+      hints:
+        readOnly: true
+        openWorld: true
+      call: tradestation-api.get-symbols
+      with:
+        symbols: tools.symbols
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-option-expirations
+      description: Retrieve available option expiration dates for an underlying symbol
+      hints:
+        readOnly: true
+        openWorld: true
+      call: tradestation-api.get-option-expirations
+      with:
+        underlying: tools.underlying
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-option-strikes
+      description: Retrieve available strike prices for options on an underlying symbol
+      hints:
+        readOnly: true
+        openWorld: true
+      call: tradestation-api.get-option-strikes
+      with:
+        underlying: tools.underlying
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: calculate-option-risk-reward
+      description: Calculate the risk/reward profile for an option strategy
+      hints:
+        readOnly: true
+        openWorld: false
+      call: tradestation-api.calculate-option-risk-reward
+      with:
+        spread_price: tools.spread_price
+        legs: tools.legs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: confirm-order
+      description: Preview estimated commissions, costs, and margin requirements before placing an order
+      hints:
+        readOnly: true
+        openWorld: false
+      call: tradestation-api.confirm-order
+      with:
+        account_id: tools.account_id
+        symbol: tools.symbol
+        quantity: tools.quantity
+        order_type: tools.order_type
+        trade_action: tools.trade_action
+        time_in_force: tools.time_in_force
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: place-order
+      description: Place a new stock, option, futures, or crypto order on TradeStation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tradestation-api.place-order
+      with:
+        account_id: tools.account_id
+        symbol: tools.symbol
+        quantity: tools.quantity
+        order_type: tools.order_type
+        trade_action: tools.trade_action
+        time_in_force: tools.time_in_force
+        limit_price: tools.limit_price
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-order
+      description: Cancel an existing open TradeStation order
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: tradestation-api.cancel-order
+      with:
+        orderId: tools.order_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: place-order-group
+      description: Place a bracket, OCO, or OSO group order on TradeStation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tradestation-api.place-order-group
+      with:
+        group_type: tools.group_type
+        orders: tools.orders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-crypto-pairs
+      description: Retrieve available cryptocurrency trading pairs on TradeStation
+      hints:
+        readOnly: true
+        openWorld: true
+      call: tradestation-api.get-crypto-pairs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-wallets
+      description: Retrieve cryptocurrency wallet balances for a TradeStation account
+      hints:
+        readOnly: true
+        openWorld: false
+      call: tradestation-api.get-wallets
+      with:
+        accountId: tools.account_id
+      outputParameters:
+      - type: object
+        mapping: $.

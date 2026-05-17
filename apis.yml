@@ -56,7 +56,7 @@ apis:
         url: json-schema/tradestation-order-schema.json
       - type: JSONStructure
         url: json-structure/tradestation-order-structure.json
-      - type: JSONLd
+      - type: JSONLD
         url: json-ld/tradestation-context.jsonld
       - type: SpectralRules
         url: rules/tradestation-rules.yml

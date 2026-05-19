@@ -1,0 +1,273 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: TradeStation API — Order Execution
+  description: 'TradeStation API — Order Execution. 6 operations. Lead operation: Confirm an order. Self-contained Naftiko
+    capability covering one Tradestation business surface.'
+  tags:
+  - Tradestation
+  - Order Execution
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRADESTATION_API_KEY: TRADESTATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: tradestation-order-execution
+    baseUri: https://api.tradestation.com
+    description: TradeStation API — Order Execution business capability. Self-contained, no shared references.
+    resources:
+    - name: v3-orderexecution-orderconfirm
+      path: /v3/orderexecution/orderconfirm
+      operations:
+      - name: confirmorder
+        method: POST
+        description: Confirm an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-orderexecution-ordergroupconfirm
+      path: /v3/orderexecution/ordergroupconfirm
+      operations:
+      - name: confirmordergroup
+        method: POST
+        description: Confirm a group order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-orderexecution-ordergroups
+      path: /v3/orderexecution/ordergroups
+      operations:
+      - name: placeordergroup
+        method: POST
+        description: Place a group order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-orderexecution-orders
+      path: /v3/orderexecution/orders
+      operations:
+      - name: placeorder
+        method: POST
+        description: Place an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-orderexecution-orders-orderId
+      path: /v3/orderexecution/orders/{orderId}
+      operations:
+      - name: replaceorder
+        method: PUT
+        description: Replace an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: cancelorder
+        method: DELETE
+        description: Cancel an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.TRADESTATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: tradestation-order-execution-rest
+    port: 8080
+    description: REST adapter for TradeStation API — Order Execution. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v3/orderexecution/orderconfirm
+      name: v3-orderexecution-orderconfirm
+      description: REST surface for v3-orderexecution-orderconfirm.
+      operations:
+      - method: POST
+        name: confirmorder
+        description: Confirm an order
+        call: tradestation-order-execution.confirmorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/orderexecution/ordergroupconfirm
+      name: v3-orderexecution-ordergroupconfirm
+      description: REST surface for v3-orderexecution-ordergroupconfirm.
+      operations:
+      - method: POST
+        name: confirmordergroup
+        description: Confirm a group order
+        call: tradestation-order-execution.confirmordergroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/orderexecution/ordergroups
+      name: v3-orderexecution-ordergroups
+      description: REST surface for v3-orderexecution-ordergroups.
+      operations:
+      - method: POST
+        name: placeordergroup
+        description: Place a group order
+        call: tradestation-order-execution.placeordergroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/orderexecution/orders
+      name: v3-orderexecution-orders
+      description: REST surface for v3-orderexecution-orders.
+      operations:
+      - method: POST
+        name: placeorder
+        description: Place an order
+        call: tradestation-order-execution.placeorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/orderexecution/orders/{orderid}
+      name: v3-orderexecution-orders-orderid
+      description: REST surface for v3-orderexecution-orders-orderId.
+      operations:
+      - method: PUT
+        name: replaceorder
+        description: Replace an order
+        call: tradestation-order-execution.replaceorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: cancelorder
+        description: Cancel an order
+        call: tradestation-order-execution.cancelorder
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tradestation-order-execution-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for TradeStation API — Order Execution. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: confirm-order
+      description: Confirm an order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tradestation-order-execution.confirmorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: confirm-group-order
+      description: Confirm a group order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tradestation-order-execution.confirmordergroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: place-group-order
+      description: Place a group order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tradestation-order-execution.placeordergroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: place-order
+      description: Place an order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tradestation-order-execution.placeorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: replace-order
+      description: Replace an order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: tradestation-order-execution.replaceorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-order
+      description: Cancel an order
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: tradestation-order-execution.cancelorder
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,4874 @@
+{
+  "item": [
+    {
+      "id": "0dba29f8-78f4-42f8-8369-8cd8652567e8",
+      "name": "Accounts",
+      "description": {
+        "content": "Retrieve account information including account details, balances, beginning-of-day balances, positions, orders, historical orders, and cryptocurrency wallets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ebb31b9b-4a96-4c77-9999-f9f05fe82a0b",
+          "name": "Get accounts",
+          "request": {
+            "name": "Get accounts",
+            "description": {
+              "content": "Retrieves all brokerage accounts associated with the authenticated user. Returns account identifiers, account types, and other account metadata needed for subsequent API calls.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e9980a0-b69c-43c5-80d6-e73963d6a230",
+              "name": "Successfully retrieved accounts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Accounts\": [\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"DVP\",\n      \"Status\": \"Active\",\n      \"StatusDescription\": \"string\"\n    },\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"Crypto\",\n      \"Status\": \"Active\",\n      \"StatusDescription\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91991df4-2e04-4dc9-b720-60ba733ce000",
+              "name": "Unauthorized - invalid or expired access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4cf14674-dcab-4ccb-aae1-6d699f3ff5e4",
+          "name": "Get account balances",
+          "request": {
+            "name": "Get account balances",
+            "description": {
+              "content": "Retrieves the current real-time balances for one or more brokerage accounts. Includes cash balance, equity, market value, buying power, and margin-related balance information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountIds",
+                "balances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountIds",
+                  "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2941fff-d583-4970-a6b0-f94c1c5c99c8",
+              "name": "Successfully retrieved balances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Balances\": [\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"string\",\n      \"CashBalance\": 7905.851322111744,\n      \"Equity\": 7074.927630127788,\n      \"MarketValue\": 3801.256070055964,\n      \"BuyingPower\": 1384.1947828218392,\n      \"RealizedProfitLoss\": 3766.2706550476423,\n      \"UnrealizedProfitLoss\": 2330.599891811638\n    },\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"string\",\n      \"CashBalance\": 7474.561926569992,\n      \"Equity\": 2497.775560157569,\n      \"MarketValue\": 1738.5582503795915,\n      \"BuyingPower\": 8323.902779706763,\n      \"RealizedProfitLoss\": 2582.3463552401026,\n      \"UnrealizedProfitLoss\": 893.8530286120516\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e4f5e32-8cb8-42ea-bb6a-b7f8e608e022",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bba2fe8c-ead9-4bd0-99b1-976a53ed3c5c",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02d177a4-f6c6-4f08-8361-012439c99877",
+          "name": "Get beginning-of-day balances",
+          "request": {
+            "name": "Get beginning-of-day balances",
+            "description": {
+              "content": "Retrieves the beginning-of-day balances for one or more brokerage accounts. These balances reflect account state at the start of the current trading session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountIds",
+                "bodbalances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountIds",
+                  "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "523b314a-6ced-41fe-84f2-de99eae8905e",
+              "name": "Successfully retrieved beginning-of-day balances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "bodbalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Balances\": [\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"string\",\n      \"CashBalance\": 7905.851322111744,\n      \"Equity\": 7074.927630127788,\n      \"MarketValue\": 3801.256070055964,\n      \"BuyingPower\": 1384.1947828218392,\n      \"RealizedProfitLoss\": 3766.2706550476423,\n      \"UnrealizedProfitLoss\": 2330.599891811638\n    },\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"string\",\n      \"CashBalance\": 7474.561926569992,\n      \"Equity\": 2497.775560157569,\n      \"MarketValue\": 1738.5582503795915,\n      \"BuyingPower\": 8323.902779706763,\n      \"RealizedProfitLoss\": 2582.3463552401026,\n      \"UnrealizedProfitLoss\": 893.8530286120516\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06030d66-9176-4f26-8a60-861f5afd9fd0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "bodbalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14961e56-8b96-474c-9284-8171344d0d16",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "bodbalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "744f04fc-97c3-417d-b89f-ea0210d4d7c8",
+          "name": "Get account positions",
+          "request": {
+            "name": "Get account positions",
+            "description": {
+              "content": "Retrieves the current positions for one or more brokerage accounts. Returns information about each open position including symbol, quantity, average price, market value, and unrealized profit/loss.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountIds",
+                "positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountIds",
+                  "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44176bdb-25c0-49c3-8f2a-e5f3df832b7e",
+              "name": "Successfully retrieved positions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Positions\": [\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 9982.45777950188,\n      \"AveragePrice\": 7622.255028550261,\n      \"Last\": 5071.727019709132,\n      \"MarketValue\": 3689.6569068391204,\n      \"UnrealizedProfitLoss\": 1518.8444658855483,\n      \"UnrealizedProfitLossPercent\": 9566.580626776926,\n      \"AssetType\": \"Crypto\",\n      \"LongShort\": \"Long\"\n    },\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 5846.948812837295,\n      \"AveragePrice\": 544.6407313878143,\n      \"Last\": 782.4347987708724,\n      \"MarketValue\": 1387.9108880142167,\n      \"UnrealizedProfitLoss\": 2079.8087935731037,\n      \"UnrealizedProfitLossPercent\": 9419.497740637435,\n      \"AssetType\": \"Future\",\n      \"LongShort\": \"Short\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1d0451a-d84b-4d13-b593-0c28d14cd206",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b9352da-d0d8-49de-955f-b98148030fd1",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53fc4fff-bd8f-467a-90e8-7a75e1bca5f8",
+          "name": "Get account orders",
+          "request": {
+            "name": "Get account orders",
+            "description": {
+              "content": "Retrieves the current active orders for one or more brokerage accounts. Returns information about each order including status, order type, symbol, quantity, and price.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountIds",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountIds",
+                  "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "211247ea-83a5-494e-a86c-eb0ebc68aa23",
+              "name": "Successfully retrieved orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Orders\": [\n    {\n      \"OrderID\": \"string\",\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 4834.1310608735,\n      \"FilledQuantity\": 3713.201185016637,\n      \"OrderType\": \"Market\",\n      \"Status\": \"Open\",\n      \"Side\": \"BuyToClose\",\n      \"LimitPrice\": 1578.9517002554921,\n      \"StopPrice\": 8751.711833535288,\n      \"TimeInForce\": \"FOK\",\n      \"Route\": \"string\",\n      \"FilledPrice\": 5635.567350986559,\n      \"OpenedDateTime\": \"1956-10-02T02:52:58.921Z\",\n      \"ClosedDateTime\": \"1948-05-07T00:53:15.469Z\"\n    },\n    {\n      \"OrderID\": \"string\",\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 1389.5298630935238,\n      \"FilledQuantity\": 3063.260142957991,\n      \"OrderType\": \"TrailingStopLimit\",\n      \"Status\": \"Cancelled\",\n      \"Side\": \"Buy\",\n      \"LimitPrice\": 9877.9044738508,\n      \"StopPrice\": 1524.193983846015,\n      \"TimeInForce\": \"GTC\",\n      \"Route\": \"string\",\n      \"FilledPrice\": 7423.007728892239,\n      \"OpenedDateTime\": \"1995-03-13T18:49:51.966Z\",\n      \"ClosedDateTime\": \"1973-09-25T09:25:50.473Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97c48186-00c7-4c70-939c-392354fa97ed",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9c54978-668e-41d6-a575-2405aa1cd912",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5bcdd59f-8eb1-4b87-9c99-9fca1dff6ce0",
+          "name": "Get historical orders",
+          "request": {
+            "name": "Get historical orders",
+            "description": {
+              "content": "Retrieves historical orders for one or more brokerage accounts. Returns past orders including filled, cancelled, and rejected orders up to 90 days in the past.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountIds",
+                "historicalorders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>",
+                  "description": "Filter orders since this date. Format is MM-DD-YYYY."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "Number of orders per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNum",
+                  "value": "<integer>",
+                  "description": "Page number for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountIds",
+                  "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e85e374-537f-4f0d-8478-72742b9d8412",
+              "name": "Successfully retrieved historical orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "historicalorders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Orders\": [\n    {\n      \"OrderID\": \"string\",\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 4834.1310608735,\n      \"FilledQuantity\": 3713.201185016637,\n      \"OrderType\": \"Market\",\n      \"Status\": \"Open\",\n      \"Side\": \"BuyToClose\",\n      \"LimitPrice\": 1578.9517002554921,\n      \"StopPrice\": 8751.711833535288,\n      \"TimeInForce\": \"FOK\",\n      \"Route\": \"string\",\n      \"FilledPrice\": 5635.567350986559,\n      \"OpenedDateTime\": \"1956-10-02T02:52:58.921Z\",\n      \"ClosedDateTime\": \"1948-05-07T00:53:15.469Z\"\n    },\n    {\n      \"OrderID\": \"string\",\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 1389.5298630935238,\n      \"FilledQuantity\": 3063.260142957991,\n      \"OrderType\": \"TrailingStopLimit\",\n      \"Status\": \"Cancelled\",\n      \"Side\": \"Buy\",\n      \"LimitPrice\": 9877.9044738508,\n      \"StopPrice\": 1524.193983846015,\n      \"TimeInForce\": \"GTC\",\n      \"Route\": \"string\",\n      \"FilledPrice\": 7423.007728892239,\n      \"OpenedDateTime\": \"1995-03-13T18:49:51.966Z\",\n      \"ClosedDateTime\": \"1973-09-25T09:25:50.473Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f249b9fe-d5e8-41c9-ad3e-1a45b331f3ca",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "historicalorders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c72fa05c-3d2a-489e-921f-5dd1a594ff35",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "historicalorders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96ef1bbe-ce99-4bd9-8326-2d8d6c295965",
+          "name": "Get cryptocurrency wallets",
+          "request": {
+            "name": "Get cryptocurrency wallets",
+            "description": {
+              "content": "Retrieves cryptocurrency wallet information for a specific brokerage account. Returns wallet balances and cryptocurrency holdings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountId",
+                "wallets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The account identifier for wallet retrieval."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e35202e-ecea-45e7-94d4-43c05277def6",
+              "name": "Successfully retrieved wallets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountId",
+                    "wallets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account identifier for wallet retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Wallets\": [\n    {\n      \"Currency\": \"string\",\n      \"Balance\": 8919.0168966019,\n      \"Available\": 8614.970646004846\n    },\n    {\n      \"Currency\": \"string\",\n      \"Balance\": 3381.127393924461,\n      \"Available\": 6410.698274742669\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43683f9a-e128-4179-852b-38f30755fab3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountId",
+                    "wallets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account identifier for wallet retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dfe55ec-bfb6-40fc-a305-7f3ebcd64253",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountId",
+                    "wallets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account identifier for wallet retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ca9a158e-a05a-420b-95e5-d024761357fa",
+      "name": "Market Data",
+      "description": {
+        "content": "Access real-time and historical market data including quotes, bar charts, symbol information, symbol lists, and cryptocurrency pairs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "71561d79-dcf9-44d2-a520-f94f75cb6f96",
+          "name": "Get quotes",
+          "request": {
+            "name": "Get quotes",
+            "description": {
+              "content": "Retrieves real-time quote snapshots for one or more symbols. Returns current bid, ask, last price, volume, and other quote data fields. Supports stocks, options, futures, and cryptocurrency symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "quotes",
+                ":symbols"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbols",
+                  "description": "(Required) One or more symbol identifiers, comma-separated."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1871eb3-68bb-420d-a050-ef2a82fcd1f2",
+              "name": "Successfully retrieved quotes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "quotes",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Quotes\": [\n    {\n      \"Symbol\": \"string\",\n      \"Last\": 8477.045582447283,\n      \"Bid\": 8385.14848036711,\n      \"Ask\": 3598.979139237757,\n      \"BidSize\": 3292,\n      \"AskSize\": 4890,\n      \"Volume\": 510,\n      \"Open\": 9283.09998746092,\n      \"High\": 4902.282321088025,\n      \"Low\": 6481.431469433142,\n      \"Close\": 6514.825914170899,\n      \"NetChange\": 6989.656808619955,\n      \"NetChangePct\": 4080.0697614227543,\n      \"TradeTime\": \"2024-11-18T06:08:06.246Z\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Last\": 4462.337558366132,\n      \"Bid\": 1809.2499656902128,\n      \"Ask\": 7163.915302135152,\n      \"BidSize\": 5846,\n      \"AskSize\": 6254,\n      \"Volume\": 8184,\n      \"Open\": 2263.336780015961,\n      \"High\": 1565.459327508364,\n      \"Low\": 5216.114478860909,\n      \"Close\": 6852.659579349966,\n      \"NetChange\": 1397.4340047076328,\n      \"NetChangePct\": 3818.805977027503,\n      \"TradeTime\": \"1988-06-05T22:25:18.859Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75477831-800a-437d-ad5b-b867d7c3e340",
+              "name": "Invalid symbol format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "quotes",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35ddf064-f293-41ca-a126-321ccd26e91f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "quotes",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfcf0eed-6ccd-42ae-af4a-081e9df2379a",
+          "name": "Get bar chart data",
+          "request": {
+            "name": "Get bar chart data",
+            "description": {
+              "content": "Retrieves historical bar chart data (OHLC) for a given symbol. Supports multiple intervals and units including minute, daily, weekly, and monthly bars. Returns open, high, low, close prices along with volume and timestamp information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "barcharts",
+                ":symbol"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<integer>",
+                  "description": "The interval for each bar. For minute bars, valid values are 1-1440. For daily, weekly, and monthly bars, use 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>",
+                  "description": "The unit of time for the bar interval."
+                },
+                {
+                  "disabled": false,
+                  "key": "barsBack",
+                  "value": "<integer>",
+                  "description": "Number of bars to retrieve going back from the last date."
+                },
+                {
+                  "disabled": false,
+                  "key": "firstDate",
+                  "value": "<dateTime>",
+                  "description": "The start date for bar data retrieval."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastDate",
+                  "value": "<dateTime>",
+                  "description": "The end date for bar data retrieval."
+                },
+                {
+                  "disabled": false,
+                  "key": "sessionTemplate",
+                  "value": "<string>",
+                  "description": "The session template to use for filtering bar data. Controls which trading session data to include."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to retrieve bar chart data for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4d5b101-2618-461b-95e2-d3a7ad7a8d63",
+              "name": "Successfully retrieved bar chart data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "barcharts",
+                    ":symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "barsBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "firstDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lastDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sessionTemplate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to retrieve bar chart data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Bars\": [\n    {\n      \"High\": 6772.068415080445,\n      \"Low\": 6229.091598522977,\n      \"Open\": 6161.203623567255,\n      \"Close\": 190.9337620235596,\n      \"Volume\": 9153,\n      \"TimeStamp\": \"2013-09-22T10:20:11.115Z\",\n      \"TotalTicks\": 6267,\n      \"UpTicks\": 3423,\n      \"DownTicks\": 5720\n    },\n    {\n      \"High\": 263.81874967612686,\n      \"Low\": 457.46981467914225,\n      \"Open\": 4685.4196527170625,\n      \"Close\": 5757.191346747674,\n      \"Volume\": 7859,\n      \"TimeStamp\": \"1973-05-29T00:12:46.486Z\",\n      \"TotalTicks\": 2702,\n      \"UpTicks\": 6910,\n      \"DownTicks\": 9863\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89376f1b-efab-4832-91e4-dfa269bbc236",
+              "name": "Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "barcharts",
+                    ":symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "barsBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "firstDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lastDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sessionTemplate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to retrieve bar chart data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e5bad7d-5cbd-4ac9-9784-4f9dda14f48f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "barcharts",
+                    ":symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "barsBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "firstDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lastDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sessionTemplate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to retrieve bar chart data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "709ab065-5511-424c-93d3-e534a00acf75",
+              "name": "Symbol not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "barcharts",
+                    ":symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "barsBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "firstDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lastDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sessionTemplate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to retrieve bar chart data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13de0ef1-7cd8-480f-b01d-ae25cd067ce2",
+          "name": "Get symbol details",
+          "request": {
+            "name": "Get symbol details",
+            "description": {
+              "content": "Retrieves detailed symbol information for one or more symbols. Returns symbol metadata including description, exchange, category, currency, point value, and contract specifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "symbols",
+                ":symbols"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbols",
+                  "description": "(Required) One or more symbol identifiers, comma-separated."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4eaead54-6de1-4192-846d-5ca175e94119",
+              "name": "Successfully retrieved symbol details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "symbols",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Symbols\": [\n    {\n      \"Name\": \"string\",\n      \"Description\": \"string\",\n      \"Exchange\": \"string\",\n      \"ExchangeID\": 8023,\n      \"Category\": \"string\",\n      \"Currency\": \"USD\",\n      \"Country\": \"string\",\n      \"PointValue\": 6250.600204459796,\n      \"MinMove\": 8904.271575531351,\n      \"Root\": \"string\",\n      \"Underlying\": \"string\",\n      \"StrikePrice\": 2537.606750977699,\n      \"ExpirationDate\": \"1988-07-14\",\n      \"OptionType\": \"Put\",\n      \"FutureType\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Description\": \"string\",\n      \"Exchange\": \"string\",\n      \"ExchangeID\": 5502,\n      \"Category\": \"string\",\n      \"Currency\": \"CAD\",\n      \"Country\": \"string\",\n      \"PointValue\": 724.3962188470421,\n      \"MinMove\": 9526.849243679428,\n      \"Root\": \"string\",\n      \"Underlying\": \"string\",\n      \"StrikePrice\": 8250.351251196598,\n      \"ExpirationDate\": \"2008-08-07\",\n      \"OptionType\": \"Put\",\n      \"FutureType\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c31304f-d332-47be-8ee1-6b3e37bd1085",
+              "name": "Invalid symbol format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "symbols",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62ef0f4f-5eb2-4a0c-ab75-10bc8c3b79b5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "symbols",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a5601aa-b652-4212-8e63-2b0e542f4d24",
+          "name": "Get cryptocurrency pairs",
+          "request": {
+            "name": "Get cryptocurrency pairs",
+            "description": {
+              "content": "Retrieves the list of available cryptocurrency trading pairs. Returns symbol names for all supported crypto pairs on the TradeStation platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "symbollists",
+                "cryptopairs",
+                "symbolnames"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd35ff65-8fc9-44b1-b037-a43e9b0cfabc",
+              "name": "Successfully retrieved cryptocurrency pairs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "symbollists",
+                    "cryptopairs",
+                    "symbolnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SymbolNames\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b74754a4-57b2-49eb-b16d-2dd26c338245",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "symbollists",
+                    "cryptopairs",
+                    "symbolnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a571cb1a-f0d4-4cb8-a2ff-2a1ed8b1726b",
+      "name": "Options",
+      "description": {
+        "content": "Retrieve options-related market data including expirations, strike prices, spread types, and risk/reward calculations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43e045c7-440f-4a03-9b9f-4b17995ed15c",
+          "name": "Get option expirations",
+          "request": {
+            "name": "Get option expirations",
+            "description": {
+              "content": "Retrieves available option expiration dates for a given underlying symbol. Returns expiration dates along with expiration type information such as monthly, weekly, or quarterly.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "options",
+                "expirations",
+                ":underlying"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "underlying",
+                  "description": "(Required) The underlying symbol for options data retrieval."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d750ed8-276f-4116-a91d-97a37030b915",
+              "name": "Successfully retrieved option expirations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "expirations",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Expirations\": [\n    {\n      \"Date\": \"1985-01-02\",\n      \"Type\": \"EOM\"\n    },\n    {\n      \"Date\": \"2016-08-17\",\n      \"Type\": \"Weekly\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05049cb4-cffc-47b8-a63e-78d6ce8d9ef7",
+              "name": "Invalid underlying symbol",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "expirations",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce5cad47-d2b2-4795-9d6e-85620da0aee1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "expirations",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "629008a8-ea0c-4c24-a361-b747103a56ad",
+          "name": "Get option strikes",
+          "request": {
+            "name": "Get option strikes",
+            "description": {
+              "content": "Retrieves available strike prices for options on a given underlying symbol. Returns the list of strike prices available for trading.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "options",
+                "strikes",
+                ":underlying"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "underlying",
+                  "description": "(Required) The underlying symbol for options data retrieval."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3762882a-336d-490e-94d1-059ee95b1f3c",
+              "name": "Successfully retrieved option strikes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "strikes",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Strikes\": [\n    3473.919312467886,\n    4264.578688860642\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f4c20a0-bb50-40aa-a55c-31863c4d0305",
+              "name": "Invalid underlying symbol",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "strikes",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b32af4a4-924a-4764-b9c1-c6e1aa3973eb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "strikes",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68bb2d26-8b60-44db-9c08-e7f4abc59bf2",
+          "name": "Get option spread types",
+          "request": {
+            "name": "Get option spread types",
+            "description": {
+              "content": "Retrieves the list of available option spread types supported by TradeStation. Returns spread type names and identifiers for use in multi-leg option order construction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "options",
+                "spreadtypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88843b1e-9179-4625-a97f-7a4550a464dc",
+              "name": "Successfully retrieved option spread types",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "spreadtypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SpreadTypes\": [\n    {\n      \"Name\": \"string\",\n      \"Id\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06de911f-0f34-4d20-b660-47102141694c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "spreadtypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "094052aa-e23a-4738-bd55-8f62183ccf7a",
+          "name": "Calculate option risk/reward",
+          "request": {
+            "name": "Calculate option risk/reward",
+            "description": {
+              "content": "Calculates the risk and reward profile for one or more option positions. Returns theoretical profit/loss values at various price levels for the specified option strategy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "options",
+                "riskreward"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SpreadPrice\": \"<double>\",\n  \"Legs\": [\n    {\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<integer>\",\n      \"TradeAction\": \"<string>\"\n    },\n    {\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<integer>\",\n      \"TradeAction\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "22bd6005-05ef-44f9-b0ce-3db7f4c43fab",
+              "name": "Successfully calculated risk/reward",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "riskreward"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SpreadPrice\": \"<double>\",\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5559,\n      \"TradeAction\": \"SellToClose\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6633,\n      \"TradeAction\": \"SellToClose\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MaxGain\": 4668.4205690090685,\n  \"MaxLoss\": 7315.123885436628,\n  \"BreakEvenPoints\": [\n    5539.43136203902,\n    8551.150288606228\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd3be4d3-0dfe-40b6-97f8-544560ddfd80",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "riskreward"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SpreadPrice\": \"<double>\",\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5559,\n      \"TradeAction\": \"SellToClose\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6633,\n      \"TradeAction\": \"SellToClose\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34e0e5d7-53ca-4831-919e-db34126e6954",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "riskreward"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SpreadPrice\": \"<double>\",\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5559,\n      \"TradeAction\": \"SellToClose\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6633,\n      \"TradeAction\": \"SellToClose\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3c09897c-67a3-4cbf-b85d-33d2cd31b82f",
+      "name": "Order Execution",
+      "description": {
+        "content": "Place, confirm, modify, and cancel orders for stocks, options, and futures. Includes support for group orders such as bracket and OCO orders.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c62a046c-eff9-496c-b0c9-83cefaa86dfa",
+          "name": "Place an order",
+          "request": {
+            "name": "Place an order",
+            "description": {
+              "content": "Submits a new order for execution. Supports market, limit, stop market, stop limit, and trailing stop order types for stocks, options, and futures. Includes support for time-in-force settings such as day, GTC, GTD, and IOC.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "orderexecution",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<integer>\",\n      \"TradeAction\": \"<string>\"\n    },\n    {\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<integer>\",\n      \"TradeAction\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8818740b-766c-4479-889a-4d5ff03fb61f",
+              "name": "Order successfully submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5239,\n      \"TradeAction\": \"BuyToOpen\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6981,\n      \"TradeAction\": \"BuyToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Orders\": [\n    {\n      \"OrderID\": \"string\",\n      \"Message\": \"string\"\n    },\n    {\n      \"OrderID\": \"string\",\n      \"Message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e382069-9388-422a-845c-638fb6a67ed1",
+              "name": "Invalid order parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5239,\n      \"TradeAction\": \"BuyToOpen\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6981,\n      \"TradeAction\": \"BuyToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5097a77-6a40-4c57-bbbe-ba07f02d3328",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5239,\n      \"TradeAction\": \"BuyToOpen\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6981,\n      \"TradeAction\": \"BuyToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4741a712-5868-4399-b8bd-2cc6d1728ade",
+          "name": "Replace an order",
+          "request": {
+            "name": "Replace an order",
+            "description": {
+              "content": "Modifies an existing open order. Allows changing price, quantity, and other order parameters. The original order is cancelled and replaced with the updated order parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "orderexecution",
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The unique identifier of the order."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<integer>\",\n      \"TradeAction\": \"<string>\"\n    },\n    {\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<integer>\",\n      \"TradeAction\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e162c7a9-3c0c-4584-a504-506b4e1ebe00",
+              "name": "Order successfully replaced",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique identifier of the order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5239,\n      \"TradeAction\": \"BuyToOpen\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6981,\n      \"TradeAction\": \"BuyToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Orders\": [\n    {\n      \"OrderID\": \"string\",\n      \"Message\": \"string\"\n    },\n    {\n      \"OrderID\": \"string\",\n      \"Message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d725d511-1a3a-4ddc-8b14-51d0efc9323c",
+              "name": "Invalid order parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique identifier of the order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5239,\n      \"TradeAction\": \"BuyToOpen\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6981,\n      \"TradeAction\": \"BuyToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebdba8be-4ead-4138-b9dc-1cae1dac76d0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique identifier of the order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5239,\n      \"TradeAction\": \"BuyToOpen\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6981,\n      \"TradeAction\": \"BuyToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a57db1bb-7a20-4a6a-9dac-ac63bb46f6c1",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique identifier of the order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5239,\n      \"TradeAction\": \"BuyToOpen\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6981,\n      \"TradeAction\": \"BuyToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00b204db-d14a-4d24-b07b-1be9fba4ed90",
+          "name": "Cancel an order",
+          "request": {
+            "name": "Cancel an order",
+            "description": {
+              "content": "Cancels an existing open order. The order must be in a cancellable state. Returns the updated order status after cancellation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "orderexecution",
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The unique identifier of the order."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b89dbd50-c0dd-4f63-9af1-0e6d76358b26",
+              "name": "Order successfully cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique identifier of the order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Orders\": [\n    {\n      \"OrderID\": \"string\",\n      \"Message\": \"string\"\n    },\n    {\n      \"OrderID\": \"string\",\n      \"Message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b6fc951-7703-49c7-a780-4bafbe02d2df",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique identifier of the order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "012fd178-a3b3-4c82-bb50-7b28cb48cb30",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique identifier of the order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3eef313d-f4c6-44f2-8a8d-ae76664cb693",
+          "name": "Confirm an order",
+          "request": {
+            "name": "Confirm an order",
+            "description": {
+              "content": "Validates an order and returns estimated costs, commissions, and margin requirements without actually submitting the order for execution. Use this endpoint to preview order details before placing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "orderexecution",
+                "orderconfirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<integer>\",\n      \"TradeAction\": \"<string>\"\n    },\n    {\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<integer>\",\n      \"TradeAction\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "306d268f-db0b-44f0-83e0-2997a0f87d92",
+              "name": "Order confirmation details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orderconfirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5239,\n      \"TradeAction\": \"BuyToOpen\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6981,\n      \"TradeAction\": \"BuyToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"EstimatedCommission\": 8741.715574907088,\n  \"EstimatedCost\": 4139.945190864,\n  \"EstimatedPrice\": 4049.3033931530977,\n  \"MarginRequirement\": 8688.162080784237\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6988b411-9cd7-4d21-9e69-b18979b7d0b5",
+              "name": "Invalid order parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orderconfirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5239,\n      \"TradeAction\": \"BuyToOpen\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6981,\n      \"TradeAction\": \"BuyToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26821180-bc4c-4c49-91d2-3b8a19318cac",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "orderconfirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AccountID\": \"<string>\",\n  \"Symbol\": \"<string>\",\n  \"Quantity\": \"<double>\",\n  \"OrderType\": \"<string>\",\n  \"TradeAction\": \"<string>\",\n  \"TimeInForce\": \"<string>\",\n  \"LimitPrice\": \"<double>\",\n  \"StopPrice\": \"<double>\",\n  \"Route\": \"<string>\",\n  \"AdvancedOptions\": {\n    \"TrailingStop\": {\n      \"Amount\": \"<double>\",\n      \"Percent\": \"<double>\"\n    }\n  },\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 5239,\n      \"TradeAction\": \"BuyToOpen\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 6981,\n      \"TradeAction\": \"BuyToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0bcc1ae-71e4-4d1c-b15e-c1d10efd65b8",
+          "name": "Place a group order",
+          "request": {
+            "name": "Place a group order",
+            "description": {
+              "content": "Submits a group of related orders for execution. Supports bracket orders (OCO - One Cancels Other), OSO (Order Sends Order), and other multi-order strategies. When one order in the group is filled or cancelled, related orders are automatically managed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "orderexecution",
+                "ordergroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Type\": \"<string>\",\n  \"Orders\": [\n    {\n      \"AccountID\": \"<string>\",\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<double>\",\n      \"OrderType\": \"<string>\",\n      \"TradeAction\": \"<string>\",\n      \"TimeInForce\": \"<string>\",\n      \"LimitPrice\": \"<double>\",\n      \"StopPrice\": \"<double>\",\n      \"Route\": \"<string>\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": \"<double>\",\n          \"Percent\": \"<double>\"\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"<string>\",\n          \"Quantity\": \"<integer>\",\n          \"TradeAction\": \"<string>\"\n        },\n        {\n          \"Symbol\": \"<string>\",\n          \"Quantity\": \"<integer>\",\n          \"TradeAction\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"AccountID\": \"<string>\",\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<double>\",\n      \"OrderType\": \"<string>\",\n      \"TradeAction\": \"<string>\",\n      \"TimeInForce\": \"<string>\",\n      \"LimitPrice\": \"<double>\",\n      \"StopPrice\": \"<double>\",\n      \"Route\": \"<string>\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": \"<double>\",\n          \"Percent\": \"<double>\"\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"<string>\",\n          \"Quantity\": \"<integer>\",\n          \"TradeAction\": \"<string>\"\n        },\n        {\n          \"Symbol\": \"<string>\",\n          \"Quantity\": \"<integer>\",\n          \"TradeAction\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5c9ac41-403c-4d2d-8c84-b123d9a26cc8",
+              "name": "Group order successfully submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "ordergroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Type\": \"<string>\",\n  \"Orders\": [\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 918.5772519635349,\n      \"OrderType\": \"StopLimit\",\n      \"TradeAction\": \"Sell\",\n      \"TimeInForce\": \"IOC\",\n      \"LimitPrice\": 4950.4699219816,\n      \"StopPrice\": 6543.626727619101,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 9107.697956365999,\n          \"Percent\": 2101.388548924732\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6080,\n          \"TradeAction\": \"SellToOpen\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6025,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    },\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 9043.789930687504,\n      \"OrderType\": \"TrailingStopLimit\",\n      \"TradeAction\": \"SellShort\",\n      \"TimeInForce\": \"OPG\",\n      \"LimitPrice\": 9480.994941470492,\n      \"StopPrice\": 647.3460296452471,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 3948.0059728011784,\n          \"Percent\": 7883.0994818630315\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 8419,\n          \"TradeAction\": \"SellToClose\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 7970,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Orders\": [\n    {\n      \"OrderID\": \"string\",\n      \"Message\": \"string\"\n    },\n    {\n      \"OrderID\": \"string\",\n      \"Message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7663c774-5a6b-469a-bc71-74854dcec2fc",
+              "name": "Invalid group order parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "ordergroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Type\": \"<string>\",\n  \"Orders\": [\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 918.5772519635349,\n      \"OrderType\": \"StopLimit\",\n      \"TradeAction\": \"Sell\",\n      \"TimeInForce\": \"IOC\",\n      \"LimitPrice\": 4950.4699219816,\n      \"StopPrice\": 6543.626727619101,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 9107.697956365999,\n          \"Percent\": 2101.388548924732\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6080,\n          \"TradeAction\": \"SellToOpen\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6025,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    },\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 9043.789930687504,\n      \"OrderType\": \"TrailingStopLimit\",\n      \"TradeAction\": \"SellShort\",\n      \"TimeInForce\": \"OPG\",\n      \"LimitPrice\": 9480.994941470492,\n      \"StopPrice\": 647.3460296452471,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 3948.0059728011784,\n          \"Percent\": 7883.0994818630315\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 8419,\n          \"TradeAction\": \"SellToClose\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 7970,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c995d7c-4bcd-4806-824a-239b98e03f40",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "ordergroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Type\": \"<string>\",\n  \"Orders\": [\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 918.5772519635349,\n      \"OrderType\": \"StopLimit\",\n      \"TradeAction\": \"Sell\",\n      \"TimeInForce\": \"IOC\",\n      \"LimitPrice\": 4950.4699219816,\n      \"StopPrice\": 6543.626727619101,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 9107.697956365999,\n          \"Percent\": 2101.388548924732\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6080,\n          \"TradeAction\": \"SellToOpen\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6025,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    },\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 9043.789930687504,\n      \"OrderType\": \"TrailingStopLimit\",\n      \"TradeAction\": \"SellShort\",\n      \"TimeInForce\": \"OPG\",\n      \"LimitPrice\": 9480.994941470492,\n      \"StopPrice\": 647.3460296452471,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 3948.0059728011784,\n          \"Percent\": 7883.0994818630315\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 8419,\n          \"TradeAction\": \"SellToClose\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 7970,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7edaed3e-2189-4743-a78b-214b5ba5ecd4",
+          "name": "Confirm a group order",
+          "request": {
+            "name": "Confirm a group order",
+            "description": {
+              "content": "Validates a group of related orders and returns estimated costs, commissions, and margin requirements without submitting for execution. Use this endpoint to preview group order details before placing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "orderexecution",
+                "ordergroupconfirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Type\": \"<string>\",\n  \"Orders\": [\n    {\n      \"AccountID\": \"<string>\",\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<double>\",\n      \"OrderType\": \"<string>\",\n      \"TradeAction\": \"<string>\",\n      \"TimeInForce\": \"<string>\",\n      \"LimitPrice\": \"<double>\",\n      \"StopPrice\": \"<double>\",\n      \"Route\": \"<string>\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": \"<double>\",\n          \"Percent\": \"<double>\"\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"<string>\",\n          \"Quantity\": \"<integer>\",\n          \"TradeAction\": \"<string>\"\n        },\n        {\n          \"Symbol\": \"<string>\",\n          \"Quantity\": \"<integer>\",\n          \"TradeAction\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"AccountID\": \"<string>\",\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<double>\",\n      \"OrderType\": \"<string>\",\n      \"TradeAction\": \"<string>\",\n      \"TimeInForce\": \"<string>\",\n      \"LimitPrice\": \"<double>\",\n      \"StopPrice\": \"<double>\",\n      \"Route\": \"<string>\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": \"<double>\",\n          \"Percent\": \"<double>\"\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"<string>\",\n          \"Quantity\": \"<integer>\",\n          \"TradeAction\": \"<string>\"\n        },\n        {\n          \"Symbol\": \"<string>\",\n          \"Quantity\": \"<integer>\",\n          \"TradeAction\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80933723-19b0-4025-85d3-eaabeb832478",
+              "name": "Group order confirmation details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "ordergroupconfirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Type\": \"<string>\",\n  \"Orders\": [\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 918.5772519635349,\n      \"OrderType\": \"StopLimit\",\n      \"TradeAction\": \"Sell\",\n      \"TimeInForce\": \"IOC\",\n      \"LimitPrice\": 4950.4699219816,\n      \"StopPrice\": 6543.626727619101,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 9107.697956365999,\n          \"Percent\": 2101.388548924732\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6080,\n          \"TradeAction\": \"SellToOpen\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6025,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    },\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 9043.789930687504,\n      \"OrderType\": \"TrailingStopLimit\",\n      \"TradeAction\": \"SellShort\",\n      \"TimeInForce\": \"OPG\",\n      \"LimitPrice\": 9480.994941470492,\n      \"StopPrice\": 647.3460296452471,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 3948.0059728011784,\n          \"Percent\": 7883.0994818630315\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 8419,\n          \"TradeAction\": \"SellToClose\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 7970,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Confirmations\": [\n    {\n      \"EstimatedCommission\": 3339.5557472515757,\n      \"EstimatedCost\": 3227.5211121612024,\n      \"EstimatedPrice\": 1404.6329234942357,\n      \"MarginRequirement\": 4804.894262600598\n    },\n    {\n      \"EstimatedCommission\": 6177.996451316953,\n      \"EstimatedCost\": 1742.0276367472643,\n      \"EstimatedPrice\": 818.2789393516388,\n      \"MarginRequirement\": 2730.425223866618\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "989341ad-4633-4258-88a6-962083d70130",
+              "name": "Invalid group order parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "ordergroupconfirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Type\": \"<string>\",\n  \"Orders\": [\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 918.5772519635349,\n      \"OrderType\": \"StopLimit\",\n      \"TradeAction\": \"Sell\",\n      \"TimeInForce\": \"IOC\",\n      \"LimitPrice\": 4950.4699219816,\n      \"StopPrice\": 6543.626727619101,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 9107.697956365999,\n          \"Percent\": 2101.388548924732\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6080,\n          \"TradeAction\": \"SellToOpen\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6025,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    },\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 9043.789930687504,\n      \"OrderType\": \"TrailingStopLimit\",\n      \"TradeAction\": \"SellShort\",\n      \"TimeInForce\": \"OPG\",\n      \"LimitPrice\": 9480.994941470492,\n      \"StopPrice\": 647.3460296452471,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 3948.0059728011784,\n          \"Percent\": 7883.0994818630315\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 8419,\n          \"TradeAction\": \"SellToClose\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 7970,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acf7b801-cdb4-49af-aa1e-4b2c4fef7705",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "ordergroupconfirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Type\": \"<string>\",\n  \"Orders\": [\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 918.5772519635349,\n      \"OrderType\": \"StopLimit\",\n      \"TradeAction\": \"Sell\",\n      \"TimeInForce\": \"IOC\",\n      \"LimitPrice\": 4950.4699219816,\n      \"StopPrice\": 6543.626727619101,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 9107.697956365999,\n          \"Percent\": 2101.388548924732\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6080,\n          \"TradeAction\": \"SellToOpen\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 6025,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    },\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 9043.789930687504,\n      \"OrderType\": \"TrailingStopLimit\",\n      \"TradeAction\": \"SellShort\",\n      \"TimeInForce\": \"OPG\",\n      \"LimitPrice\": 9480.994941470492,\n      \"StopPrice\": 647.3460296452471,\n      \"Route\": \"string\",\n      \"AdvancedOptions\": {\n        \"TrailingStop\": {\n          \"Amount\": 3948.0059728011784,\n          \"Percent\": 7883.0994818630315\n        }\n      },\n      \"Legs\": [\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 8419,\n          \"TradeAction\": \"SellToClose\"\n        },\n        {\n          \"Symbol\": \"string\",\n          \"Quantity\": 7970,\n          \"TradeAction\": \"SellToClose\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d6664400-9a1a-40e4-9ca8-074b9f01e6be",
+      "name": "Reference Data",
+      "description": {
+        "content": "Access reference data for order execution including activation triggers and available routing destinations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f3e803f2-0346-458a-928b-3572e3b1e5a7",
+          "name": "Get activation triggers",
+          "request": {
+            "name": "Get activation triggers",
+            "description": {
+              "content": "Retrieves the list of available activation trigger methods for conditional orders. Returns trigger types and their identifiers that can be used when placing orders with activation conditions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "orderexecution",
+                "activationtriggers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63d91777-212a-4c30-910c-a6691fd87ed2",
+              "name": "Successfully retrieved activation triggers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "activationtriggers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ActivationTriggers\": [\n    {\n      \"Key\": \"string\",\n      \"Name\": \"string\",\n      \"Description\": \"string\"\n    },\n    {\n      \"Key\": \"string\",\n      \"Name\": \"string\",\n      \"Description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56c12b0e-55fe-4b4a-80f9-ed951d3e2237",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "activationtriggers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c27da927-ccfa-4e26-9d8a-d0349e53247a",
+          "name": "Get execution routes",
+          "request": {
+            "name": "Get execution routes",
+            "description": {
+              "content": "Retrieves the list of available order routing destinations. Returns route identifiers and names for use when specifying a routing preference on order submission.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "orderexecution",
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0cd21d99-568c-44a0-a3c4-55fbc7937925",
+              "name": "Successfully retrieved routes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Routes\": [\n    {\n      \"Id\": \"string\",\n      \"Name\": \"string\",\n      \"AssetTypes\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"Id\": \"string\",\n      \"Name\": \"string\",\n      \"AssetTypes\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "126d0e38-c3f8-426b-9853-a400f6107147",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 2279,\n  \"Message\": \"string\",\n  \"TraceId\": \"759f3d5d-f11e-497e-e240-16ac8bf9bb9d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tradestation.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "marketdata readaccount trade"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://signin.tradestation.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://signin.tradestation.com/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3f7ef0b7-b88e-4089-b45c-286bf7282b59",
+    "name": "TradeStation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.\n\nContact Support:\n Name: TradeStation API Support",
+      "type": "text/plain"
+    }
+  }
+}

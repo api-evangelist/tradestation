@@ -1,10 +1,11 @@
 aid: tradestation
 name: TradeStation
-description: TradeStation is a financial brokerage and trading platform offering a collection of RESTful brokerage and market
-  data services for building trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints
-  for account management, order placement and execution, real-time and historical market data, option chains, symbol information,
-  and HTTP streaming for live market feeds. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg
-  options orders with OAuth2 authentication.
+description: >-
+  TradeStation is a financial brokerage and trading platform offering a collection of RESTful brokerage and market data
+  services for building trading applications for stocks, options, futures, and cryptocurrency. The API provides
+  endpoints for account management, order placement and execution, real-time and historical market data, option chains,
+  symbol information, and HTTP streaming for live market feeds. TradeStation supports advanced order types including
+  bracket, OCO, OSO, and multi-leg options orders with OAuth2 authentication.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -23,73 +24,63 @@ specificationVersion: '0.19'
 apis:
   - aid: tradestation:tradestation-api
     name: TradeStation API
-    description: The TradeStation REST API provides brokerage and market data services for building trading applications. Covers
-      account management, order placement and execution, real-time and historical market data, option chains, symbol information,
-      and reference data. Supports stocks, options, futures, and cryptocurrency with OAuth2 authentication.
+    description: >-
+      The TradeStation REST API provides brokerage and market data services for building trading applications. Covers
+      account management, order placement and execution, real-time and historical market data, option chains, symbol
+      information, and reference data. Supports stocks, options, futures, and cryptocurrency with OAuth2 authentication.
     humanURL: https://api.tradestation.com/docs/
     baseURL: https://api.tradestation.com
     tags:
-    - Accounts
-    - Brokerage
-    - Cryptocurrency
-    - Market Data
-    - Options
-    - Order Execution
-    - Stocks
-    - Trading
+      - Accounts
+      - Brokerage
+      - Cryptocurrency
+      - Market Data
+      - Options
+      - Order Execution
+      - Stocks
+      - Trading
     properties:
-    - type: Documentation
-      url: https://api.tradestation.com/docs/
-    - type: OpenAPI
-      url: openapi/tradestation-api-openapi.yml
-    - type: AsyncAPI
-      url: asyncapi/tradestation-streaming-asyncapi.yml
-    - type: JSONSchema
-      url: json-schema/tradestation-order-schema.json
-    - type: JSONStructure
-      url: json-structure/tradestation-order-structure.json
-    - type: JSONLD
-      url: json-ld/tradestation-context.jsonld
-    - type: SpectralRules
-      url: rules/tradestation-rules.yml
-    - type: NaftikoCapabilities
-      url: capabilities/trading-and-market-data.yaml
-    - type: Vocabulary
-      url: vocabulary/tradestation-vocabulary.yml
-    - type: GitHubOrg
-      url: https://github.com/tradestation
-    - type: APISpecification
-      url: https://tradestation.github.io/api-docs/
-    - type: NaftikoCapability
-      url: capabilities/tradestation-accounts.yaml
-    - type: NaftikoCapability
-      url: capabilities/tradestation-market-data.yaml
-    - type: NaftikoCapability
-      url: capabilities/tradestation-options.yaml
-    - type: NaftikoCapability
-      url: capabilities/tradestation-order-execution.yaml
-    - type: NaftikoCapability
-      url: capabilities/tradestation-reference-data.yaml
+      - type: Documentation
+        url: https://api.tradestation.com/docs/
+      - type: OpenAPI
+        url: openapi/tradestation-api-openapi.yml
+      - type: AsyncAPI
+        url: asyncapi/tradestation-streaming-asyncapi.yml
+      - type: JSONSchema
+        url: json-schema/tradestation-order-schema.json
+      - type: JSONStructure
+        url: json-structure/tradestation-order-structure.json
+      - type: JSONLD
+        url: json-ld/tradestation-context.jsonld
+      - type: SpectralRules
+        url: rules/tradestation-rules.yml
+      - type: Vocabulary
+        url: vocabulary/tradestation-vocabulary.yml
+      - type: GitHubOrg
+        url: https://github.com/tradestation
+      - type: APISpecification
+        url: https://tradestation.github.io/api-docs/
   - aid: tradestation:tradestation-streaming
     name: TradeStation Streaming API
-    description: The TradeStation Streaming API provides real-time HTTP streaming endpoints using chunked transfer encoding
-      with newline-delimited JSON for market data and brokerage events. Streams deliver live quote updates, bar chart data,
+    description: >-
+      The TradeStation Streaming API provides real-time HTTP streaming endpoints using chunked transfer encoding with
+      newline-delimited JSON for market data and brokerage events. Streams deliver live quote updates, bar chart data,
       and order status changes with minimal latency.
     humanURL: https://api.tradestation.com/docs/
     baseURL: https://api.tradestation.com
     tags:
-    - Bar Charts
-    - Cryptocurrency
-    - Market Data
-    - Options
-    - Order Status
-    - Real-Time
-    - Streaming
+      - Bar Charts
+      - Cryptocurrency
+      - Market Data
+      - Options
+      - Order Status
+      - Real-Time
+      - Streaming
     properties:
-    - type: Documentation
-      url: https://api.tradestation.com/docs/
-    - type: AsyncAPI
-      url: asyncapi/tradestation-streaming-asyncapi.yml
+      - type: Documentation
+        url: https://api.tradestation.com/docs/
+      - type: AsyncAPI
+        url: asyncapi/tradestation-streaming-asyncapi.yml
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/tradestation

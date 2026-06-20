@@ -7,7 +7,7 @@ description: >-
   symbol information, and HTTP streaming for live market feeds. TradeStation supports advanced order types including
   bracket, OCO, OSO, and multi-leg options orders with OAuth2 authentication.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Brokerage
   - Cryptocurrency

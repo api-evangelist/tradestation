@@ -98,7 +98,7 @@ common:
     url: https://api.tradestation.com/docs/fundamentals/rate-limiting/
   - type: TermsOfService
     url: https://www.tradestation.com/important-information/
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://developer.tradestation.com/llms.txt
 maintainers:
   - FN: Kin Lane

@@ -82,6 +82,8 @@ apis:
       - type: AsyncAPI
         url: asyncapi/tradestation-streaming-asyncapi.yml
 common:
+  - type: DomainSecurity
+    url: security/tradestation-domain-security.yml
   - type: Authentication
     url: authentication/tradestation-authentication.yml
   - type: OAuthScopes

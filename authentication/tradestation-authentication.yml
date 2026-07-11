@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/tradestation-api-openapi.yml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: oauth2AuthCode
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://signin.tradestation.com/authorize
+    tokenUrl: https://signin.tradestation.com/oauth/token
+    scopes: 3
+  description: OAuth 2.0 authorization code flow for accessing TradeStation API resources. Requires
+    user authorization and supports token refresh.
+  sources:
+  - openapi/tradestation-api-openapi.yml

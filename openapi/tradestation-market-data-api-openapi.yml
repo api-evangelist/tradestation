@@ -1,0 +1,416 @@
+openapi: 3.1.0
+info:
+  title: TradeStation Accounts Market Data API
+  description: The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.
+  version: '3.0'
+  contact:
+    name: TradeStation API Support
+    url: https://api.tradestation.com/docs/
+  termsOfService: https://www.tradestation.com/important-information/
+servers:
+- url: https://api.tradestation.com
+  description: Production Server
+- url: https://sim-api.tradestation.com
+  description: Simulator Server (Paper Trading)
+security:
+- oauth2AuthCode: []
+tags:
+- name: Market Data
+  description: Access real-time and historical market data including quotes, bar charts, symbol information, symbol lists, and cryptocurrency pairs.
+paths:
+  /v3/marketdata/quotes/{symbols}:
+    get:
+      operationId: getQuotes
+      summary: Get quotes
+      description: Retrieves real-time quote snapshots for one or more symbols. Returns current bid, ask, last price, volume, and other quote data fields. Supports stocks, options, futures, and cryptocurrency symbols.
+      tags:
+      - Market Data
+      parameters:
+      - $ref: '#/components/parameters/Symbols'
+      responses:
+        '200':
+          description: Successfully retrieved quotes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuotesResponse'
+        '400':
+          description: Invalid symbol format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/marketdata/barcharts/{symbol}:
+    get:
+      operationId: getBars
+      summary: Get bar chart data
+      description: Retrieves historical bar chart data (OHLC) for a given symbol. Supports multiple intervals and units including minute, daily, weekly, and monthly bars. Returns open, high, low, close prices along with volume and timestamp information.
+      tags:
+      - Market Data
+      parameters:
+      - name: symbol
+        in: path
+        required: true
+        description: The symbol to retrieve bar chart data for.
+        schema:
+          type: string
+      - name: interval
+        in: query
+        description: The interval for each bar. For minute bars, valid values are 1-1440. For daily, weekly, and monthly bars, use 1.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1440
+      - name: unit
+        in: query
+        description: The unit of time for the bar interval.
+        required: false
+        schema:
+          type: string
+          enum:
+          - Minute
+          - Daily
+          - Weekly
+          - Monthly
+      - name: barsBack
+        in: query
+        description: Number of bars to retrieve going back from the last date.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 57600
+      - name: firstDate
+        in: query
+        description: The start date for bar data retrieval.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: lastDate
+        in: query
+        description: The end date for bar data retrieval.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: sessionTemplate
+        in: query
+        description: The session template to use for filtering bar data. Controls which trading session data to include.
+        required: false
+        schema:
+          type: string
+          enum:
+          - USEQPre
+          - USEQPost
+          - USEQPreAndPost
+          - Default
+      responses:
+        '200':
+          description: Successfully retrieved bar chart data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BarsResponse'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Symbol not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/marketdata/symbols/{symbols}:
+    get:
+      operationId: getSymbols
+      summary: Get symbol details
+      description: Retrieves detailed symbol information for one or more symbols. Returns symbol metadata including description, exchange, category, currency, point value, and contract specifications.
+      tags:
+      - Market Data
+      parameters:
+      - $ref: '#/components/parameters/Symbols'
+      responses:
+        '200':
+          description: Successfully retrieved symbol details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SymbolsResponse'
+        '400':
+          description: Invalid symbol format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/marketdata/symbollists/cryptopairs/symbolnames:
+    get:
+      operationId: getCryptoPairs
+      summary: Get cryptocurrency pairs
+      description: Retrieves the list of available cryptocurrency trading pairs. Returns symbol names for all supported crypto pairs on the TradeStation platform.
+      tags:
+      - Market Data
+      responses:
+        '200':
+          description: Successfully retrieved cryptocurrency pairs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CryptoPairsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Symbol:
+      type: object
+      description: Detailed symbol information and metadata.
+      properties:
+        Name:
+          type: string
+          description: The symbol name or ticker.
+        Description:
+          type: string
+          description: A human-readable description of the symbol.
+        Exchange:
+          type: string
+          description: The exchange where the symbol is listed.
+        ExchangeID:
+          type: integer
+          description: The numeric exchange identifier.
+        Category:
+          type: string
+          description: The category of the symbol such as Stock, Option, Future, or Forex.
+        Currency:
+          type: string
+          description: The currency the symbol is denominated in.
+          enum:
+          - USD
+          - EUR
+          - CAD
+          - GBP
+          - JPY
+        Country:
+          type: string
+          description: The country where the symbol is listed.
+        PointValue:
+          type: number
+          format: double
+          description: The dollar value of a single point move.
+        MinMove:
+          type: number
+          format: double
+          description: The minimum price movement.
+        Root:
+          type: string
+          description: The root symbol for options and futures.
+        Underlying:
+          type: string
+          description: The underlying symbol for options.
+        StrikePrice:
+          type: number
+          format: double
+          description: The strike price for option symbols.
+        ExpirationDate:
+          type: string
+          format: date
+          description: The expiration date for option and futures symbols.
+        OptionType:
+          type: string
+          description: The option type for option symbols.
+          enum:
+          - Call
+          - Put
+        FutureType:
+          type: string
+          description: The futures type classification.
+    BarsResponse:
+      type: object
+      description: Response containing bar chart data for a symbol.
+      properties:
+        Bars:
+          type: array
+          description: List of OHLC bars.
+          items:
+            $ref: '#/components/schemas/Bar'
+    Bar:
+      type: object
+      description: A single OHLC bar representing price activity over a time interval.
+      properties:
+        High:
+          type: number
+          format: double
+          description: The highest price during the bar interval.
+        Low:
+          type: number
+          format: double
+          description: The lowest price during the bar interval.
+        Open:
+          type: number
+          format: double
+          description: The opening price of the bar interval.
+        Close:
+          type: number
+          format: double
+          description: The closing price of the bar interval.
+        Volume:
+          type: integer
+          description: The total volume during the bar interval.
+        TimeStamp:
+          type: string
+          format: date-time
+          description: The timestamp for the start of the bar interval.
+        TotalTicks:
+          type: integer
+          description: The total number of ticks during the bar interval.
+        UpTicks:
+          type: integer
+          description: The number of up ticks during the bar interval.
+        DownTicks:
+          type: integer
+          description: The number of down ticks during the bar interval.
+    QuotesResponse:
+      type: object
+      description: Response containing quote data for one or more symbols.
+      properties:
+        Quotes:
+          type: array
+          description: List of quote snapshots.
+          items:
+            $ref: '#/components/schemas/Quote'
+    SymbolsResponse:
+      type: object
+      description: Response containing detailed symbol information.
+      properties:
+        Symbols:
+          type: array
+          description: List of symbol details.
+          items:
+            $ref: '#/components/schemas/Symbol'
+    CryptoPairsResponse:
+      type: object
+      description: Response containing available cryptocurrency trading pairs.
+      properties:
+        SymbolNames:
+          type: array
+          description: List of cryptocurrency pair symbol names.
+          items:
+            type: string
+    Quote:
+      type: object
+      description: Real-time quote data for a single symbol.
+      properties:
+        Symbol:
+          type: string
+          description: The symbol identifier.
+        Last:
+          type: number
+          format: double
+          description: The last traded price.
+        Bid:
+          type: number
+          format: double
+          description: The current bid price.
+        Ask:
+          type: number
+          format: double
+          description: The current ask price.
+        BidSize:
+          type: integer
+          description: The size of the bid in shares or contracts.
+        AskSize:
+          type: integer
+          description: The size of the ask in shares or contracts.
+        Volume:
+          type: integer
+          description: The total volume traded today.
+        Open:
+          type: number
+          format: double
+          description: The opening price for the current session.
+        High:
+          type: number
+          format: double
+          description: The highest price for the current session.
+        Low:
+          type: number
+          format: double
+          description: The lowest price for the current session.
+        Close:
+          type: number
+          format: double
+          description: The previous session closing price.
+        NetChange:
+          type: number
+          format: double
+          description: Net change from previous close.
+        NetChangePct:
+          type: number
+          format: double
+          description: Net change as a percentage.
+        TradeTime:
+          type: string
+          format: date-time
+          description: The timestamp of the last trade.
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+  parameters:
+    Symbols:
+      name: symbols
+      in: path
+      required: true
+      description: One or more symbol identifiers, comma-separated.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2AuthCode:
+      type: oauth2
+      description: OAuth 2.0 authorization code flow for accessing TradeStation API resources. Requires user authorization and supports token refresh.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://signin.tradestation.com/authorize
+          tokenUrl: https://signin.tradestation.com/oauth/token
+          scopes:
+            marketdata: Access to market data endpoints
+            readaccount: Read access to account information
+            trade: Access to order placement and management
+externalDocs:
+  description: TradeStation API Documentation
+  url: https://api.tradestation.com/docs/

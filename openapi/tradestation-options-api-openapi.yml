@@ -1,0 +1,270 @@
+openapi: 3.1.0
+info:
+  title: TradeStation Accounts Options API
+  description: The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.
+  version: '3.0'
+  contact:
+    name: TradeStation API Support
+    url: https://api.tradestation.com/docs/
+  termsOfService: https://www.tradestation.com/important-information/
+servers:
+- url: https://api.tradestation.com
+  description: Production Server
+- url: https://sim-api.tradestation.com
+  description: Simulator Server (Paper Trading)
+security:
+- oauth2AuthCode: []
+tags:
+- name: Options
+  description: Retrieve options-related market data including expirations, strike prices, spread types, and risk/reward calculations.
+paths:
+  /v3/marketdata/options/expirations/{underlying}:
+    get:
+      operationId: getOptionExpirations
+      summary: Get option expirations
+      description: Retrieves available option expiration dates for a given underlying symbol. Returns expiration dates along with expiration type information such as monthly, weekly, or quarterly.
+      tags:
+      - Options
+      parameters:
+      - $ref: '#/components/parameters/Underlying'
+      responses:
+        '200':
+          description: Successfully retrieved option expirations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionExpirationsResponse'
+        '400':
+          description: Invalid underlying symbol
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/marketdata/options/strikes/{underlying}:
+    get:
+      operationId: getOptionStrikes
+      summary: Get option strikes
+      description: Retrieves available strike prices for options on a given underlying symbol. Returns the list of strike prices available for trading.
+      tags:
+      - Options
+      parameters:
+      - $ref: '#/components/parameters/Underlying'
+      responses:
+        '200':
+          description: Successfully retrieved option strikes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionStrikesResponse'
+        '400':
+          description: Invalid underlying symbol
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/marketdata/options/spreadtypes:
+    get:
+      operationId: getOptionSpreadTypes
+      summary: Get option spread types
+      description: Retrieves the list of available option spread types supported by TradeStation. Returns spread type names and identifiers for use in multi-leg option order construction.
+      tags:
+      - Options
+      responses:
+        '200':
+          description: Successfully retrieved option spread types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionSpreadTypesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/marketdata/options/riskreward:
+    post:
+      operationId: calculateOptionRiskReward
+      summary: Calculate option risk/reward
+      description: Calculates the risk and reward profile for one or more option positions. Returns theoretical profit/loss values at various price levels for the specified option strategy.
+      tags:
+      - Options
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RiskRewardRequest'
+      responses:
+        '200':
+          description: Successfully calculated risk/reward
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RiskRewardResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    OptionExpiration:
+      type: object
+      description: An option expiration date with its type classification.
+      properties:
+        Date:
+          type: string
+          format: date
+          description: The expiration date.
+        Type:
+          type: string
+          description: The expiration type classification.
+          enum:
+          - Monthly
+          - Weekly
+          - Quarterly
+          - EOM
+    OptionLeg:
+      type: object
+      description: A single leg of an option strategy.
+      properties:
+        Symbol:
+          type: string
+          description: The option symbol.
+        Quantity:
+          type: integer
+          description: The number of contracts.
+        TradeAction:
+          type: string
+          description: The trade action for this leg.
+          enum:
+          - BuyToOpen
+          - BuyToClose
+          - SellToOpen
+          - SellToClose
+    OptionExpirationsResponse:
+      type: object
+      description: Response containing option expiration dates for an underlying symbol.
+      properties:
+        Expirations:
+          type: array
+          description: List of option expirations.
+          items:
+            $ref: '#/components/schemas/OptionExpiration'
+    OptionStrikesResponse:
+      type: object
+      description: Response containing available strike prices for an underlying symbol.
+      properties:
+        Strikes:
+          type: array
+          description: List of available strike prices.
+          items:
+            type: number
+            format: double
+    RiskRewardRequest:
+      type: object
+      description: Request body for option risk/reward calculation.
+      required:
+      - SpreadPrice
+      - Legs
+      properties:
+        SpreadPrice:
+          type: number
+          format: double
+          description: The net price of the option spread.
+        Legs:
+          type: array
+          description: The option legs to include in the calculation.
+          items:
+            $ref: '#/components/schemas/OptionLeg'
+    OptionSpreadTypesResponse:
+      type: object
+      description: Response containing available option spread types.
+      properties:
+        SpreadTypes:
+          type: array
+          description: List of available spread types.
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+                description: The name of the spread type.
+              Id:
+                type: string
+                description: The unique identifier of the spread type.
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+    RiskRewardResponse:
+      type: object
+      description: Response containing the risk/reward analysis results.
+      properties:
+        MaxGain:
+          type: number
+          format: double
+          description: The maximum potential gain.
+        MaxLoss:
+          type: number
+          format: double
+          description: The maximum potential loss.
+        BreakEvenPoints:
+          type: array
+          description: Break-even price points.
+          items:
+            type: number
+            format: double
+  parameters:
+    Underlying:
+      name: underlying
+      in: path
+      required: true
+      description: The underlying symbol for options data retrieval.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2AuthCode:
+      type: oauth2
+      description: OAuth 2.0 authorization code flow for accessing TradeStation API resources. Requires user authorization and supports token refresh.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://signin.tradestation.com/authorize
+          tokenUrl: https://signin.tradestation.com/oauth/token
+          scopes:
+            marketdata: Access to market data endpoints
+            readaccount: Read access to account information
+            trade: Access to order placement and management
+externalDocs:
+  description: TradeStation API Documentation
+  url: https://api.tradestation.com/docs/

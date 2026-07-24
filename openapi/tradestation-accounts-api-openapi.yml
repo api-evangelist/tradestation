@@ -1,0 +1,529 @@
+openapi: 3.1.0
+info:
+  title: TradeStation Accounts API
+  description: The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.
+  version: '3.0'
+  contact:
+    name: TradeStation API Support
+    url: https://api.tradestation.com/docs/
+  termsOfService: https://www.tradestation.com/important-information/
+servers:
+- url: https://api.tradestation.com
+  description: Production Server
+- url: https://sim-api.tradestation.com
+  description: Simulator Server (Paper Trading)
+security:
+- oauth2AuthCode: []
+tags:
+- name: Accounts
+  description: Retrieve account information including account details, balances, beginning-of-day balances, positions, orders, historical orders, and cryptocurrency wallets.
+paths:
+  /v3/brokerage/accounts:
+    get:
+      operationId: getAccounts
+      summary: Get accounts
+      description: Retrieves all brokerage accounts associated with the authenticated user. Returns account identifiers, account types, and other account metadata needed for subsequent API calls.
+      tags:
+      - Accounts
+      responses:
+        '200':
+          description: Successfully retrieved accounts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountsResponse'
+        '401':
+          description: Unauthorized - invalid or expired access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/brokerage/accounts/{accountIds}/balances:
+    get:
+      operationId: getBalances
+      summary: Get account balances
+      description: Retrieves the current real-time balances for one or more brokerage accounts. Includes cash balance, equity, market value, buying power, and margin-related balance information.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/AccountIds'
+      responses:
+        '200':
+          description: Successfully retrieved balances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalancesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/brokerage/accounts/{accountIds}/bodbalances:
+    get:
+      operationId: getBalancesBOD
+      summary: Get beginning-of-day balances
+      description: Retrieves the beginning-of-day balances for one or more brokerage accounts. These balances reflect account state at the start of the current trading session.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/AccountIds'
+      responses:
+        '200':
+          description: Successfully retrieved beginning-of-day balances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalancesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/brokerage/accounts/{accountIds}/positions:
+    get:
+      operationId: getPositions
+      summary: Get account positions
+      description: Retrieves the current positions for one or more brokerage accounts. Returns information about each open position including symbol, quantity, average price, market value, and unrealized profit/loss.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/AccountIds'
+      responses:
+        '200':
+          description: Successfully retrieved positions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PositionsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/brokerage/accounts/{accountIds}/orders:
+    get:
+      operationId: getOrders
+      summary: Get account orders
+      description: Retrieves the current active orders for one or more brokerage accounts. Returns information about each order including status, order type, symbol, quantity, and price.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/AccountIds'
+      responses:
+        '200':
+          description: Successfully retrieved orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrdersResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/brokerage/accounts/{accountIds}/historicalorders:
+    get:
+      operationId: getHistoricalOrders
+      summary: Get historical orders
+      description: Retrieves historical orders for one or more brokerage accounts. Returns past orders including filled, cancelled, and rejected orders up to 90 days in the past.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/AccountIds'
+      - name: since
+        in: query
+        description: Filter orders since this date. Format is MM-DD-YYYY.
+        required: false
+        schema:
+          type: string
+          pattern: ^\d{2}-\d{2}-\d{4}$
+      - name: pageSize
+        in: query
+        description: Number of orders per page.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      - name: pageNum
+        in: query
+        description: Page number for pagination.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      responses:
+        '200':
+          description: Successfully retrieved historical orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrdersResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/brokerage/accounts/{accountId}/wallets:
+    get:
+      operationId: getWallets
+      summary: Get cryptocurrency wallets
+      description: Retrieves cryptocurrency wallet information for a specific brokerage account. Returns wallet balances and cryptocurrency holdings.
+      tags:
+      - Accounts
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The account identifier for wallet retrieval.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved wallets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    WalletsResponse:
+      type: object
+      description: Response containing cryptocurrency wallet information.
+      properties:
+        Wallets:
+          type: array
+          description: List of cryptocurrency wallets.
+          items:
+            $ref: '#/components/schemas/Wallet'
+    Account:
+      type: object
+      description: Represents a brokerage account with its identifiers and metadata.
+      properties:
+        AccountID:
+          type: string
+          description: The unique account identifier.
+        AccountType:
+          type: string
+          description: The type of account such as Cash, Margin, Futures, or Crypto.
+          enum:
+          - Cash
+          - Margin
+          - Futures
+          - DVP
+          - Crypto
+        Status:
+          type: string
+          description: The current status of the account.
+          enum:
+          - Active
+          - Closed
+        StatusDescription:
+          type: string
+          description: Human-readable description of the account status.
+    AccountsResponse:
+      type: object
+      description: Response containing a list of brokerage accounts.
+      properties:
+        Accounts:
+          type: array
+          description: List of brokerage accounts.
+          items:
+            $ref: '#/components/schemas/Account'
+    Position:
+      type: object
+      description: Represents an open position in a brokerage account.
+      properties:
+        AccountID:
+          type: string
+          description: The account identifier holding this position.
+        Symbol:
+          type: string
+          description: The symbol of the held instrument.
+        Quantity:
+          type: number
+          format: double
+          description: The number of shares, contracts, or units held.
+        AveragePrice:
+          type: number
+          format: double
+          description: The average entry price per unit.
+        Last:
+          type: number
+          format: double
+          description: The last traded price of the instrument.
+        MarketValue:
+          type: number
+          format: double
+          description: Current market value of the position.
+        UnrealizedProfitLoss:
+          type: number
+          format: double
+          description: Unrealized profit or loss on the position.
+        UnrealizedProfitLossPercent:
+          type: number
+          format: double
+          description: Unrealized profit or loss as a percentage.
+        AssetType:
+          type: string
+          description: The asset class of the instrument.
+          enum:
+          - Stock
+          - Option
+          - Future
+          - Crypto
+        LongShort:
+          type: string
+          description: Whether the position is long or short.
+          enum:
+          - Long
+          - Short
+    Wallet:
+      type: object
+      description: Represents a cryptocurrency wallet with balance information.
+      properties:
+        Currency:
+          type: string
+          description: The cryptocurrency currency code.
+        Balance:
+          type: number
+          format: double
+          description: The wallet balance.
+        Available:
+          type: number
+          format: double
+          description: The available balance for trading.
+    PositionsResponse:
+      type: object
+      description: Response containing position information for one or more accounts.
+      properties:
+        Positions:
+          type: array
+          description: List of open positions.
+          items:
+            $ref: '#/components/schemas/Position'
+    Order:
+      type: object
+      description: Represents an order with its current status and parameters.
+      properties:
+        OrderID:
+          type: string
+          description: The unique order identifier.
+        AccountID:
+          type: string
+          description: The account identifier associated with the order.
+        Symbol:
+          type: string
+          description: The symbol being traded.
+        Quantity:
+          type: number
+          format: double
+          description: The order quantity.
+        FilledQuantity:
+          type: number
+          format: double
+          description: The quantity that has been filled.
+        OrderType:
+          type: string
+          description: The type of order.
+          enum:
+          - Market
+          - Limit
+          - StopMarket
+          - StopLimit
+          - TrailingStop
+          - TrailingStopLimit
+        Status:
+          type: string
+          description: The current status of the order.
+          enum:
+          - Open
+          - Filled
+          - PartiallyFilled
+          - Cancelled
+          - Rejected
+          - Expired
+          - Queued
+          - Received
+        Side:
+          type: string
+          description: The side of the order.
+          enum:
+          - Buy
+          - Sell
+          - BuyToOpen
+          - BuyToClose
+          - SellToOpen
+          - SellToClose
+          - SellShort
+          - BuyToCover
+        LimitPrice:
+          type: number
+          format: double
+          description: The limit price for limit and stop-limit orders.
+        StopPrice:
+          type: number
+          format: double
+          description: The stop price for stop and stop-limit orders.
+        TimeInForce:
+          type: string
+          description: Time-in-force for the order.
+          enum:
+          - Day
+          - GTC
+          - GTD
+          - IOC
+          - FOK
+          - OPG
+          - CLO
+        Route:
+          type: string
+          description: The routing destination for the order.
+        FilledPrice:
+          type: number
+          format: double
+          description: The average fill price if the order has been filled.
+        OpenedDateTime:
+          type: string
+          format: date-time
+          description: The date and time the order was opened.
+        ClosedDateTime:
+          type: string
+          format: date-time
+          description: The date and time the order was closed or filled.
+    BalancesResponse:
+      type: object
+      description: Response containing balance information for one or more accounts.
+      properties:
+        Balances:
+          type: array
+          description: List of account balances.
+          items:
+            $ref: '#/components/schemas/Balance'
+    Balance:
+      type: object
+      description: Account balance information including cash, equity, and margin details.
+      properties:
+        AccountID:
+          type: string
+          description: The account identifier.
+        AccountType:
+          type: string
+          description: The type of account.
+        CashBalance:
+          type: number
+          format: double
+          description: Current cash balance in the account.
+        Equity:
+          type: number
+          format: double
+          description: Total equity value of the account.
+        MarketValue:
+          type: number
+          format: double
+          description: Total market value of all positions.
+        BuyingPower:
+          type: number
+          format: double
+          description: Available buying power for new positions.
+        RealizedProfitLoss:
+          type: number
+          format: double
+          description: Total realized profit or loss for the current session.
+        UnrealizedProfitLoss:
+          type: number
+          format: double
+          description: Total unrealized profit or loss on open positions.
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+    OrdersResponse:
+      type: object
+      description: Response containing order information for one or more accounts.
+      properties:
+        Orders:
+          type: array
+          description: List of orders.
+          items:
+            $ref: '#/components/schemas/Order'
+  parameters:
+    AccountIds:
+      name: accountIds
+      in: path
+      required: true
+      description: One or more account identifiers, comma-separated. Maximum of 25 accounts per request.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2AuthCode:
+      type: oauth2
+      description: OAuth 2.0 authorization code flow for accessing TradeStation API resources. Requires user authorization and supports token refresh.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://signin.tradestation.com/authorize
+          tokenUrl: https://signin.tradestation.com/oauth/token
+          scopes:
+            marketdata: Access to market data endpoints
+            readaccount: Read access to account information
+            trade: Access to order placement and management
+externalDocs:
+  description: TradeStation API Documentation
+  url: https://api.tradestation.com/docs/

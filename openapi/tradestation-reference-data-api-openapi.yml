@@ -1,0 +1,131 @@
+openapi: 3.1.0
+info:
+  title: TradeStation Accounts Reference Data API
+  description: The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.
+  version: '3.0'
+  contact:
+    name: TradeStation API Support
+    url: https://api.tradestation.com/docs/
+  termsOfService: https://www.tradestation.com/important-information/
+servers:
+- url: https://api.tradestation.com
+  description: Production Server
+- url: https://sim-api.tradestation.com
+  description: Simulator Server (Paper Trading)
+security:
+- oauth2AuthCode: []
+tags:
+- name: Reference Data
+  description: Access reference data for order execution including activation triggers and available routing destinations.
+paths:
+  /v3/orderexecution/activationtriggers:
+    get:
+      operationId: getActivationTriggers
+      summary: Get activation triggers
+      description: Retrieves the list of available activation trigger methods for conditional orders. Returns trigger types and their identifiers that can be used when placing orders with activation conditions.
+      tags:
+      - Reference Data
+      responses:
+        '200':
+          description: Successfully retrieved activation triggers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationTriggersResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/orderexecution/routes:
+    get:
+      operationId: getRoutes
+      summary: Get execution routes
+      description: Retrieves the list of available order routing destinations. Returns route identifiers and names for use when specifying a routing preference on order submission.
+      tags:
+      - Reference Data
+      responses:
+        '200':
+          description: Successfully retrieved routes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ActivationTriggersResponse:
+      type: object
+      description: Response containing available activation trigger methods.
+      properties:
+        ActivationTriggers:
+          type: array
+          description: List of activation triggers.
+          items:
+            type: object
+            properties:
+              Key:
+                type: string
+                description: The activation trigger key identifier.
+              Name:
+                type: string
+                description: The human-readable name of the trigger.
+              Description:
+                type: string
+                description: A description of when the trigger activates.
+    RoutesResponse:
+      type: object
+      description: Response containing available order routing destinations.
+      properties:
+        Routes:
+          type: array
+          description: List of routing destinations.
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+                description: The route identifier.
+              Name:
+                type: string
+                description: The human-readable name of the route.
+              AssetTypes:
+                type: array
+                description: Asset types supported by this route.
+                items:
+                  type: string
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+  securitySchemes:
+    oauth2AuthCode:
+      type: oauth2
+      description: OAuth 2.0 authorization code flow for accessing TradeStation API resources. Requires user authorization and supports token refresh.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://signin.tradestation.com/authorize
+          tokenUrl: https://signin.tradestation.com/oauth/token
+          scopes:
+            marketdata: Access to market data endpoints
+            readaccount: Read access to account information
+            trade: Access to order placement and management
+externalDocs:
+  description: TradeStation API Documentation
+  url: https://api.tradestation.com/docs/

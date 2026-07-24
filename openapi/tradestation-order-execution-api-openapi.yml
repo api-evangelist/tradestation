@@ -1,0 +1,433 @@
+openapi: 3.1.0
+info:
+  title: TradeStation Accounts Order Execution API
+  description: The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.
+  version: '3.0'
+  contact:
+    name: TradeStation API Support
+    url: https://api.tradestation.com/docs/
+  termsOfService: https://www.tradestation.com/important-information/
+servers:
+- url: https://api.tradestation.com
+  description: Production Server
+- url: https://sim-api.tradestation.com
+  description: Simulator Server (Paper Trading)
+security:
+- oauth2AuthCode: []
+tags:
+- name: Order Execution
+  description: Place, confirm, modify, and cancel orders for stocks, options, and futures. Includes support for group orders such as bracket and OCO orders.
+paths:
+  /v3/orderexecution/orders:
+    post:
+      operationId: placeOrder
+      summary: Place an order
+      description: Submits a new order for execution. Supports market, limit, stop market, stop limit, and trailing stop order types for stocks, options, and futures. Includes support for time-in-force settings such as day, GTC, GTD, and IOC.
+      tags:
+      - Order Execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+      responses:
+        '200':
+          description: Order successfully submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '400':
+          description: Invalid order parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/orderexecution/orders/{orderId}:
+    put:
+      operationId: replaceOrder
+      summary: Replace an order
+      description: Modifies an existing open order. Allows changing price, quantity, and other order parameters. The original order is cancelled and replaced with the updated order parameters.
+      tags:
+      - Order Execution
+      parameters:
+      - $ref: '#/components/parameters/OrderId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+      responses:
+        '200':
+          description: Order successfully replaced
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '400':
+          description: Invalid order parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: cancelOrder
+      summary: Cancel an order
+      description: Cancels an existing open order. The order must be in a cancellable state. Returns the updated order status after cancellation.
+      tags:
+      - Order Execution
+      parameters:
+      - $ref: '#/components/parameters/OrderId'
+      responses:
+        '200':
+          description: Order successfully cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/orderexecution/orderconfirm:
+    post:
+      operationId: confirmOrder
+      summary: Confirm an order
+      description: Validates an order and returns estimated costs, commissions, and margin requirements without actually submitting the order for execution. Use this endpoint to preview order details before placing.
+      tags:
+      - Order Execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+      responses:
+        '200':
+          description: Order confirmation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderConfirmResponse'
+        '400':
+          description: Invalid order parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/orderexecution/ordergroups:
+    post:
+      operationId: placeOrderGroup
+      summary: Place a group order
+      description: Submits a group of related orders for execution. Supports bracket orders (OCO - One Cancels Other), OSO (Order Sends Order), and other multi-order strategies. When one order in the group is filled or cancelled, related orders are automatically managed.
+      tags:
+      - Order Execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupOrderRequest'
+      responses:
+        '200':
+          description: Group order successfully submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupOrderResponse'
+        '400':
+          description: Invalid group order parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/orderexecution/ordergroupconfirm:
+    post:
+      operationId: confirmOrderGroup
+      summary: Confirm a group order
+      description: Validates a group of related orders and returns estimated costs, commissions, and margin requirements without submitting for execution. Use this endpoint to preview group order details before placing.
+      tags:
+      - Order Execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupOrderRequest'
+      responses:
+        '200':
+          description: Group order confirmation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupOrderConfirmResponse'
+        '400':
+          description: Invalid group order parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    GroupOrderRequest:
+      type: object
+      description: Request body for placing a group of related orders such as bracket, OCO, or OSO orders.
+      required:
+      - Type
+      - Orders
+      properties:
+        Type:
+          type: string
+          description: The type of order group.
+          enum:
+          - OCO
+          - BRK
+          - OSO
+        Orders:
+          type: array
+          description: The list of orders in the group.
+          items:
+            $ref: '#/components/schemas/OrderRequest'
+    OptionLeg:
+      type: object
+      description: A single leg of an option strategy.
+      properties:
+        Symbol:
+          type: string
+          description: The option symbol.
+        Quantity:
+          type: integer
+          description: The number of contracts.
+        TradeAction:
+          type: string
+          description: The trade action for this leg.
+          enum:
+          - BuyToOpen
+          - BuyToClose
+          - SellToOpen
+          - SellToClose
+    OrderConfirmResponse:
+      type: object
+      description: Response with estimated order costs and confirmation details.
+      properties:
+        EstimatedCommission:
+          type: number
+          format: double
+          description: Estimated commission for the order.
+        EstimatedCost:
+          type: number
+          format: double
+          description: Estimated total cost of the order.
+        EstimatedPrice:
+          type: number
+          format: double
+          description: Estimated execution price.
+        MarginRequirement:
+          type: number
+          format: double
+          description: The margin requirement for the order.
+    GroupOrderResponse:
+      type: object
+      description: Response after placing a group order.
+      properties:
+        Orders:
+          type: array
+          description: List of order results for the group.
+          items:
+            $ref: '#/components/schemas/OrderResult'
+    OrderResult:
+      type: object
+      description: Result of an individual order operation.
+      properties:
+        OrderID:
+          type: string
+          description: The unique order identifier assigned by the system.
+        Message:
+          type: string
+          description: Human-readable message about the order result.
+    OrderRequest:
+      type: object
+      description: Request body for placing or replacing an order.
+      required:
+      - AccountID
+      - Symbol
+      - Quantity
+      - OrderType
+      - TradeAction
+      - TimeInForce
+      properties:
+        AccountID:
+          type: string
+          description: The account to place the order in.
+        Symbol:
+          type: string
+          description: The symbol to trade.
+        Quantity:
+          type: number
+          format: double
+          description: The number of shares or contracts to trade.
+        OrderType:
+          type: string
+          description: The type of order.
+          enum:
+          - Market
+          - Limit
+          - StopMarket
+          - StopLimit
+          - TrailingStop
+          - TrailingStopLimit
+        TradeAction:
+          type: string
+          description: The trade action for the order.
+          enum:
+          - Buy
+          - Sell
+          - BuyToOpen
+          - BuyToClose
+          - SellToOpen
+          - SellToClose
+          - SellShort
+          - BuyToCover
+        TimeInForce:
+          type: string
+          description: Time-in-force instruction for the order.
+          enum:
+          - Day
+          - GTC
+          - GTD
+          - IOC
+          - FOK
+          - OPG
+          - CLO
+        LimitPrice:
+          type: number
+          format: double
+          description: The limit price for limit and stop-limit orders.
+        StopPrice:
+          type: number
+          format: double
+          description: The stop price for stop and stop-limit orders.
+        Route:
+          type: string
+          description: The routing destination for the order.
+        AdvancedOptions:
+          type: object
+          description: Advanced order options such as trailing stop parameters.
+          properties:
+            TrailingStop:
+              type: object
+              properties:
+                Amount:
+                  type: number
+                  format: double
+                  description: The trailing amount in dollars.
+                Percent:
+                  type: number
+                  format: double
+                  description: The trailing amount as a percentage.
+        Legs:
+          type: array
+          description: Option legs for multi-leg option orders.
+          items:
+            $ref: '#/components/schemas/OptionLeg'
+    OrderResponse:
+      type: object
+      description: Response after placing, replacing, or cancelling an order.
+      properties:
+        Orders:
+          type: array
+          description: List of order results.
+          items:
+            $ref: '#/components/schemas/OrderResult'
+    GroupOrderConfirmResponse:
+      type: object
+      description: Response with estimated costs for all orders in a group.
+      properties:
+        Confirmations:
+          type: array
+          description: List of confirmation details for each order in the group.
+          items:
+            $ref: '#/components/schemas/OrderConfirmResponse'
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+  parameters:
+    OrderId:
+      name: orderId
+      in: path
+      required: true
+      description: The unique identifier of the order.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2AuthCode:
+      type: oauth2
+      description: OAuth 2.0 authorization code flow for accessing TradeStation API resources. Requires user authorization and supports token refresh.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://signin.tradestation.com/authorize
+          tokenUrl: https://signin.tradestation.com/oauth/token
+          scopes:
+            marketdata: Access to market data endpoints
+            readaccount: Read access to account information
+            trade: Access to order placement and management
+externalDocs:
+  description: TradeStation API Documentation
+  url: https://api.tradestation.com/docs/

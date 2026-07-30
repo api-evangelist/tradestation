@@ -7,7 +7,20 @@ description: >-
   symbol information, and HTTP streaming for live market feeds. TradeStation supports advanced order types including
   bracket, OCO, OSO, and multi-leg options orders with OAuth2 authentication.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tradestation.png
 tags:
   - Brokerage
   - Cryptocurrency
@@ -22,65 +35,176 @@ created: '2026-03-24'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: tradestation:tradestation-api
-    name: TradeStation API
-    description: >-
-      The TradeStation REST API provides brokerage and market data services for building trading applications. Covers
-      account management, order placement and execution, real-time and historical market data, option chains, symbol
-      information, and reference data. Supports stocks, options, futures, and cryptocurrency with OAuth2 authentication.
-    humanURL: https://api.tradestation.com/docs/
-    baseURL: https://api.tradestation.com
-    tags:
-      - Accounts
-      - Brokerage
-      - Cryptocurrency
-      - Market Data
-      - Options
-      - Order Execution
-      - Stocks
-      - Trading
-    properties:
-      - type: Documentation
-        url: https://api.tradestation.com/docs/
-      - type: OpenAPI
-        url: openapi/tradestation-api-openapi.yml
-      - type: AsyncAPI
-        url: asyncapi/tradestation-streaming-asyncapi.yml
-      - type: JSONSchema
-        url: json-schema/tradestation-order-schema.json
-      - type: JSONStructure
-        url: json-structure/tradestation-order-structure.json
-      - type: JSONLD
-        url: json-ld/tradestation-context.jsonld
-      - type: SpectralRules
-        url: rules/tradestation-rules.yml
-      - type: Vocabulary
-        url: vocabulary/tradestation-vocabulary.yml
-      - type: GitHubOrg
-        url: https://github.com/tradestation
-      - type: APISpecification
-        url: https://tradestation.github.io/api-docs/
-  - aid: tradestation:tradestation-streaming
-    name: TradeStation Streaming API
-    description: >-
-      The TradeStation Streaming API provides real-time HTTP streaming endpoints using chunked transfer encoding with
-      newline-delimited JSON for market data and brokerage events. Streams deliver live quote updates, bar chart data,
-      and order status changes with minimal latency.
-    humanURL: https://api.tradestation.com/docs/
-    baseURL: https://api.tradestation.com
-    tags:
-      - Bar Charts
-      - Cryptocurrency
-      - Market Data
-      - Options
-      - Order Status
-      - Real-Time
-      - Streaming
-    properties:
-      - type: Documentation
-        url: https://api.tradestation.com/docs/
-      - type: AsyncAPI
-        url: asyncapi/tradestation-streaming-asyncapi.yml
+- aid: tradestation:tradestation-streaming
+  name: TradeStation Streaming API
+  description: >-
+    The TradeStation Streaming API provides real-time HTTP streaming endpoints using chunked transfer
+    encoding with newline-delimited JSON for market data and brokerage events. Streams deliver live quote
+    updates, bar chart data, and order status changes with minimal latency.
+  humanURL: https://api.tradestation.com/docs/
+  baseURL: https://api.tradestation.com
+  tags:
+  - Bar Charts
+  - Cryptocurrency
+  - Market Data
+  - Options
+  - Order Status
+  - Real-Time
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://api.tradestation.com/docs/
+  - type: AsyncAPI
+    url: asyncapi/tradestation-streaming-asyncapi.yml
+- aid: tradestation:tradestation-accounts-api
+  name: TradeStation Accounts API
+  description: >-
+    Retrieve account information including account details, balances, beginning-of-day balances, positions,
+    orders, historical orders, and cryptocurrency wallets.
+  humanURL: https://api.tradestation.com/docs/
+  baseURL: https://api.tradestation.com
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/tradestation-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://api.tradestation.com/docs/
+  - type: AsyncAPI
+    url: asyncapi/tradestation-streaming-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tradestation-order-schema.json
+  - type: JSONStructure
+    url: json-structure/tradestation-order-structure.json
+  - type: JSONLD
+    url: json-ld/tradestation-context.jsonld
+  - type: SpectralRules
+    url: rules/tradestation-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tradestation-vocabulary.yml
+  - type: GitHubOrg
+    url: https://github.com/tradestation
+  - type: APISpecification
+    url: https://tradestation.github.io/api-docs/
+- aid: tradestation:tradestation-market-data-api
+  name: TradeStation Market Data API
+  description: >-
+    Access real-time and historical market data including quotes, bar charts, symbol information, symbol
+    lists, and cryptocurrency pairs.
+  humanURL: https://api.tradestation.com/docs/
+  baseURL: https://api.tradestation.com
+  tags:
+  - Market Data
+  properties:
+  - type: OpenAPI
+    url: openapi/tradestation-market-data-api-openapi.yml
+  - type: Documentation
+    url: https://api.tradestation.com/docs/
+  - type: AsyncAPI
+    url: asyncapi/tradestation-streaming-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tradestation-order-schema.json
+  - type: JSONStructure
+    url: json-structure/tradestation-order-structure.json
+  - type: JSONLD
+    url: json-ld/tradestation-context.jsonld
+  - type: SpectralRules
+    url: rules/tradestation-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tradestation-vocabulary.yml
+  - type: GitHubOrg
+    url: https://github.com/tradestation
+  - type: APISpecification
+    url: https://tradestation.github.io/api-docs/
+- aid: tradestation:tradestation-options-api
+  name: TradeStation Options API
+  description: >-
+    Retrieve options-related market data including expirations, strike prices, spread types, and risk/reward
+    calculations.
+  humanURL: https://api.tradestation.com/docs/
+  baseURL: https://api.tradestation.com
+  tags:
+  - Options
+  properties:
+  - type: OpenAPI
+    url: openapi/tradestation-options-api-openapi.yml
+  - type: Documentation
+    url: https://api.tradestation.com/docs/
+  - type: AsyncAPI
+    url: asyncapi/tradestation-streaming-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tradestation-order-schema.json
+  - type: JSONStructure
+    url: json-structure/tradestation-order-structure.json
+  - type: JSONLD
+    url: json-ld/tradestation-context.jsonld
+  - type: SpectralRules
+    url: rules/tradestation-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tradestation-vocabulary.yml
+  - type: GitHubOrg
+    url: https://github.com/tradestation
+  - type: APISpecification
+    url: https://tradestation.github.io/api-docs/
+- aid: tradestation:tradestation-order-execution-api
+  name: TradeStation Order Execution API
+  description: >-
+    Place, confirm, modify, and cancel orders for stocks, options, and futures. Includes support for group
+    orders such as bracket and OCO orders.
+  humanURL: https://api.tradestation.com/docs/
+  baseURL: https://api.tradestation.com
+  tags:
+  - Order Execution
+  properties:
+  - type: OpenAPI
+    url: openapi/tradestation-order-execution-api-openapi.yml
+  - type: Documentation
+    url: https://api.tradestation.com/docs/
+  - type: AsyncAPI
+    url: asyncapi/tradestation-streaming-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tradestation-order-schema.json
+  - type: JSONStructure
+    url: json-structure/tradestation-order-structure.json
+  - type: JSONLD
+    url: json-ld/tradestation-context.jsonld
+  - type: SpectralRules
+    url: rules/tradestation-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tradestation-vocabulary.yml
+  - type: GitHubOrg
+    url: https://github.com/tradestation
+  - type: APISpecification
+    url: https://tradestation.github.io/api-docs/
+- aid: tradestation:tradestation-reference-data-api
+  name: TradeStation Reference Data API
+  description: >-
+    Access reference data for order execution including activation triggers and available routing destinations.
+  humanURL: https://api.tradestation.com/docs/
+  baseURL: https://api.tradestation.com
+  tags:
+  - Reference Data
+  properties:
+  - type: OpenAPI
+    url: openapi/tradestation-reference-data-api-openapi.yml
+  - type: Documentation
+    url: https://api.tradestation.com/docs/
+  - type: AsyncAPI
+    url: asyncapi/tradestation-streaming-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tradestation-order-schema.json
+  - type: JSONStructure
+    url: json-structure/tradestation-order-structure.json
+  - type: JSONLD
+    url: json-ld/tradestation-context.jsonld
+  - type: SpectralRules
+    url: rules/tradestation-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tradestation-vocabulary.yml
+  - type: GitHubOrg
+    url: https://github.com/tradestation
+  - type: APISpecification
+    url: https://tradestation.github.io/api-docs/
 common:
   - type: AgenticAccess
     url: agentic-access/tradestation-agentic-access.yml

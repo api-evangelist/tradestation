@@ -1,0 +1,22 @@
+{
+  "provider": "tradestation",
+  "sources": [
+    "tradestation-accounts-api-openapi.yml",
+    "tradestation-market-data-api-openapi.yml",
+    "tradestation-options-api-openapi.yml",
+    "tradestation-order-execution-api-openapi.yml",
+    "tradestation-reference-data-api-openapi.yml"
+  ],
+  "outputs": [
+    "tradestation-accounts-api-openapi.yml",
+    "tradestation-market-data-api-openapi.yml",
+    "tradestation-options-api-openapi.yml",
+    "tradestation-order-execution-api-openapi.yml",
+    "tradestation-reference-data-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

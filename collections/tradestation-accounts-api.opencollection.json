@@ -1,0 +1,173 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TradeStation Accounts API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://signin.tradestation.com/authorize",
+      "accessTokenUrl": "https://signin.tradestation.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/brokerage/accounts"
+          },
+          "docs": "Retrieves all brokerage accounts associated with the authenticated user. Returns account identifiers, account types, and other account metadata needed for subsequent API calls."
+        },
+        {
+          "info": {
+            "name": "Get account balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/brokerage/accounts/:accountIds/balances",
+            "params": [
+              {
+                "name": "accountIds",
+                "value": "",
+                "type": "path",
+                "description": "One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+              }
+            ]
+          },
+          "docs": "Retrieves the current real-time balances for one or more brokerage accounts. Includes cash balance, equity, market value, buying power, and margin-related balance information."
+        },
+        {
+          "info": {
+            "name": "Get beginning-of-day balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/brokerage/accounts/:accountIds/bodbalances",
+            "params": [
+              {
+                "name": "accountIds",
+                "value": "",
+                "type": "path",
+                "description": "One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+              }
+            ]
+          },
+          "docs": "Retrieves the beginning-of-day balances for one or more brokerage accounts. These balances reflect account state at the start of the current trading session."
+        },
+        {
+          "info": {
+            "name": "Get account positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/brokerage/accounts/:accountIds/positions",
+            "params": [
+              {
+                "name": "accountIds",
+                "value": "",
+                "type": "path",
+                "description": "One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+              }
+            ]
+          },
+          "docs": "Retrieves the current positions for one or more brokerage accounts. Returns information about each open position including symbol, quantity, average price, market value, and unrealized profit/loss."
+        },
+        {
+          "info": {
+            "name": "Get account orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/brokerage/accounts/:accountIds/orders",
+            "params": [
+              {
+                "name": "accountIds",
+                "value": "",
+                "type": "path",
+                "description": "One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+              }
+            ]
+          },
+          "docs": "Retrieves the current active orders for one or more brokerage accounts. Returns information about each order including status, order type, symbol, quantity, and price."
+        },
+        {
+          "info": {
+            "name": "Get historical orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/brokerage/accounts/:accountIds/historicalorders",
+            "params": [
+              {
+                "name": "accountIds",
+                "value": "",
+                "type": "path",
+                "description": "One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Filter orders since this date. Format is MM-DD-YYYY."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of orders per page."
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves historical orders for one or more brokerage accounts. Returns past orders including filled, cancelled, and rejected orders up to 90 days in the past."
+        },
+        {
+          "info": {
+            "name": "Get cryptocurrency wallets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/brokerage/accounts/:accountId/wallets",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The account identifier for wallet retrieval."
+              }
+            ]
+          },
+          "docs": "Retrieves cryptocurrency wallet information for a specific brokerage account. Returns wallet balances and cryptocurrency holdings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

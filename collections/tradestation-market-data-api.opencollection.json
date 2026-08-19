@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TradeStation Accounts Market Data API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://signin.tradestation.com/authorize",
+      "accessTokenUrl": "https://signin.tradestation.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Market Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/marketdata/quotes/:symbols",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "path",
+                "description": "One or more symbol identifiers, comma-separated."
+              }
+            ]
+          },
+          "docs": "Retrieves real-time quote snapshots for one or more symbols. Returns current bid, ask, last price, volume, and other quote data fields. Supports stocks, options, futures, and cryptocurrency symbols."
+        },
+        {
+          "info": {
+            "name": "Get bar chart data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/marketdata/barcharts/:symbol",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "path",
+                "description": "The symbol to retrieve bar chart data for."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "The interval for each bar. For minute bars, valid values are 1-1440. For daily, weekly, and monthly bars, use 1."
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query",
+                "description": "The unit of time for the bar interval."
+              },
+              {
+                "name": "barsBack",
+                "value": "",
+                "type": "query",
+                "description": "Number of bars to retrieve going back from the last date."
+              },
+              {
+                "name": "firstDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date for bar data retrieval."
+              },
+              {
+                "name": "lastDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for bar data retrieval."
+              },
+              {
+                "name": "sessionTemplate",
+                "value": "",
+                "type": "query",
+                "description": "The session template to use for filtering bar data. Controls which trading session data to include."
+              }
+            ]
+          },
+          "docs": "Retrieves historical bar chart data (OHLC) for a given symbol. Supports multiple intervals and units including minute, daily, weekly, and monthly bars. Returns open, high, low, close prices along with volume and timestamp information."
+        },
+        {
+          "info": {
+            "name": "Get symbol details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/marketdata/symbols/:symbols",
+            "params": [
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "path",
+                "description": "One or more symbol identifiers, comma-separated."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed symbol information for one or more symbols. Returns symbol metadata including description, exchange, category, currency, point value, and contract specifications."
+        },
+        {
+          "info": {
+            "name": "Get cryptocurrency pairs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/marketdata/symbollists/cryptopairs/symbolnames"
+          },
+          "docs": "Retrieves the list of available cryptocurrency trading pairs. Returns symbol names for all supported crypto pairs on the TradeStation platform."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

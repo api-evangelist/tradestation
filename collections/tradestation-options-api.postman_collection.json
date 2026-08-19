@@ -1,0 +1,820 @@
+{
+  "item": [
+    {
+      "id": "239a97cf-0beb-4322-8c98-7616cb9d0c10",
+      "name": "Options",
+      "description": {
+        "content": "Retrieve options-related market data including expirations, strike prices, spread types, and risk/reward calculations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9f8fddf9-1abb-494d-a9c4-3dca7c0db073",
+          "name": "Get option expirations",
+          "request": {
+            "name": "Get option expirations",
+            "description": {
+              "content": "Retrieves available option expiration dates for a given underlying symbol. Returns expiration dates along with expiration type information such as monthly, weekly, or quarterly.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "options",
+                "expirations",
+                ":underlying"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "underlying",
+                  "description": "(Required) The underlying symbol for options data retrieval."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e7f168b4-f784-42d5-833e-2750d6029ee0",
+              "name": "Successfully retrieved option expirations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "expirations",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Expirations\": [\n    {\n      \"Date\": \"1946-08-15\",\n      \"Type\": \"EOM\"\n    },\n    {\n      \"Date\": \"1966-06-10\",\n      \"Type\": \"EOM\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7196a4f7-37f9-4637-b803-d2901cbe0847",
+              "name": "Invalid underlying symbol",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "expirations",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 7096,\n  \"Message\": \"string\",\n  \"TraceId\": \"ce69d4a8-29ea-6740-122e-cc42f4e92a98\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fd03f07-119b-4624-b525-21405dc5eeba",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "expirations",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 7096,\n  \"Message\": \"string\",\n  \"TraceId\": \"ce69d4a8-29ea-6740-122e-cc42f4e92a98\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00b20b2a-dfd4-4868-8c9b-893505b85025",
+          "name": "Get option strikes",
+          "request": {
+            "name": "Get option strikes",
+            "description": {
+              "content": "Retrieves available strike prices for options on a given underlying symbol. Returns the list of strike prices available for trading.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "options",
+                "strikes",
+                ":underlying"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "underlying",
+                  "description": "(Required) The underlying symbol for options data retrieval."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6b1ddf4-f926-4a1c-8c04-4744318799f5",
+              "name": "Successfully retrieved option strikes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "strikes",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Strikes\": [\n    825.0916185363733,\n    2251.013782529884\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "928542dc-dc06-4ada-af36-6abd491d0091",
+              "name": "Invalid underlying symbol",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "strikes",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 7096,\n  \"Message\": \"string\",\n  \"TraceId\": \"ce69d4a8-29ea-6740-122e-cc42f4e92a98\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71364e6a-992f-4e3a-9a14-25422679bdc7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "strikes",
+                    ":underlying"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "underlying",
+                      "description": "(Required) The underlying symbol for options data retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 7096,\n  \"Message\": \"string\",\n  \"TraceId\": \"ce69d4a8-29ea-6740-122e-cc42f4e92a98\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60e06e0c-5226-4740-8dd5-a4fa6afe713f",
+          "name": "Get option spread types",
+          "request": {
+            "name": "Get option spread types",
+            "description": {
+              "content": "Retrieves the list of available option spread types supported by TradeStation. Returns spread type names and identifiers for use in multi-leg option order construction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "options",
+                "spreadtypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6f76a75-77d6-4b79-96d5-91c4a42d6e2d",
+              "name": "Successfully retrieved option spread types",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "spreadtypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SpreadTypes\": [\n    {\n      \"Name\": \"string\",\n      \"Id\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d72e3ffe-39d1-49cd-93ce-1ec61e6c7fd4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "spreadtypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 7096,\n  \"Message\": \"string\",\n  \"TraceId\": \"ce69d4a8-29ea-6740-122e-cc42f4e92a98\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72caef78-e700-4e42-8ba8-63010def711c",
+          "name": "Calculate option risk/reward",
+          "request": {
+            "name": "Calculate option risk/reward",
+            "description": {
+              "content": "Calculates the risk and reward profile for one or more option positions. Returns theoretical profit/loss values at various price levels for the specified option strategy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "options",
+                "riskreward"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SpreadPrice\": \"<double>\",\n  \"Legs\": [\n    {\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<integer>\",\n      \"TradeAction\": \"<string>\"\n    },\n    {\n      \"Symbol\": \"<string>\",\n      \"Quantity\": \"<integer>\",\n      \"TradeAction\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "49dd34c6-ec3e-4397-9e44-e23b0cf13c96",
+              "name": "Successfully calculated risk/reward",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "riskreward"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SpreadPrice\": \"<double>\",\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 4485,\n      \"TradeAction\": \"SellToClose\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 3374,\n      \"TradeAction\": \"SellToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MaxGain\": 6551.401824406767,\n  \"MaxLoss\": 7005.207712370997,\n  \"BreakEvenPoints\": [\n    5006.8747357252805,\n    2760.8495003512103\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2334bf04-dd3f-4ed5-be04-ffe05ae3d568",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "riskreward"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SpreadPrice\": \"<double>\",\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 4485,\n      \"TradeAction\": \"SellToClose\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 3374,\n      \"TradeAction\": \"SellToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 7096,\n  \"Message\": \"string\",\n  \"TraceId\": \"ce69d4a8-29ea-6740-122e-cc42f4e92a98\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c15caf68-2138-455f-be5e-6916c7e7e342",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "options",
+                    "riskreward"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SpreadPrice\": \"<double>\",\n  \"Legs\": [\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 4485,\n      \"TradeAction\": \"SellToClose\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Quantity\": 3374,\n      \"TradeAction\": \"SellToOpen\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 7096,\n  \"Message\": \"string\",\n  \"TraceId\": \"ce69d4a8-29ea-6740-122e-cc42f4e92a98\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tradestation.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "marketdata readaccount trade"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://signin.tradestation.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://signin.tradestation.com/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a5a14317-173e-4987-b41a-fb7cb4cbb807",
+    "name": "TradeStation Accounts Options API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.\n\nContact Support:\n Name: TradeStation API Support",
+      "type": "text/plain"
+    }
+  }
+}

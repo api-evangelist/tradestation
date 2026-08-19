@@ -1,0 +1,307 @@
+{
+  "item": [
+    {
+      "id": "2ed73026-642a-4886-894a-ba14c760900a",
+      "name": "Reference Data",
+      "description": {
+        "content": "Access reference data for order execution including activation triggers and available routing destinations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77e211ca-21ca-461b-bb3e-7a6628513b91",
+          "name": "Get activation triggers",
+          "request": {
+            "name": "Get activation triggers",
+            "description": {
+              "content": "Retrieves the list of available activation trigger methods for conditional orders. Returns trigger types and their identifiers that can be used when placing orders with activation conditions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "orderexecution",
+                "activationtriggers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9009f7d-c26e-450e-a848-bfbf4f3d4dc3",
+              "name": "Successfully retrieved activation triggers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "activationtriggers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ActivationTriggers\": [\n    {\n      \"Key\": \"string\",\n      \"Name\": \"string\",\n      \"Description\": \"string\"\n    },\n    {\n      \"Key\": \"string\",\n      \"Name\": \"string\",\n      \"Description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0adf13f4-883e-4109-aead-77e1457b764f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "activationtriggers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 4238,\n  \"Message\": \"string\",\n  \"TraceId\": \"a7e53b1a-1940-4af6-58a1-12cdb384a217\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b75229fc-8e05-403e-9214-baa17ec16ee3",
+          "name": "Get execution routes",
+          "request": {
+            "name": "Get execution routes",
+            "description": {
+              "content": "Retrieves the list of available order routing destinations. Returns route identifiers and names for use when specifying a routing preference on order submission.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "orderexecution",
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "246b153a-dadb-4e99-ac92-2c3e91617370",
+              "name": "Successfully retrieved routes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Routes\": [\n    {\n      \"Id\": \"string\",\n      \"Name\": \"string\",\n      \"AssetTypes\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"Id\": \"string\",\n      \"Name\": \"string\",\n      \"AssetTypes\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d28c1a15-92ad-44c1-a712-16ebc4172c89",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orderexecution",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 4238,\n  \"Message\": \"string\",\n  \"TraceId\": \"a7e53b1a-1940-4af6-58a1-12cdb384a217\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tradestation.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "marketdata readaccount trade"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://signin.tradestation.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://signin.tradestation.com/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d8de92e8-26df-4c6a-91c8-6974998bd825",
+    "name": "TradeStation Accounts Reference Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.\n\nContact Support:\n Name: TradeStation API Support",
+      "type": "text/plain"
+    }
+  }
+}

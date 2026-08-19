@@ -1,0 +1,11 @@
+[
+  {
+    "repo": "tradestation",
+    "captured_at": "2026-08-17T125935",
+    "source_url": "https://api.tradestation.com",
+    "source_type": "Documentation",
+    "file": "tradestation-2026-08-17T125935.png",
+    "bytes": 7089,
+    "capture": "playwright-local"
+  }
+]

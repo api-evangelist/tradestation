@@ -1,0 +1,1510 @@
+{
+  "item": [
+    {
+      "id": "9658d740-7db6-4a58-a48f-3ba26877c499",
+      "name": "Accounts",
+      "description": {
+        "content": "Retrieve account information including account details, balances, beginning-of-day balances, positions, orders, historical orders, and cryptocurrency wallets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "91bd2d8c-df58-4c56-9066-97bcc1c3a6a1",
+          "name": "Get accounts",
+          "request": {
+            "name": "Get accounts",
+            "description": {
+              "content": "Retrieves all brokerage accounts associated with the authenticated user. Returns account identifiers, account types, and other account metadata needed for subsequent API calls.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f5410be-403a-4df6-8692-b256b21c52f6",
+              "name": "Successfully retrieved accounts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Accounts\": [\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"Crypto\",\n      \"Status\": \"Closed\",\n      \"StatusDescription\": \"string\"\n    },\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"Margin\",\n      \"Status\": \"Active\",\n      \"StatusDescription\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac960877-4590-40e5-aefd-16bd3ab90cdb",
+              "name": "Unauthorized - invalid or expired access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94ff497d-fb09-4486-9e13-f48ae6fa4035",
+          "name": "Get account balances",
+          "request": {
+            "name": "Get account balances",
+            "description": {
+              "content": "Retrieves the current real-time balances for one or more brokerage accounts. Includes cash balance, equity, market value, buying power, and margin-related balance information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountIds",
+                "balances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountIds",
+                  "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a052f29-d068-4788-8b0a-0d3738b6dda5",
+              "name": "Successfully retrieved balances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Balances\": [\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"string\",\n      \"CashBalance\": 3669.0223586306693,\n      \"Equity\": 2871.5284981537425,\n      \"MarketValue\": 6006.535454188843,\n      \"BuyingPower\": 1048.7725843647456,\n      \"RealizedProfitLoss\": 2987.8506641398208,\n      \"UnrealizedProfitLoss\": 9898.42594433037\n    },\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"string\",\n      \"CashBalance\": 3951.889803921594,\n      \"Equity\": 9935.705668623996,\n      \"MarketValue\": 997.9959474486011,\n      \"BuyingPower\": 1061.6048486460904,\n      \"RealizedProfitLoss\": 898.4407924512616,\n      \"UnrealizedProfitLoss\": 7943.045385255092\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c14381f1-7833-4df7-8619-1a5a816eeff8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1996d41-17bb-4997-8997-ecadd67b6b8b",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33222a9f-d222-442f-8bb8-377b1c40f2f2",
+          "name": "Get beginning-of-day balances",
+          "request": {
+            "name": "Get beginning-of-day balances",
+            "description": {
+              "content": "Retrieves the beginning-of-day balances for one or more brokerage accounts. These balances reflect account state at the start of the current trading session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountIds",
+                "bodbalances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountIds",
+                  "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63109699-9063-470b-99ae-34ce4dc95a3d",
+              "name": "Successfully retrieved beginning-of-day balances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "bodbalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Balances\": [\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"string\",\n      \"CashBalance\": 3669.0223586306693,\n      \"Equity\": 2871.5284981537425,\n      \"MarketValue\": 6006.535454188843,\n      \"BuyingPower\": 1048.7725843647456,\n      \"RealizedProfitLoss\": 2987.8506641398208,\n      \"UnrealizedProfitLoss\": 9898.42594433037\n    },\n    {\n      \"AccountID\": \"string\",\n      \"AccountType\": \"string\",\n      \"CashBalance\": 3951.889803921594,\n      \"Equity\": 9935.705668623996,\n      \"MarketValue\": 997.9959474486011,\n      \"BuyingPower\": 1061.6048486460904,\n      \"RealizedProfitLoss\": 898.4407924512616,\n      \"UnrealizedProfitLoss\": 7943.045385255092\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ac2ec39-2209-4a0c-8522-69c0f8a4660f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "bodbalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "239cd14c-5efd-4a9a-bdc8-979d772fb160",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "bodbalances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b2e557f-8b21-48f4-9a20-aba2cbbf3417",
+          "name": "Get account positions",
+          "request": {
+            "name": "Get account positions",
+            "description": {
+              "content": "Retrieves the current positions for one or more brokerage accounts. Returns information about each open position including symbol, quantity, average price, market value, and unrealized profit/loss.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountIds",
+                "positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountIds",
+                  "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12238113-28d9-43f8-a85d-579401ec6453",
+              "name": "Successfully retrieved positions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Positions\": [\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 7875.963021924561,\n      \"AveragePrice\": 1722.4167684832903,\n      \"Last\": 9277.877655389051,\n      \"MarketValue\": 9793.904697970138,\n      \"UnrealizedProfitLoss\": 3397.4700346880813,\n      \"UnrealizedProfitLossPercent\": 1734.1888063714416,\n      \"AssetType\": \"Future\",\n      \"LongShort\": \"Long\"\n    },\n    {\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 9903.173491696241,\n      \"AveragePrice\": 1743.1407389535325,\n      \"Last\": 185.15200456312274,\n      \"MarketValue\": 7931.71472668189,\n      \"UnrealizedProfitLoss\": 6325.740702513514,\n      \"UnrealizedProfitLossPercent\": 981.338263188567,\n      \"AssetType\": \"Future\",\n      \"LongShort\": \"Long\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c6c64ec-3022-4e16-83c2-1a95e1f97d4a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58e698e4-070e-4377-bb5a-0d166a8bfac9",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07afacf2-0cce-4a05-9355-8adff7b88efc",
+          "name": "Get account orders",
+          "request": {
+            "name": "Get account orders",
+            "description": {
+              "content": "Retrieves the current active orders for one or more brokerage accounts. Returns information about each order including status, order type, symbol, quantity, and price.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountIds",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountIds",
+                  "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23da9dd1-3555-4092-a727-776c9ec69627",
+              "name": "Successfully retrieved orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Orders\": [\n    {\n      \"OrderID\": \"string\",\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 9451.28691026099,\n      \"FilledQuantity\": 3575.6096986088037,\n      \"OrderType\": \"TrailingStopLimit\",\n      \"Status\": \"PartiallyFilled\",\n      \"Side\": \"SellShort\",\n      \"LimitPrice\": 6648.017343532735,\n      \"StopPrice\": 1609.0971840060752,\n      \"TimeInForce\": \"OPG\",\n      \"Route\": \"string\",\n      \"FilledPrice\": 2985.185439655953,\n      \"OpenedDateTime\": \"1992-11-18T06:07:30.897Z\",\n      \"ClosedDateTime\": \"1967-12-06T02:43:28.823Z\"\n    },\n    {\n      \"OrderID\": \"string\",\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 2056.081544204148,\n      \"FilledQuantity\": 5429.102670340479,\n      \"OrderType\": \"Market\",\n      \"Status\": \"Received\",\n      \"Side\": \"Sell\",\n      \"LimitPrice\": 1969.4613205365363,\n      \"StopPrice\": 5358.2882142862045,\n      \"TimeInForce\": \"GTC\",\n      \"Route\": \"string\",\n      \"FilledPrice\": 7645.820603344688,\n      \"OpenedDateTime\": \"1955-05-29T02:34:51.652Z\",\n      \"ClosedDateTime\": \"1966-08-19T06:01:54.223Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "477159d4-17e3-431a-bc2e-a3b68eb3a590",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92958e36-1eb8-4e1d-8ed0-09ad942f8c48",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1a3bd2f-f17a-4187-862d-ccb1673fbb54",
+          "name": "Get historical orders",
+          "request": {
+            "name": "Get historical orders",
+            "description": {
+              "content": "Retrieves historical orders for one or more brokerage accounts. Returns past orders including filled, cancelled, and rejected orders up to 90 days in the past.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountIds",
+                "historicalorders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>",
+                  "description": "Filter orders since this date. Format is MM-DD-YYYY."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "Number of orders per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNum",
+                  "value": "<integer>",
+                  "description": "Page number for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountIds",
+                  "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e80eff03-8bc2-4343-afaa-2aee978145fb",
+              "name": "Successfully retrieved historical orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "historicalorders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Orders\": [\n    {\n      \"OrderID\": \"string\",\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 9451.28691026099,\n      \"FilledQuantity\": 3575.6096986088037,\n      \"OrderType\": \"TrailingStopLimit\",\n      \"Status\": \"PartiallyFilled\",\n      \"Side\": \"SellShort\",\n      \"LimitPrice\": 6648.017343532735,\n      \"StopPrice\": 1609.0971840060752,\n      \"TimeInForce\": \"OPG\",\n      \"Route\": \"string\",\n      \"FilledPrice\": 2985.185439655953,\n      \"OpenedDateTime\": \"1992-11-18T06:07:30.897Z\",\n      \"ClosedDateTime\": \"1967-12-06T02:43:28.823Z\"\n    },\n    {\n      \"OrderID\": \"string\",\n      \"AccountID\": \"string\",\n      \"Symbol\": \"string\",\n      \"Quantity\": 2056.081544204148,\n      \"FilledQuantity\": 5429.102670340479,\n      \"OrderType\": \"Market\",\n      \"Status\": \"Received\",\n      \"Side\": \"Sell\",\n      \"LimitPrice\": 1969.4613205365363,\n      \"StopPrice\": 5358.2882142862045,\n      \"TimeInForce\": \"GTC\",\n      \"Route\": \"string\",\n      \"FilledPrice\": 7645.820603344688,\n      \"OpenedDateTime\": \"1955-05-29T02:34:51.652Z\",\n      \"ClosedDateTime\": \"1966-08-19T06:01:54.223Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d88623de-dd13-494d-a966-036958c75a20",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "historicalorders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10b20618-2611-4cf8-945b-0fdb12d5a02d",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountIds",
+                    "historicalorders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNum",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountIds",
+                      "description": "(Required) One or more account identifiers, comma-separated. Maximum of 25 accounts per request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae46c027-f1bf-499d-bf4a-77aa7b302e40",
+          "name": "Get cryptocurrency wallets",
+          "request": {
+            "name": "Get cryptocurrency wallets",
+            "description": {
+              "content": "Retrieves cryptocurrency wallet information for a specific brokerage account. Returns wallet balances and cryptocurrency holdings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "brokerage",
+                "accounts",
+                ":accountId",
+                "wallets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The account identifier for wallet retrieval."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4764737c-46d9-496a-be98-f9ce9efb69fc",
+              "name": "Successfully retrieved wallets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountId",
+                    "wallets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account identifier for wallet retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Wallets\": [\n    {\n      \"Currency\": \"string\",\n      \"Balance\": 5768.158006682272,\n      \"Available\": 8474.910782126484\n    },\n    {\n      \"Currency\": \"string\",\n      \"Balance\": 4813.1507265713235,\n      \"Available\": 2565.2425316001095\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b75275af-6d8a-480f-ae00-ad5df3de33fa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountId",
+                    "wallets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account identifier for wallet retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60010dbf-8a8a-4a92-ad03-2fceee43c4a3",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "brokerage",
+                    "accounts",
+                    ":accountId",
+                    "wallets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account identifier for wallet retrieval."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 5754,\n  \"Message\": \"string\",\n  \"TraceId\": \"089c5450-9478-decf-9a07-9a4716bc0a04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tradestation.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "marketdata readaccount trade"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://signin.tradestation.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://signin.tradestation.com/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f0389aef-49b6-4850-93dc-edf0575f5ff3",
+    "name": "TradeStation Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.\n\nContact Support:\n Name: TradeStation API Support",
+      "type": "text/plain"
+    }
+  }
+}

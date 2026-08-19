@@ -1,0 +1,1001 @@
+{
+  "item": [
+    {
+      "id": "f5ce1735-47d0-45e8-a641-001140456cba",
+      "name": "Market Data",
+      "description": {
+        "content": "Access real-time and historical market data including quotes, bar charts, symbol information, symbol lists, and cryptocurrency pairs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6de0386-e377-40bf-bc3a-5decc0bc0009",
+          "name": "Get quotes",
+          "request": {
+            "name": "Get quotes",
+            "description": {
+              "content": "Retrieves real-time quote snapshots for one or more symbols. Returns current bid, ask, last price, volume, and other quote data fields. Supports stocks, options, futures, and cryptocurrency symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "quotes",
+                ":symbols"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbols",
+                  "description": "(Required) One or more symbol identifiers, comma-separated."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b567bae-1e97-499a-be50-a24aae6f2bf2",
+              "name": "Successfully retrieved quotes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "quotes",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Quotes\": [\n    {\n      \"Symbol\": \"string\",\n      \"Last\": 4217.430183631955,\n      \"Bid\": 2789.9654307648157,\n      \"Ask\": 4576.078665415038,\n      \"BidSize\": 2283,\n      \"AskSize\": 6593,\n      \"Volume\": 4387,\n      \"Open\": 9341.358527503276,\n      \"High\": 565.2797731169778,\n      \"Low\": 4076.7996077807957,\n      \"Close\": 4328.153068293565,\n      \"NetChange\": 2836.427216646603,\n      \"NetChangePct\": 1753.4341190419834,\n      \"TradeTime\": \"1980-03-12T03:05:18.833Z\"\n    },\n    {\n      \"Symbol\": \"string\",\n      \"Last\": 1310.505398847509,\n      \"Bid\": 3997.73378322445,\n      \"Ask\": 1737.277497822174,\n      \"BidSize\": 845,\n      \"AskSize\": 8145,\n      \"Volume\": 5864,\n      \"Open\": 9384.50576398827,\n      \"High\": 6401.295104931135,\n      \"Low\": 7396.78462057358,\n      \"Close\": 3803.5320955456086,\n      \"NetChange\": 1744.8208012086309,\n      \"NetChangePct\": 1378.8160431610675,\n      \"TradeTime\": \"1970-03-23T23:19:32.645Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a30f1487-42f8-4cef-91f9-5e4dcab66a1f",
+              "name": "Invalid symbol format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "quotes",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 1756,\n  \"Message\": \"string\",\n  \"TraceId\": \"f09281bc-cea0-933e-8cca-98c74364fc5c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d226fc3-9618-43d4-bad2-1fe210904860",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "quotes",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 1756,\n  \"Message\": \"string\",\n  \"TraceId\": \"f09281bc-cea0-933e-8cca-98c74364fc5c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43dd08fa-935d-40a9-a224-52b6817a0c5a",
+          "name": "Get bar chart data",
+          "request": {
+            "name": "Get bar chart data",
+            "description": {
+              "content": "Retrieves historical bar chart data (OHLC) for a given symbol. Supports multiple intervals and units including minute, daily, weekly, and monthly bars. Returns open, high, low, close prices along with volume and timestamp information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "barcharts",
+                ":symbol"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<integer>",
+                  "description": "The interval for each bar. For minute bars, valid values are 1-1440. For daily, weekly, and monthly bars, use 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>",
+                  "description": "The unit of time for the bar interval."
+                },
+                {
+                  "disabled": false,
+                  "key": "barsBack",
+                  "value": "<integer>",
+                  "description": "Number of bars to retrieve going back from the last date."
+                },
+                {
+                  "disabled": false,
+                  "key": "firstDate",
+                  "value": "<dateTime>",
+                  "description": "The start date for bar data retrieval."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastDate",
+                  "value": "<dateTime>",
+                  "description": "The end date for bar data retrieval."
+                },
+                {
+                  "disabled": false,
+                  "key": "sessionTemplate",
+                  "value": "<string>",
+                  "description": "The session template to use for filtering bar data. Controls which trading session data to include."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbol",
+                  "description": "(Required) The symbol to retrieve bar chart data for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2d7fb8e-d1ad-40fd-b957-67a606f774aa",
+              "name": "Successfully retrieved bar chart data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "barcharts",
+                    ":symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "barsBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "firstDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lastDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sessionTemplate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to retrieve bar chart data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Bars\": [\n    {\n      \"High\": 4784.964004357769,\n      \"Low\": 3272.365250944735,\n      \"Open\": 3827.786342335222,\n      \"Close\": 389.5880078411029,\n      \"Volume\": 2167,\n      \"TimeStamp\": \"1982-11-06T21:54:44.289Z\",\n      \"TotalTicks\": 6834,\n      \"UpTicks\": 6905,\n      \"DownTicks\": 3952\n    },\n    {\n      \"High\": 9517.100688969347,\n      \"Low\": 1805.4803561596789,\n      \"Open\": 1747.349459162424,\n      \"Close\": 6286.157920562952,\n      \"Volume\": 5860,\n      \"TimeStamp\": \"2017-06-18T18:10:41.549Z\",\n      \"TotalTicks\": 522,\n      \"UpTicks\": 2132,\n      \"DownTicks\": 4157\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51b353ce-e00c-44e4-9ffe-dcd93c2f5514",
+              "name": "Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "barcharts",
+                    ":symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "barsBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "firstDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lastDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sessionTemplate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to retrieve bar chart data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 1756,\n  \"Message\": \"string\",\n  \"TraceId\": \"f09281bc-cea0-933e-8cca-98c74364fc5c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31ee5daa-e554-494a-a512-427ec76e9be8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "barcharts",
+                    ":symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "barsBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "firstDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lastDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sessionTemplate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to retrieve bar chart data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 1756,\n  \"Message\": \"string\",\n  \"TraceId\": \"f09281bc-cea0-933e-8cca-98c74364fc5c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11f06875-0616-49fd-a2ed-f5790260dbe6",
+              "name": "Symbol not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "barcharts",
+                    ":symbol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "barsBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "firstDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lastDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sessionTemplate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbol",
+                      "description": "(Required) The symbol to retrieve bar chart data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 1756,\n  \"Message\": \"string\",\n  \"TraceId\": \"f09281bc-cea0-933e-8cca-98c74364fc5c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4902d85e-622d-40a1-85ce-c66427cbeb72",
+          "name": "Get symbol details",
+          "request": {
+            "name": "Get symbol details",
+            "description": {
+              "content": "Retrieves detailed symbol information for one or more symbols. Returns symbol metadata including description, exchange, category, currency, point value, and contract specifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "symbols",
+                ":symbols"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "symbols",
+                  "description": "(Required) One or more symbol identifiers, comma-separated."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "47d311e5-c20e-44fd-8940-0ef6bb0b0fe9",
+              "name": "Successfully retrieved symbol details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "symbols",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Symbols\": [\n    {\n      \"Name\": \"string\",\n      \"Description\": \"string\",\n      \"Exchange\": \"string\",\n      \"ExchangeID\": 3697,\n      \"Category\": \"string\",\n      \"Currency\": \"JPY\",\n      \"Country\": \"string\",\n      \"PointValue\": 9449.388817185189,\n      \"MinMove\": 4342.410711405711,\n      \"Root\": \"string\",\n      \"Underlying\": \"string\",\n      \"StrikePrice\": 116.804802999656,\n      \"ExpirationDate\": \"1961-02-15\",\n      \"OptionType\": \"Call\",\n      \"FutureType\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Description\": \"string\",\n      \"Exchange\": \"string\",\n      \"ExchangeID\": 8797,\n      \"Category\": \"string\",\n      \"Currency\": \"USD\",\n      \"Country\": \"string\",\n      \"PointValue\": 5537.334350199622,\n      \"MinMove\": 9425.103592227,\n      \"Root\": \"string\",\n      \"Underlying\": \"string\",\n      \"StrikePrice\": 338.7483311726014,\n      \"ExpirationDate\": \"1970-05-21\",\n      \"OptionType\": \"Put\",\n      \"FutureType\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fac083ab-e929-4e94-b99a-ad6b15caf99a",
+              "name": "Invalid symbol format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "symbols",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 1756,\n  \"Message\": \"string\",\n  \"TraceId\": \"f09281bc-cea0-933e-8cca-98c74364fc5c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3768047d-f22b-4ec1-bc88-549d4fb05e96",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "symbols",
+                    ":symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "symbols",
+                      "description": "(Required) One or more symbol identifiers, comma-separated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 1756,\n  \"Message\": \"string\",\n  \"TraceId\": \"f09281bc-cea0-933e-8cca-98c74364fc5c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f84559e0-9289-460d-8377-0055755df6d6",
+          "name": "Get cryptocurrency pairs",
+          "request": {
+            "name": "Get cryptocurrency pairs",
+            "description": {
+              "content": "Retrieves the list of available cryptocurrency trading pairs. Returns symbol names for all supported crypto pairs on the TradeStation platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "marketdata",
+                "symbollists",
+                "cryptopairs",
+                "symbolnames"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "82145d30-b52d-446e-8376-e7d2bcc5de19",
+              "name": "Successfully retrieved cryptocurrency pairs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "symbollists",
+                    "cryptopairs",
+                    "symbolnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SymbolNames\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c47e6c09-a44a-4f01-84f6-8aeda74ce2ce",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "marketdata",
+                    "symbollists",
+                    "cryptopairs",
+                    "symbolnames"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 1756,\n  \"Message\": \"string\",\n  \"TraceId\": \"f09281bc-cea0-933e-8cca-98c74364fc5c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tradestation.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "marketdata readaccount trade"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://signin.tradestation.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://signin.tradestation.com/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6eaa16ba-9ca0-48f1-b090-3750b8a4da37",
+    "name": "TradeStation Accounts Market Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.\n\nContact Support:\n Name: TradeStation API Support",
+      "type": "text/plain"
+    }
+  }
+}

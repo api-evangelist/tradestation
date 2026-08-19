@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TradeStation Accounts Reference Data API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://signin.tradestation.com/authorize",
+      "accessTokenUrl": "https://signin.tradestation.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reference Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get activation triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/orderexecution/activationtriggers"
+          },
+          "docs": "Retrieves the list of available activation trigger methods for conditional orders. Returns trigger types and their identifiers that can be used when placing orders with activation conditions."
+        },
+        {
+          "info": {
+            "name": "Get execution routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/orderexecution/routes"
+          },
+          "docs": "Retrieves the list of available order routing destinations. Returns route identifiers and names for use when specifying a routing preference on order submission."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

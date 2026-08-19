@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TradeStation Accounts Order Execution API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://signin.tradestation.com/authorize",
+      "accessTokenUrl": "https://signin.tradestation.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Order Execution",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Place an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tradestation.com/v3/orderexecution/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new order for execution. Supports market, limit, stop market, stop limit, and trailing stop order types for stocks, options, and futures. Includes support for time-in-force settings such as day, GTC, GTD, and IOC."
+        },
+        {
+          "info": {
+            "name": "Replace an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.tradestation.com/v3/orderexecution/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the order."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing open order. Allows changing price, quantity, and other order parameters. The original order is cancelled and replaced with the updated order parameters."
+        },
+        {
+          "info": {
+            "name": "Cancel an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tradestation.com/v3/orderexecution/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the order."
+              }
+            ]
+          },
+          "docs": "Cancels an existing open order. The order must be in a cancellable state. Returns the updated order status after cancellation."
+        },
+        {
+          "info": {
+            "name": "Confirm an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tradestation.com/v3/orderexecution/orderconfirm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates an order and returns estimated costs, commissions, and margin requirements without actually submitting the order for execution. Use this endpoint to preview order details before placing."
+        },
+        {
+          "info": {
+            "name": "Place a group order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tradestation.com/v3/orderexecution/ordergroups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a group of related orders for execution. Supports bracket orders (OCO - One Cancels Other), OSO (Order Sends Order), and other multi-order strategies. When one order in the group is filled or cancelled, related orders are automatically managed."
+        },
+        {
+          "info": {
+            "name": "Confirm a group order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tradestation.com/v3/orderexecution/ordergroupconfirm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates a group of related orders and returns estimated costs, commissions, and margin requirements without submitting for execution. Use this endpoint to preview group order details before placing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

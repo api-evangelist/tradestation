@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TradeStation Accounts Options API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://signin.tradestation.com/authorize",
+      "accessTokenUrl": "https://signin.tradestation.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Options",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get option expirations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/marketdata/options/expirations/:underlying",
+            "params": [
+              {
+                "name": "underlying",
+                "value": "",
+                "type": "path",
+                "description": "The underlying symbol for options data retrieval."
+              }
+            ]
+          },
+          "docs": "Retrieves available option expiration dates for a given underlying symbol. Returns expiration dates along with expiration type information such as monthly, weekly, or quarterly."
+        },
+        {
+          "info": {
+            "name": "Get option strikes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/marketdata/options/strikes/:underlying",
+            "params": [
+              {
+                "name": "underlying",
+                "value": "",
+                "type": "path",
+                "description": "The underlying symbol for options data retrieval."
+              }
+            ]
+          },
+          "docs": "Retrieves available strike prices for options on a given underlying symbol. Returns the list of strike prices available for trading."
+        },
+        {
+          "info": {
+            "name": "Get option spread types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tradestation.com/v3/marketdata/options/spreadtypes"
+          },
+          "docs": "Retrieves the list of available option spread types supported by TradeStation. Returns spread type names and identifiers for use in multi-leg option order construction."
+        },
+        {
+          "info": {
+            "name": "Calculate option risk/reward",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tradestation.com/v3/marketdata/options/riskreward",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculates the risk and reward profile for one or more option positions. Returns theoretical profit/loss values at various price levels for the specified option strategy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

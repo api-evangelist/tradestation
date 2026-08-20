@@ -64,6 +64,8 @@ apis:
   humanURL: https://api.tradestation.com/docs/
   baseURL: https://api.tradestation.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI

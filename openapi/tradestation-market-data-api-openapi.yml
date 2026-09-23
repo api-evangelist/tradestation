@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: TradeStation Accounts Market Data API
-  description: The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.
+  title: TradeStation Market Data API
+  description: The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency.
   version: '3.0'
   contact:
     name: TradeStation API Support
@@ -187,6 +187,74 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+    Bar:
+      type: object
+      description: A single OHLC bar representing price activity over a time interval.
+      properties:
+        High:
+          type: number
+          format: double
+          description: The highest price during the bar interval.
+        Low:
+          type: number
+          format: double
+          description: The lowest price during the bar interval.
+        Open:
+          type: number
+          format: double
+          description: The opening price of the bar interval.
+        Close:
+          type: number
+          format: double
+          description: The closing price of the bar interval.
+        Volume:
+          type: integer
+          description: The total volume during the bar interval.
+        TimeStamp:
+          type: string
+          format: date-time
+          description: The timestamp for the start of the bar interval.
+        TotalTicks:
+          type: integer
+          description: The total number of ticks during the bar interval.
+        UpTicks:
+          type: integer
+          description: The number of up ticks during the bar interval.
+        DownTicks:
+          type: integer
+          description: The number of down ticks during the bar interval.
+    BarsResponse:
+      type: object
+      description: Response containing bar chart data for a symbol.
+      properties:
+        Bars:
+          type: array
+          description: List of OHLC bars.
+          items:
+            $ref: '#/components/schemas/Bar'
+    SymbolsResponse:
+      type: object
+      description: Response containing detailed symbol information.
+      properties:
+        Symbols:
+          type: array
+          description: List of symbol details.
+          items:
+            $ref: '#/components/schemas/Symbol'
     Symbol:
       type: object
       description: Detailed symbol information and metadata.
@@ -249,78 +317,6 @@ components:
         FutureType:
           type: string
           description: The futures type classification.
-    BarsResponse:
-      type: object
-      description: Response containing bar chart data for a symbol.
-      properties:
-        Bars:
-          type: array
-          description: List of OHLC bars.
-          items:
-            $ref: '#/components/schemas/Bar'
-    Bar:
-      type: object
-      description: A single OHLC bar representing price activity over a time interval.
-      properties:
-        High:
-          type: number
-          format: double
-          description: The highest price during the bar interval.
-        Low:
-          type: number
-          format: double
-          description: The lowest price during the bar interval.
-        Open:
-          type: number
-          format: double
-          description: The opening price of the bar interval.
-        Close:
-          type: number
-          format: double
-          description: The closing price of the bar interval.
-        Volume:
-          type: integer
-          description: The total volume during the bar interval.
-        TimeStamp:
-          type: string
-          format: date-time
-          description: The timestamp for the start of the bar interval.
-        TotalTicks:
-          type: integer
-          description: The total number of ticks during the bar interval.
-        UpTicks:
-          type: integer
-          description: The number of up ticks during the bar interval.
-        DownTicks:
-          type: integer
-          description: The number of down ticks during the bar interval.
-    QuotesResponse:
-      type: object
-      description: Response containing quote data for one or more symbols.
-      properties:
-        Quotes:
-          type: array
-          description: List of quote snapshots.
-          items:
-            $ref: '#/components/schemas/Quote'
-    SymbolsResponse:
-      type: object
-      description: Response containing detailed symbol information.
-      properties:
-        Symbols:
-          type: array
-          description: List of symbol details.
-          items:
-            $ref: '#/components/schemas/Symbol'
-    CryptoPairsResponse:
-      type: object
-      description: Response containing available cryptocurrency trading pairs.
-      properties:
-        SymbolNames:
-          type: array
-          description: List of cryptocurrency pair symbol names.
-          items:
-            type: string
     Quote:
       type: object
       description: Real-time quote data for a single symbol.
@@ -377,20 +373,24 @@ components:
           type: string
           format: date-time
           description: The timestamp of the last trade.
-    Error:
+    QuotesResponse:
       type: object
-      description: Standard error response returned by the TradeStation API.
+      description: Response containing quote data for one or more symbols.
       properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code of the error.
-        Message:
-          type: string
-          description: Human-readable description of the error.
-        TraceId:
-          type: string
-          format: uuid
-          description: Unique trace identifier for debugging and support purposes.
+        Quotes:
+          type: array
+          description: List of quote snapshots.
+          items:
+            $ref: '#/components/schemas/Quote'
+    CryptoPairsResponse:
+      type: object
+      description: Response containing available cryptocurrency trading pairs.
+      properties:
+        SymbolNames:
+          type: array
+          description: List of cryptocurrency pair symbol names.
+          items:
+            type: string
   parameters:
     Symbols:
       name: symbols

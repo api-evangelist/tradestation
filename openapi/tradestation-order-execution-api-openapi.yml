@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: TradeStation Accounts Order Execution API
-  description: The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.
+  title: TradeStation Order Execution API
+  description: The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency.
   version: '3.0'
   contact:
     name: TradeStation API Support
@@ -215,82 +215,20 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    GroupOrderRequest:
+    Error:
       type: object
-      description: Request body for placing a group of related orders such as bracket, OCO, or OSO orders.
-      required:
-      - Type
-      - Orders
+      description: Standard error response returned by the TradeStation API.
       properties:
-        Type:
-          type: string
-          description: The type of order group.
-          enum:
-          - OCO
-          - BRK
-          - OSO
-        Orders:
-          type: array
-          description: The list of orders in the group.
-          items:
-            $ref: '#/components/schemas/OrderRequest'
-    OptionLeg:
-      type: object
-      description: A single leg of an option strategy.
-      properties:
-        Symbol:
-          type: string
-          description: The option symbol.
-        Quantity:
+        StatusCode:
           type: integer
-          description: The number of contracts.
-        TradeAction:
-          type: string
-          description: The trade action for this leg.
-          enum:
-          - BuyToOpen
-          - BuyToClose
-          - SellToOpen
-          - SellToClose
-    OrderConfirmResponse:
-      type: object
-      description: Response with estimated order costs and confirmation details.
-      properties:
-        EstimatedCommission:
-          type: number
-          format: double
-          description: Estimated commission for the order.
-        EstimatedCost:
-          type: number
-          format: double
-          description: Estimated total cost of the order.
-        EstimatedPrice:
-          type: number
-          format: double
-          description: Estimated execution price.
-        MarginRequirement:
-          type: number
-          format: double
-          description: The margin requirement for the order.
-    GroupOrderResponse:
-      type: object
-      description: Response after placing a group order.
-      properties:
-        Orders:
-          type: array
-          description: List of order results for the group.
-          items:
-            $ref: '#/components/schemas/OrderResult'
-    OrderResult:
-      type: object
-      description: Result of an individual order operation.
-      properties:
-        OrderID:
-          type: string
-          description: The unique order identifier assigned by the system.
+          description: HTTP status code of the error.
         Message:
           type: string
-          description: Human-readable message about the order result.
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
     OrderRequest:
       type: object
       description: Request body for placing or replacing an order.
@@ -376,15 +314,25 @@ components:
           description: Option legs for multi-leg option orders.
           items:
             $ref: '#/components/schemas/OptionLeg'
-    OrderResponse:
+    GroupOrderResponse:
       type: object
-      description: Response after placing, replacing, or cancelling an order.
+      description: Response after placing a group order.
       properties:
         Orders:
           type: array
-          description: List of order results.
+          description: List of order results for the group.
           items:
             $ref: '#/components/schemas/OrderResult'
+    OrderResult:
+      type: object
+      description: Result of an individual order operation.
+      properties:
+        OrderID:
+          type: string
+          description: The unique order identifier assigned by the system.
+        Message:
+          type: string
+          description: Human-readable message about the order result.
     GroupOrderConfirmResponse:
       type: object
       description: Response with estimated costs for all orders in a group.
@@ -394,20 +342,72 @@ components:
           description: List of confirmation details for each order in the group.
           items:
             $ref: '#/components/schemas/OrderConfirmResponse'
-    Error:
+    OrderResponse:
       type: object
-      description: Standard error response returned by the TradeStation API.
+      description: Response after placing, replacing, or cancelling an order.
       properties:
-        StatusCode:
+        Orders:
+          type: array
+          description: List of order results.
+          items:
+            $ref: '#/components/schemas/OrderResult'
+    OrderConfirmResponse:
+      type: object
+      description: Response with estimated order costs and confirmation details.
+      properties:
+        EstimatedCommission:
+          type: number
+          format: double
+          description: Estimated commission for the order.
+        EstimatedCost:
+          type: number
+          format: double
+          description: Estimated total cost of the order.
+        EstimatedPrice:
+          type: number
+          format: double
+          description: Estimated execution price.
+        MarginRequirement:
+          type: number
+          format: double
+          description: The margin requirement for the order.
+    GroupOrderRequest:
+      type: object
+      description: Request body for placing a group of related orders such as bracket, OCO, or OSO orders.
+      required:
+      - Type
+      - Orders
+      properties:
+        Type:
+          type: string
+          description: The type of order group.
+          enum:
+          - OCO
+          - BRK
+          - OSO
+        Orders:
+          type: array
+          description: The list of orders in the group.
+          items:
+            $ref: '#/components/schemas/OrderRequest'
+    OptionLeg:
+      type: object
+      description: A single leg of an option strategy.
+      properties:
+        Symbol:
+          type: string
+          description: The option symbol.
+        Quantity:
           type: integer
-          description: HTTP status code of the error.
-        Message:
+          description: The number of contracts.
+        TradeAction:
           type: string
-          description: Human-readable description of the error.
-        TraceId:
-          type: string
-          format: uuid
-          description: Unique trace identifier for debugging and support purposes.
+          description: The trade action for this leg.
+          enum:
+          - BuyToOpen
+          - BuyToClose
+          - SellToOpen
+          - SellToClose
   parameters:
     OrderId:
       name: orderId

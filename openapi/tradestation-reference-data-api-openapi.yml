@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: TradeStation Accounts Reference Data API
-  description: The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency. The API provides endpoints for account management, order placement and execution, real-time and historical market data, option chains, and symbol information. TradeStation supports advanced order types including bracket, OCO, OSO, and multi-leg options orders, with both intelligent and direct order routing. The API uses OAuth2 authentication and version 3 is the recommended version for new integrations.
+  title: TradeStation Reference Data API
+  description: The TradeStation API is a collection of RESTful brokerage and market data services used to build trading applications for stocks, options, futures, and cryptocurrency.
   version: '3.0'
   contact:
     name: TradeStation API Support
@@ -79,6 +79,20 @@ components:
               Description:
                 type: string
                 description: A description of when the trigger activates.
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
     RoutesResponse:
       type: object
       description: Response containing available order routing destinations.
@@ -100,20 +114,6 @@ components:
                 description: Asset types supported by this route.
                 items:
                   type: string
-    Error:
-      type: object
-      description: Standard error response returned by the TradeStation API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code of the error.
-        Message:
-          type: string
-          description: Human-readable description of the error.
-        TraceId:
-          type: string
-          format: uuid
-          description: Unique trace identifier for debugging and support purposes.
   securitySchemes:
     oauth2AuthCode:
       type: oauth2

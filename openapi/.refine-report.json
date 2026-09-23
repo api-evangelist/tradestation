@@ -1,11 +1,7 @@
 {
   "provider": "tradestation",
   "sources": [
-    "tradestation-accounts-api-openapi.yml",
-    "tradestation-market-data-api-openapi.yml",
-    "tradestation-options-api-openapi.yml",
-    "tradestation-order-execution-api-openapi.yml",
-    "tradestation-reference-data-api-openapi.yml"
+    "_original/tradestation-api-openapi.yml"
   ],
   "outputs": [
     "tradestation-accounts-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tradestation-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "tradestation-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tradestation-market-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tradestation-options-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tradestation-order-execution-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tradestation-reference-data-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -146,30 +146,6 @@ components:
           items:
             type: number
             format: double
-    Error:
-      type: object
-      description: Standard error response returned by the TradeStation API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code of the error.
-        Message:
-          type: string
-          description: Human-readable description of the error.
-        TraceId:
-          type: string
-          format: uuid
-          description: Unique trace identifier for debugging and support purposes.
-    OptionStrikesResponse:
-      type: object
-      description: Response containing available strike prices for an underlying symbol.
-      properties:
-        Strikes:
-          type: array
-          description: List of available strike prices.
-          items:
-            type: number
-            format: double
     RiskRewardRequest:
       type: object
       description: Request body for option risk/reward calculation.
@@ -186,22 +162,6 @@ components:
           description: The option legs to include in the calculation.
           items:
             $ref: '#/components/schemas/OptionLeg'
-    OptionSpreadTypesResponse:
-      type: object
-      description: Response containing available option spread types.
-      properties:
-        SpreadTypes:
-          type: array
-          description: List of available spread types.
-          items:
-            type: object
-            properties:
-              Name:
-                type: string
-                description: The name of the spread type.
-              Id:
-                type: string
-                description: The unique identifier of the spread type.
     OptionExpiration:
       type: object
       description: An option expiration date with its type classification.
@@ -218,6 +178,55 @@ components:
           - Weekly
           - Quarterly
           - EOM
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+    OptionExpirationsResponse:
+      type: object
+      description: Response containing option expiration dates for an underlying symbol.
+      properties:
+        Expirations:
+          type: array
+          description: List of option expirations.
+          items:
+            $ref: '#/components/schemas/OptionExpiration'
+    OptionSpreadTypesResponse:
+      type: object
+      description: Response containing available option spread types.
+      properties:
+        SpreadTypes:
+          type: array
+          description: List of available spread types.
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+                description: The name of the spread type.
+              Id:
+                type: string
+                description: The unique identifier of the spread type.
+    OptionStrikesResponse:
+      type: object
+      description: Response containing available strike prices for an underlying symbol.
+      properties:
+        Strikes:
+          type: array
+          description: List of available strike prices.
+          items:
+            type: number
+            format: double
     OptionLeg:
       type: object
       description: A single leg of an option strategy.
@@ -236,15 +245,6 @@ components:
           - BuyToClose
           - SellToOpen
           - SellToClose
-    OptionExpirationsResponse:
-      type: object
-      description: Response containing option expiration dates for an underlying symbol.
-      properties:
-        Expirations:
-          type: array
-          description: List of option expirations.
-          items:
-            $ref: '#/components/schemas/OptionExpiration'
   parameters:
     Underlying:
       name: underlying

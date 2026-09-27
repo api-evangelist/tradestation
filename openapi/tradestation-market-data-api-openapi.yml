@@ -187,74 +187,15 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
+    QuotesResponse:
       type: object
-      description: Standard error response returned by the TradeStation API.
+      description: Response containing quote data for one or more symbols.
       properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code of the error.
-        Message:
-          type: string
-          description: Human-readable description of the error.
-        TraceId:
-          type: string
-          format: uuid
-          description: Unique trace identifier for debugging and support purposes.
-    Bar:
-      type: object
-      description: A single OHLC bar representing price activity over a time interval.
-      properties:
-        High:
-          type: number
-          format: double
-          description: The highest price during the bar interval.
-        Low:
-          type: number
-          format: double
-          description: The lowest price during the bar interval.
-        Open:
-          type: number
-          format: double
-          description: The opening price of the bar interval.
-        Close:
-          type: number
-          format: double
-          description: The closing price of the bar interval.
-        Volume:
-          type: integer
-          description: The total volume during the bar interval.
-        TimeStamp:
-          type: string
-          format: date-time
-          description: The timestamp for the start of the bar interval.
-        TotalTicks:
-          type: integer
-          description: The total number of ticks during the bar interval.
-        UpTicks:
-          type: integer
-          description: The number of up ticks during the bar interval.
-        DownTicks:
-          type: integer
-          description: The number of down ticks during the bar interval.
-    BarsResponse:
-      type: object
-      description: Response containing bar chart data for a symbol.
-      properties:
-        Bars:
+        Quotes:
           type: array
-          description: List of OHLC bars.
+          description: List of quote snapshots.
           items:
-            $ref: '#/components/schemas/Bar'
-    SymbolsResponse:
-      type: object
-      description: Response containing detailed symbol information.
-      properties:
-        Symbols:
-          type: array
-          description: List of symbol details.
-          items:
-            $ref: '#/components/schemas/Symbol'
+            $ref: '#/components/schemas/Quote'
     Symbol:
       type: object
       description: Detailed symbol information and metadata.
@@ -317,6 +258,74 @@ components:
         FutureType:
           type: string
           description: The futures type classification.
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+    Bar:
+      type: object
+      description: A single OHLC bar representing price activity over a time interval.
+      properties:
+        High:
+          type: number
+          format: double
+          description: The highest price during the bar interval.
+        Low:
+          type: number
+          format: double
+          description: The lowest price during the bar interval.
+        Open:
+          type: number
+          format: double
+          description: The opening price of the bar interval.
+        Close:
+          type: number
+          format: double
+          description: The closing price of the bar interval.
+        Volume:
+          type: integer
+          description: The total volume during the bar interval.
+        TimeStamp:
+          type: string
+          format: date-time
+          description: The timestamp for the start of the bar interval.
+        TotalTicks:
+          type: integer
+          description: The total number of ticks during the bar interval.
+        UpTicks:
+          type: integer
+          description: The number of up ticks during the bar interval.
+        DownTicks:
+          type: integer
+          description: The number of down ticks during the bar interval.
+    SymbolsResponse:
+      type: object
+      description: Response containing detailed symbol information.
+      properties:
+        Symbols:
+          type: array
+          description: List of symbol details.
+          items:
+            $ref: '#/components/schemas/Symbol'
+    CryptoPairsResponse:
+      type: object
+      description: Response containing available cryptocurrency trading pairs.
+      properties:
+        SymbolNames:
+          type: array
+          description: List of cryptocurrency pair symbol names.
+          items:
+            type: string
     Quote:
       type: object
       description: Real-time quote data for a single symbol.
@@ -373,24 +382,15 @@ components:
           type: string
           format: date-time
           description: The timestamp of the last trade.
-    QuotesResponse:
+    BarsResponse:
       type: object
-      description: Response containing quote data for one or more symbols.
+      description: Response containing bar chart data for a symbol.
       properties:
-        Quotes:
+        Bars:
           type: array
-          description: List of quote snapshots.
+          description: List of OHLC bars.
           items:
-            $ref: '#/components/schemas/Quote'
-    CryptoPairsResponse:
-      type: object
-      description: Response containing available cryptocurrency trading pairs.
-      properties:
-        SymbolNames:
-          type: array
-          description: List of cryptocurrency pair symbol names.
-          items:
-            type: string
+            $ref: '#/components/schemas/Bar'
   parameters:
     Symbols:
       name: symbols

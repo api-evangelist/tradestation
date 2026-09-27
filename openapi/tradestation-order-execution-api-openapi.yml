@@ -215,20 +215,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
+    OrderResult:
       type: object
-      description: Standard error response returned by the TradeStation API.
+      description: Result of an individual order operation.
       properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code of the error.
+        OrderID:
+          type: string
+          description: The unique order identifier assigned by the system.
         Message:
           type: string
-          description: Human-readable description of the error.
-        TraceId:
-          type: string
-          format: uuid
-          description: Unique trace identifier for debugging and support purposes.
+          description: Human-readable message about the order result.
     OrderRequest:
       type: object
       description: Request body for placing or replacing an order.
@@ -314,43 +310,6 @@ components:
           description: Option legs for multi-leg option orders.
           items:
             $ref: '#/components/schemas/OptionLeg'
-    GroupOrderResponse:
-      type: object
-      description: Response after placing a group order.
-      properties:
-        Orders:
-          type: array
-          description: List of order results for the group.
-          items:
-            $ref: '#/components/schemas/OrderResult'
-    OrderResult:
-      type: object
-      description: Result of an individual order operation.
-      properties:
-        OrderID:
-          type: string
-          description: The unique order identifier assigned by the system.
-        Message:
-          type: string
-          description: Human-readable message about the order result.
-    GroupOrderConfirmResponse:
-      type: object
-      description: Response with estimated costs for all orders in a group.
-      properties:
-        Confirmations:
-          type: array
-          description: List of confirmation details for each order in the group.
-          items:
-            $ref: '#/components/schemas/OrderConfirmResponse'
-    OrderResponse:
-      type: object
-      description: Response after placing, replacing, or cancelling an order.
-      properties:
-        Orders:
-          type: array
-          description: List of order results.
-          items:
-            $ref: '#/components/schemas/OrderResult'
     OrderConfirmResponse:
       type: object
       description: Response with estimated order costs and confirmation details.
@@ -371,6 +330,38 @@ components:
           type: number
           format: double
           description: The margin requirement for the order.
+    GroupOrderResponse:
+      type: object
+      description: Response after placing a group order.
+      properties:
+        Orders:
+          type: array
+          description: List of order results for the group.
+          items:
+            $ref: '#/components/schemas/OrderResult'
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+    GroupOrderConfirmResponse:
+      type: object
+      description: Response with estimated costs for all orders in a group.
+      properties:
+        Confirmations:
+          type: array
+          description: List of confirmation details for each order in the group.
+          items:
+            $ref: '#/components/schemas/OrderConfirmResponse'
     GroupOrderRequest:
       type: object
       description: Request body for placing a group of related orders such as bracket, OCO, or OSO orders.
@@ -390,6 +381,15 @@ components:
           description: The list of orders in the group.
           items:
             $ref: '#/components/schemas/OrderRequest'
+    OrderResponse:
+      type: object
+      description: Response after placing, replacing, or cancelling an order.
+      properties:
+        Orders:
+          type: array
+          description: List of order results.
+          items:
+            $ref: '#/components/schemas/OrderResult'
     OptionLeg:
       type: object
       description: A single leg of an option strategy.

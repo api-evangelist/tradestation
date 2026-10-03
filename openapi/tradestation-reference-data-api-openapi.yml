@@ -74,6 +74,25 @@ components:
           type: string
           format: uuid
           description: Unique trace identifier for debugging and support purposes.
+    ActivationTriggersResponse:
+      type: object
+      description: Response containing available activation trigger methods.
+      properties:
+        ActivationTriggers:
+          type: array
+          description: List of activation triggers.
+          items:
+            type: object
+            properties:
+              Key:
+                type: string
+                description: The activation trigger key identifier.
+              Name:
+                type: string
+                description: The human-readable name of the trigger.
+              Description:
+                type: string
+                description: A description of when the trigger activates.
     RoutesResponse:
       type: object
       description: Response containing available order routing destinations.
@@ -95,25 +114,6 @@ components:
                 description: Asset types supported by this route.
                 items:
                   type: string
-    ActivationTriggersResponse:
-      type: object
-      description: Response containing available activation trigger methods.
-      properties:
-        ActivationTriggers:
-          type: array
-          description: List of activation triggers.
-          items:
-            type: object
-            properties:
-              Key:
-                type: string
-                description: The activation trigger key identifier.
-              Name:
-                type: string
-                description: The human-readable name of the trigger.
-              Description:
-                type: string
-                description: A description of when the trigger activates.
   securitySchemes:
     oauth2AuthCode:
       type: oauth2

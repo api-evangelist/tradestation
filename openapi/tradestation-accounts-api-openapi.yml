@@ -233,33 +233,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  parameters:
-    AccountIds:
-      name: accountIds
-      in: path
-      required: true
-      description: One or more account identifiers, comma-separated. Maximum of 25 accounts per request.
-      schema:
-        type: string
   schemas:
-    PositionsResponse:
+    WalletsResponse:
       type: object
-      description: Response containing position information for one or more accounts.
+      description: Response containing cryptocurrency wallet information.
       properties:
-        Positions:
+        Wallets:
           type: array
-          description: List of open positions.
+          description: List of cryptocurrency wallets.
           items:
-            $ref: '#/components/schemas/Position'
-    BalancesResponse:
-      type: object
-      description: Response containing balance information for one or more accounts.
-      properties:
-        Balances:
-          type: array
-          description: List of account balances.
-          items:
-            $ref: '#/components/schemas/Balance'
+            $ref: '#/components/schemas/Wallet'
     Error:
       type: object
       description: Standard error response returned by the TradeStation API.
@@ -331,31 +314,6 @@ components:
           description: List of orders.
           items:
             $ref: '#/components/schemas/Order'
-    Account:
-      type: object
-      description: Represents a brokerage account with its identifiers and metadata.
-      properties:
-        AccountID:
-          type: string
-          description: The unique account identifier.
-        AccountType:
-          type: string
-          description: The type of account such as Cash, Margin, Futures, or Crypto.
-          enum:
-          - Cash
-          - Margin
-          - Futures
-          - DVP
-          - Crypto
-        Status:
-          type: string
-          description: The current status of the account.
-          enum:
-          - Active
-          - Closed
-        StatusDescription:
-          type: string
-          description: Human-readable description of the account status.
     Wallet:
       type: object
       description: Represents a cryptocurrency wallet with balance information.
@@ -371,6 +329,33 @@ components:
           type: number
           format: double
           description: The available balance for trading.
+    AccountsResponse:
+      type: object
+      description: Response containing a list of brokerage accounts.
+      properties:
+        Accounts:
+          type: array
+          description: List of brokerage accounts.
+          items:
+            $ref: '#/components/schemas/Account'
+    PositionsResponse:
+      type: object
+      description: Response containing position information for one or more accounts.
+      properties:
+        Positions:
+          type: array
+          description: List of open positions.
+          items:
+            $ref: '#/components/schemas/Position'
+    BalancesResponse:
+      type: object
+      description: Response containing balance information for one or more accounts.
+      properties:
+        Balances:
+          type: array
+          description: List of account balances.
+          items:
+            $ref: '#/components/schemas/Balance'
     Balance:
       type: object
       description: Account balance information including cash, equity, and margin details.
@@ -405,6 +390,31 @@ components:
           type: number
           format: double
           description: Total unrealized profit or loss on open positions.
+    Account:
+      type: object
+      description: Represents a brokerage account with its identifiers and metadata.
+      properties:
+        AccountID:
+          type: string
+          description: The unique account identifier.
+        AccountType:
+          type: string
+          description: The type of account such as Cash, Margin, Futures, or Crypto.
+          enum:
+          - Cash
+          - Margin
+          - Futures
+          - DVP
+          - Crypto
+        Status:
+          type: string
+          description: The current status of the account.
+          enum:
+          - Active
+          - Closed
+        StatusDescription:
+          type: string
+          description: Human-readable description of the account status.
     Order:
       type: object
       description: Represents an order with its current status and parameters.
@@ -494,24 +504,14 @@ components:
           type: string
           format: date-time
           description: The date and time the order was closed or filled.
-    WalletsResponse:
-      type: object
-      description: Response containing cryptocurrency wallet information.
-      properties:
-        Wallets:
-          type: array
-          description: List of cryptocurrency wallets.
-          items:
-            $ref: '#/components/schemas/Wallet'
-    AccountsResponse:
-      type: object
-      description: Response containing a list of brokerage accounts.
-      properties:
-        Accounts:
-          type: array
-          description: List of brokerage accounts.
-          items:
-            $ref: '#/components/schemas/Account'
+  parameters:
+    AccountIds:
+      name: accountIds
+      in: path
+      required: true
+      description: One or more account identifiers, comma-separated. Maximum of 25 accounts per request.
+      schema:
+        type: string
   securitySchemes:
     oauth2AuthCode:
       type: oauth2

@@ -187,121 +187,24 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
+    BarsResponse:
       type: object
-      description: Standard error response returned by the TradeStation API.
+      description: Response containing bar chart data for a symbol.
       properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code of the error.
-        Message:
-          type: string
-          description: Human-readable description of the error.
-        TraceId:
-          type: string
-          format: uuid
-          description: Unique trace identifier for debugging and support purposes.
-    Bar:
-      type: object
-      description: A single OHLC bar representing price activity over a time interval.
-      properties:
-        High:
-          type: number
-          format: double
-          description: The highest price during the bar interval.
-        Low:
-          type: number
-          format: double
-          description: The lowest price during the bar interval.
-        Open:
-          type: number
-          format: double
-          description: The opening price of the bar interval.
-        Close:
-          type: number
-          format: double
-          description: The closing price of the bar interval.
-        Volume:
-          type: integer
-          description: The total volume during the bar interval.
-        TimeStamp:
-          type: string
-          format: date-time
-          description: The timestamp for the start of the bar interval.
-        TotalTicks:
-          type: integer
-          description: The total number of ticks during the bar interval.
-        UpTicks:
-          type: integer
-          description: The number of up ticks during the bar interval.
-        DownTicks:
-          type: integer
-          description: The number of down ticks during the bar interval.
-    Quote:
-      type: object
-      description: Real-time quote data for a single symbol.
-      properties:
-        Symbol:
-          type: string
-          description: The symbol identifier.
-        Last:
-          type: number
-          format: double
-          description: The last traded price.
-        Bid:
-          type: number
-          format: double
-          description: The current bid price.
-        Ask:
-          type: number
-          format: double
-          description: The current ask price.
-        BidSize:
-          type: integer
-          description: The size of the bid in shares or contracts.
-        AskSize:
-          type: integer
-          description: The size of the ask in shares or contracts.
-        Volume:
-          type: integer
-          description: The total volume traded today.
-        Open:
-          type: number
-          format: double
-          description: The opening price for the current session.
-        High:
-          type: number
-          format: double
-          description: The highest price for the current session.
-        Low:
-          type: number
-          format: double
-          description: The lowest price for the current session.
-        Close:
-          type: number
-          format: double
-          description: The previous session closing price.
-        NetChange:
-          type: number
-          format: double
-          description: Net change from previous close.
-        NetChangePct:
-          type: number
-          format: double
-          description: Net change as a percentage.
-        TradeTime:
-          type: string
-          format: date-time
-          description: The timestamp of the last trade.
-    CryptoPairsResponse:
-      type: object
-      description: Response containing available cryptocurrency trading pairs.
-      properties:
-        SymbolNames:
+        Bars:
           type: array
-          description: List of cryptocurrency pair symbol names.
+          description: List of OHLC bars.
           items:
-            type: string
+            $ref: '#/components/schemas/Bar'
+    QuotesResponse:
+      type: object
+      description: Response containing quote data for one or more symbols.
+      properties:
+        Quotes:
+          type: array
+          description: List of quote snapshots.
+          items:
+            $ref: '#/components/schemas/Quote'
     Symbol:
       type: object
       description: Detailed symbol information and metadata.
@@ -364,15 +267,62 @@ components:
         FutureType:
           type: string
           description: The futures type classification.
-    QuotesResponse:
+    Quote:
       type: object
-      description: Response containing quote data for one or more symbols.
+      description: Real-time quote data for a single symbol.
       properties:
-        Quotes:
-          type: array
-          description: List of quote snapshots.
-          items:
-            $ref: '#/components/schemas/Quote'
+        Symbol:
+          type: string
+          description: The symbol identifier.
+        Last:
+          type: number
+          format: double
+          description: The last traded price.
+        Bid:
+          type: number
+          format: double
+          description: The current bid price.
+        Ask:
+          type: number
+          format: double
+          description: The current ask price.
+        BidSize:
+          type: integer
+          description: The size of the bid in shares or contracts.
+        AskSize:
+          type: integer
+          description: The size of the ask in shares or contracts.
+        Volume:
+          type: integer
+          description: The total volume traded today.
+        Open:
+          type: number
+          format: double
+          description: The opening price for the current session.
+        High:
+          type: number
+          format: double
+          description: The highest price for the current session.
+        Low:
+          type: number
+          format: double
+          description: The lowest price for the current session.
+        Close:
+          type: number
+          format: double
+          description: The previous session closing price.
+        NetChange:
+          type: number
+          format: double
+          description: Net change from previous close.
+        NetChangePct:
+          type: number
+          format: double
+          description: Net change as a percentage.
+        TradeTime:
+          type: string
+          format: date-time
+          description: The timestamp of the last trade.
     SymbolsResponse:
       type: object
       description: Response containing detailed symbol information.
@@ -382,15 +332,65 @@ components:
           description: List of symbol details.
           items:
             $ref: '#/components/schemas/Symbol'
-    BarsResponse:
+    CryptoPairsResponse:
       type: object
-      description: Response containing bar chart data for a symbol.
+      description: Response containing available cryptocurrency trading pairs.
       properties:
-        Bars:
+        SymbolNames:
           type: array
-          description: List of OHLC bars.
+          description: List of cryptocurrency pair symbol names.
           items:
-            $ref: '#/components/schemas/Bar'
+            type: string
+    Bar:
+      type: object
+      description: A single OHLC bar representing price activity over a time interval.
+      properties:
+        High:
+          type: number
+          format: double
+          description: The highest price during the bar interval.
+        Low:
+          type: number
+          format: double
+          description: The lowest price during the bar interval.
+        Open:
+          type: number
+          format: double
+          description: The opening price of the bar interval.
+        Close:
+          type: number
+          format: double
+          description: The closing price of the bar interval.
+        Volume:
+          type: integer
+          description: The total volume during the bar interval.
+        TimeStamp:
+          type: string
+          format: date-time
+          description: The timestamp for the start of the bar interval.
+        TotalTicks:
+          type: integer
+          description: The total number of ticks during the bar interval.
+        UpTicks:
+          type: integer
+          description: The number of up ticks during the bar interval.
+        DownTicks:
+          type: integer
+          description: The number of down ticks during the bar interval.
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
   parameters:
     Symbols:
       name: symbols

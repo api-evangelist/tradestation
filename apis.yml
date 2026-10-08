@@ -221,6 +221,12 @@ apis:
   - type: APISpecification
     url: https://tradestation.github.io/api-docs/
 common:
+  - type: Plans
+    url: plans/tradestation-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/tradestation-rate-limits.yml
+  - type: FinOps
+    url: finops/tradestation-finops.yml
   - type: AgenticAccess
     url: agentic-access/tradestation-agentic-access.yml
   - type: DomainSecurity

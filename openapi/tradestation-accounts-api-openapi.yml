@@ -234,6 +234,104 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    OrdersResponse:
+      type: object
+      description: Response containing order information for one or more accounts.
+      properties:
+        Orders:
+          type: array
+          description: List of orders.
+          items:
+            $ref: '#/components/schemas/Order'
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+    AccountsResponse:
+      type: object
+      description: Response containing a list of brokerage accounts.
+      properties:
+        Accounts:
+          type: array
+          description: List of brokerage accounts.
+          items:
+            $ref: '#/components/schemas/Account'
+    PositionsResponse:
+      type: object
+      description: Response containing position information for one or more accounts.
+      properties:
+        Positions:
+          type: array
+          description: List of open positions.
+          items:
+            $ref: '#/components/schemas/Position'
+    BalancesResponse:
+      type: object
+      description: Response containing balance information for one or more accounts.
+      properties:
+        Balances:
+          type: array
+          description: List of account balances.
+          items:
+            $ref: '#/components/schemas/Balance'
+    Position:
+      type: object
+      description: Represents an open position in a brokerage account.
+      properties:
+        AccountID:
+          type: string
+          description: The account identifier holding this position.
+        Symbol:
+          type: string
+          description: The symbol of the held instrument.
+        Quantity:
+          type: number
+          format: double
+          description: The number of shares, contracts, or units held.
+        AveragePrice:
+          type: number
+          format: double
+          description: The average entry price per unit.
+        Last:
+          type: number
+          format: double
+          description: The last traded price of the instrument.
+        MarketValue:
+          type: number
+          format: double
+          description: Current market value of the position.
+        UnrealizedProfitLoss:
+          type: number
+          format: double
+          description: Unrealized profit or loss on the position.
+        UnrealizedProfitLossPercent:
+          type: number
+          format: double
+          description: Unrealized profit or loss as a percentage.
+        AssetType:
+          type: string
+          description: The asset class of the instrument.
+          enum:
+          - Stock
+          - Option
+          - Future
+          - Crypto
+        LongShort:
+          type: string
+          description: Whether the position is long or short.
+          enum:
+          - Long
+          - Short
     Account:
       type: object
       description: Represents a brokerage account with its identifiers and metadata.
@@ -259,49 +357,6 @@ components:
         StatusDescription:
           type: string
           description: Human-readable description of the account status.
-    WalletsResponse:
-      type: object
-      description: Response containing cryptocurrency wallet information.
-      properties:
-        Wallets:
-          type: array
-          description: List of cryptocurrency wallets.
-          items:
-            $ref: '#/components/schemas/Wallet'
-    Balance:
-      type: object
-      description: Account balance information including cash, equity, and margin details.
-      properties:
-        AccountID:
-          type: string
-          description: The account identifier.
-        AccountType:
-          type: string
-          description: The type of account.
-        CashBalance:
-          type: number
-          format: double
-          description: Current cash balance in the account.
-        Equity:
-          type: number
-          format: double
-          description: Total equity value of the account.
-        MarketValue:
-          type: number
-          format: double
-          description: Total market value of all positions.
-        BuyingPower:
-          type: number
-          format: double
-          description: Available buying power for new positions.
-        RealizedProfitLoss:
-          type: number
-          format: double
-          description: Total realized profit or loss for the current session.
-        UnrealizedProfitLoss:
-          type: number
-          format: double
-          description: Total unrealized profit or loss on open positions.
     Wallet:
       type: object
       description: Represents a cryptocurrency wallet with balance information.
@@ -406,104 +461,49 @@ components:
           type: string
           format: date-time
           description: The date and time the order was closed or filled.
-    BalancesResponse:
+    Balance:
       type: object
-      description: Response containing balance information for one or more accounts.
-      properties:
-        Balances:
-          type: array
-          description: List of account balances.
-          items:
-            $ref: '#/components/schemas/Balance'
-    AccountsResponse:
-      type: object
-      description: Response containing a list of brokerage accounts.
-      properties:
-        Accounts:
-          type: array
-          description: List of brokerage accounts.
-          items:
-            $ref: '#/components/schemas/Account'
-    Position:
-      type: object
-      description: Represents an open position in a brokerage account.
+      description: Account balance information including cash, equity, and margin details.
       properties:
         AccountID:
           type: string
-          description: The account identifier holding this position.
-        Symbol:
+          description: The account identifier.
+        AccountType:
           type: string
-          description: The symbol of the held instrument.
-        Quantity:
+          description: The type of account.
+        CashBalance:
           type: number
           format: double
-          description: The number of shares, contracts, or units held.
-        AveragePrice:
+          description: Current cash balance in the account.
+        Equity:
           type: number
           format: double
-          description: The average entry price per unit.
-        Last:
-          type: number
-          format: double
-          description: The last traded price of the instrument.
+          description: Total equity value of the account.
         MarketValue:
           type: number
           format: double
-          description: Current market value of the position.
+          description: Total market value of all positions.
+        BuyingPower:
+          type: number
+          format: double
+          description: Available buying power for new positions.
+        RealizedProfitLoss:
+          type: number
+          format: double
+          description: Total realized profit or loss for the current session.
         UnrealizedProfitLoss:
           type: number
           format: double
-          description: Unrealized profit or loss on the position.
-        UnrealizedProfitLossPercent:
-          type: number
-          format: double
-          description: Unrealized profit or loss as a percentage.
-        AssetType:
-          type: string
-          description: The asset class of the instrument.
-          enum:
-          - Stock
-          - Option
-          - Future
-          - Crypto
-        LongShort:
-          type: string
-          description: Whether the position is long or short.
-          enum:
-          - Long
-          - Short
-    PositionsResponse:
+          description: Total unrealized profit or loss on open positions.
+    WalletsResponse:
       type: object
-      description: Response containing position information for one or more accounts.
+      description: Response containing cryptocurrency wallet information.
       properties:
-        Positions:
+        Wallets:
           type: array
-          description: List of open positions.
+          description: List of cryptocurrency wallets.
           items:
-            $ref: '#/components/schemas/Position'
-    OrdersResponse:
-      type: object
-      description: Response containing order information for one or more accounts.
-      properties:
-        Orders:
-          type: array
-          description: List of orders.
-          items:
-            $ref: '#/components/schemas/Order'
-    Error:
-      type: object
-      description: Standard error response returned by the TradeStation API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code of the error.
-        Message:
-          type: string
-          description: Human-readable description of the error.
-        TraceId:
-          type: string
-          format: uuid
-          description: Unique trace identifier for debugging and support purposes.
+            $ref: '#/components/schemas/Wallet'
   parameters:
     AccountIds:
       name: accountIds

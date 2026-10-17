@@ -128,6 +128,47 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+    OptionLeg:
+      type: object
+      description: A single leg of an option strategy.
+      properties:
+        Symbol:
+          type: string
+          description: The option symbol.
+        Quantity:
+          type: integer
+          description: The number of contracts.
+        TradeAction:
+          type: string
+          description: The trade action for this leg.
+          enum:
+          - BuyToOpen
+          - BuyToClose
+          - SellToOpen
+          - SellToClose
+    OptionExpirationsResponse:
+      type: object
+      description: Response containing option expiration dates for an underlying symbol.
+      properties:
+        Expirations:
+          type: array
+          description: List of option expirations.
+          items:
+            $ref: '#/components/schemas/OptionExpiration'
     RiskRewardResponse:
       type: object
       description: Response containing the risk/reward analysis results.
@@ -143,6 +184,32 @@ components:
         BreakEvenPoints:
           type: array
           description: Break-even price points.
+          items:
+            type: number
+            format: double
+    OptionExpiration:
+      type: object
+      description: An option expiration date with its type classification.
+      properties:
+        Date:
+          type: string
+          format: date
+          description: The expiration date.
+        Type:
+          type: string
+          description: The expiration type classification.
+          enum:
+          - Monthly
+          - Weekly
+          - Quarterly
+          - EOM
+    OptionStrikesResponse:
+      type: object
+      description: Response containing available strike prices for an underlying symbol.
+      properties:
+        Strikes:
+          type: array
+          description: List of available strike prices.
           items:
             type: number
             format: double
@@ -162,59 +229,6 @@ components:
           description: The option legs to include in the calculation.
           items:
             $ref: '#/components/schemas/OptionLeg'
-    OptionExpiration:
-      type: object
-      description: An option expiration date with its type classification.
-      properties:
-        Date:
-          type: string
-          format: date
-          description: The expiration date.
-        Type:
-          type: string
-          description: The expiration type classification.
-          enum:
-          - Monthly
-          - Weekly
-          - Quarterly
-          - EOM
-    OptionExpirationsResponse:
-      type: object
-      description: Response containing option expiration dates for an underlying symbol.
-      properties:
-        Expirations:
-          type: array
-          description: List of option expirations.
-          items:
-            $ref: '#/components/schemas/OptionExpiration'
-    OptionLeg:
-      type: object
-      description: A single leg of an option strategy.
-      properties:
-        Symbol:
-          type: string
-          description: The option symbol.
-        Quantity:
-          type: integer
-          description: The number of contracts.
-        TradeAction:
-          type: string
-          description: The trade action for this leg.
-          enum:
-          - BuyToOpen
-          - BuyToClose
-          - SellToOpen
-          - SellToClose
-    OptionStrikesResponse:
-      type: object
-      description: Response containing available strike prices for an underlying symbol.
-      properties:
-        Strikes:
-          type: array
-          description: List of available strike prices.
-          items:
-            type: number
-            format: double
     OptionSpreadTypesResponse:
       type: object
       description: Response containing available option spread types.
@@ -231,20 +245,6 @@ components:
               Id:
                 type: string
                 description: The unique identifier of the spread type.
-    Error:
-      type: object
-      description: Standard error response returned by the TradeStation API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code of the error.
-        Message:
-          type: string
-          description: Human-readable description of the error.
-        TraceId:
-          type: string
-          format: uuid
-          description: Unique trace identifier for debugging and support purposes.
   parameters:
     Underlying:
       name: underlying

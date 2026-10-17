@@ -81,6 +81,20 @@ components:
                 description: Asset types supported by this route.
                 items:
                   type: string
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
     ActivationTriggersResponse:
       type: object
       description: Response containing available activation trigger methods.
@@ -100,20 +114,6 @@ components:
               Description:
                 type: string
                 description: A description of when the trigger activates.
-    Error:
-      type: object
-      description: Standard error response returned by the TradeStation API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code of the error.
-        Message:
-          type: string
-          description: Human-readable description of the error.
-        TraceId:
-          type: string
-          format: uuid
-          description: Unique trace identifier for debugging and support purposes.
   securitySchemes:
     oauth2AuthCode:
       type: oauth2

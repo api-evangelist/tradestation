@@ -215,6 +215,114 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    OrderConfirmResponse:
+      type: object
+      description: Response with estimated order costs and confirmation details.
+      properties:
+        EstimatedCommission:
+          type: number
+          format: double
+          description: Estimated commission for the order.
+        EstimatedCost:
+          type: number
+          format: double
+          description: Estimated total cost of the order.
+        EstimatedPrice:
+          type: number
+          format: double
+          description: Estimated execution price.
+        MarginRequirement:
+          type: number
+          format: double
+          description: The margin requirement for the order.
+    OptionLeg:
+      type: object
+      description: A single leg of an option strategy.
+      properties:
+        Symbol:
+          type: string
+          description: The option symbol.
+        Quantity:
+          type: integer
+          description: The number of contracts.
+        TradeAction:
+          type: string
+          description: The trade action for this leg.
+          enum:
+          - BuyToOpen
+          - BuyToClose
+          - SellToOpen
+          - SellToClose
+    Error:
+      type: object
+      description: Standard error response returned by the TradeStation API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code of the error.
+        Message:
+          type: string
+          description: Human-readable description of the error.
+        TraceId:
+          type: string
+          format: uuid
+          description: Unique trace identifier for debugging and support purposes.
+    GroupOrderConfirmResponse:
+      type: object
+      description: Response with estimated costs for all orders in a group.
+      properties:
+        Confirmations:
+          type: array
+          description: List of confirmation details for each order in the group.
+          items:
+            $ref: '#/components/schemas/OrderConfirmResponse'
+    GroupOrderResponse:
+      type: object
+      description: Response after placing a group order.
+      properties:
+        Orders:
+          type: array
+          description: List of order results for the group.
+          items:
+            $ref: '#/components/schemas/OrderResult'
+    GroupOrderRequest:
+      type: object
+      description: Request body for placing a group of related orders such as bracket, OCO, or OSO orders.
+      required:
+      - Type
+      - Orders
+      properties:
+        Type:
+          type: string
+          description: The type of order group.
+          enum:
+          - OCO
+          - BRK
+          - OSO
+        Orders:
+          type: array
+          description: The list of orders in the group.
+          items:
+            $ref: '#/components/schemas/OrderRequest'
+    OrderResponse:
+      type: object
+      description: Response after placing, replacing, or cancelling an order.
+      properties:
+        Orders:
+          type: array
+          description: List of order results.
+          items:
+            $ref: '#/components/schemas/OrderResult'
+    OrderResult:
+      type: object
+      description: Result of an individual order operation.
+      properties:
+        OrderID:
+          type: string
+          description: The unique order identifier assigned by the system.
+        Message:
+          type: string
+          description: Human-readable message about the order result.
     OrderRequest:
       type: object
       description: Request body for placing or replacing an order.
@@ -300,114 +408,6 @@ components:
           description: Option legs for multi-leg option orders.
           items:
             $ref: '#/components/schemas/OptionLeg'
-    Error:
-      type: object
-      description: Standard error response returned by the TradeStation API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code of the error.
-        Message:
-          type: string
-          description: Human-readable description of the error.
-        TraceId:
-          type: string
-          format: uuid
-          description: Unique trace identifier for debugging and support purposes.
-    GroupOrderConfirmResponse:
-      type: object
-      description: Response with estimated costs for all orders in a group.
-      properties:
-        Confirmations:
-          type: array
-          description: List of confirmation details for each order in the group.
-          items:
-            $ref: '#/components/schemas/OrderConfirmResponse'
-    OrderConfirmResponse:
-      type: object
-      description: Response with estimated order costs and confirmation details.
-      properties:
-        EstimatedCommission:
-          type: number
-          format: double
-          description: Estimated commission for the order.
-        EstimatedCost:
-          type: number
-          format: double
-          description: Estimated total cost of the order.
-        EstimatedPrice:
-          type: number
-          format: double
-          description: Estimated execution price.
-        MarginRequirement:
-          type: number
-          format: double
-          description: The margin requirement for the order.
-    OrderResult:
-      type: object
-      description: Result of an individual order operation.
-      properties:
-        OrderID:
-          type: string
-          description: The unique order identifier assigned by the system.
-        Message:
-          type: string
-          description: Human-readable message about the order result.
-    GroupOrderRequest:
-      type: object
-      description: Request body for placing a group of related orders such as bracket, OCO, or OSO orders.
-      required:
-      - Type
-      - Orders
-      properties:
-        Type:
-          type: string
-          description: The type of order group.
-          enum:
-          - OCO
-          - BRK
-          - OSO
-        Orders:
-          type: array
-          description: The list of orders in the group.
-          items:
-            $ref: '#/components/schemas/OrderRequest'
-    OptionLeg:
-      type: object
-      description: A single leg of an option strategy.
-      properties:
-        Symbol:
-          type: string
-          description: The option symbol.
-        Quantity:
-          type: integer
-          description: The number of contracts.
-        TradeAction:
-          type: string
-          description: The trade action for this leg.
-          enum:
-          - BuyToOpen
-          - BuyToClose
-          - SellToOpen
-          - SellToClose
-    GroupOrderResponse:
-      type: object
-      description: Response after placing a group order.
-      properties:
-        Orders:
-          type: array
-          description: List of order results for the group.
-          items:
-            $ref: '#/components/schemas/OrderResult'
-    OrderResponse:
-      type: object
-      description: Response after placing, replacing, or cancelling an order.
-      properties:
-        Orders:
-          type: array
-          description: List of order results.
-          items:
-            $ref: '#/components/schemas/OrderResult'
   parameters:
     OrderId:
       name: orderId

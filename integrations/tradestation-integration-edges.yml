@@ -1,0 +1,47 @@
+edges:
+- partner_name: FinCEN (MSB registration)
+  partner: null
+  partner_match: register
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://msb.fincen.gov/
+  category: Money services business
+  contract_reference:
+    register: FinCEN MSB Registrant Search (msb.fincen.gov, full list export)
+    spec_file: null
+    standard: FinCEN MSB registration (US Bank Secrecy Act)
+    role: fincen-msb-registrant
+    registered_name: TradeStation (CO) Ltd
+    dba_name: null
+    register_id: TradeStation (CO) Ltd
+    matched_domain: tradestation.com
+    matched_by: domain
+    identity: wikidata Q3536370 'TradeStation' P856 http://www.tradestation.com
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    msb_activities:
+    - 401 issuer of traveler's checks
+    - 402 seller of traveler's checks
+    - 404 issuer of money orders
+    - 405 seller of money orders
+    - 409 money transmitter
+    - 415 dealer in foreign exchange
+    states_of_activity: 59
+    received_date: 10/15/2026
+    signal_note: 'participation only: an MSB registration is not a licence or a certification; activities and states
+      are context, never counted'
+    detected_by: sweep-regtech-aml.py
+    detected: '2026-10-20'
+  detected_by: sweep-regtech-aml.py
+  first_seen: '2026-10-20'
+generated: '2026-10-20'
+method: searched
+source:
+- https://msb.fincen.gov/
+- https://www.access-dvs-register.service.gov.uk/register/download-register
+- https://kantarainitiative.org/trust-status-list/
+checked:
+- https://kantarainitiative.org/trust-status-list/
+- https://msb.fincen.gov/
+- https://www.access-dvs-register.service.gov.uk/register/download-register

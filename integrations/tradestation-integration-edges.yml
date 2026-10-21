@@ -35,6 +35,47 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-regtech-aml.py
   first_seen: '2026-10-20'
+- partner_name: FINRA (broker-dealer registration)
+  partner: null
+  partner_match: register-name
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://brokercheck.finra.org/firm/summary/39473
+  category: Broker-dealer
+  contract_reference:
+    register: FINRA BrokerCheck (api.brokercheck.finra.org firm search, the page's own public JSON)
+    standard: Securities Exchange Act of 1934 broker-dealer registration (FINRA member firm)
+    spec_file: null
+    role: finra-registered-broker-dealer
+    registered_name: TRADESTATION SECURITIES, INC.
+    other_names:
+    - ONLINE TRADING INC.COM
+    - TRADESTATION SECURITIES
+    - TRADESTATION
+    - ONLINETRADNG.COM
+    - ONLINETRADINGINC.COM CORP
+    - ONLINETRADING.COM
+    - ONLINETRADEINGINC.COM CORP.
+    - ONLINE TRADING, INC.
+    register_id: CRD 39473
+    sec_file_number: 8-48711
+    registration_status: ACTIVE
+    main_office: PLANTATION, FL, UNITED STATES
+    matched_domain: null
+    matched_by: register-name
+    register_name_note: BrokerCheck firm name 'TRADESTATION SECURITIES, INC.' normalises to tradestation's apis.yml
+      name 'TradeStation'
+    signal_note: 'participation only: broker-dealer registration is not a certification; disclosures and branch
+      counts are not recorded (breadth is not credit)'
+    detected_by: sweep-private-markets-fund-admin.py
+    detected: '2026-10-20'
+    identity_source: register-name
+    identity_note: register gave only the name; exact normalised match to the repo's apis.yml name, one repo, Wikidata
+      P856 not contradicting (Kin 2026-10-20 decision 2)
+  detected_by: sweep-private-markets-fund-admin.py
+  first_seen: '2026-10-20'
 generated: '2026-10-20'
 method: searched
 source:
@@ -45,3 +86,11 @@ checked:
 - https://kantarainitiative.org/trust-status-list/
 - https://msb.fincen.gov/
 - https://www.access-dvs-register.service.gov.uk/register/download-register
+- https://brokercheck.finra.org/
+- https://ilpa.org/about-ilpa/member-directory/
+- https://ilpa.org/industry-guidance/templates-standards-model-documents/ilpa-templates-hub/template-endorsers/
+- https://ilpa.org/members
+- https://ilpa.org/wp-json/wp/v2/organization
+- https://www.cboe.com/market_data_services/vendors/
+- https://www.fixtrading.org/members/
+- https://www.sec.gov/foia/docs/form-adv-archive-data

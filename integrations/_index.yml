@@ -39,3 +39,44 @@
     detected: '2026-10-20'
   status: not-a-workflow
   arazzo: null
+- slug: tradestation-finra-broker-dealer-registration
+  label: FINRA (broker-dealer registration)
+  partner_name: FINRA (broker-dealer registration)
+  category: Broker-dealer
+  type: contract
+  channel: regulator-register
+  evidence: https://brokercheck.finra.org/firm/summary/39473
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: FINRA BrokerCheck (api.brokercheck.finra.org firm search, the page's own public JSON)
+    standard: Securities Exchange Act of 1934 broker-dealer registration (FINRA member firm)
+    spec_file: null
+    role: finra-registered-broker-dealer
+    registered_name: TRADESTATION SECURITIES, INC.
+    other_names:
+    - ONLINE TRADING INC.COM
+    - TRADESTATION SECURITIES
+    - TRADESTATION
+    - ONLINETRADNG.COM
+    - ONLINETRADINGINC.COM CORP
+    - ONLINETRADING.COM
+    - ONLINETRADEINGINC.COM CORP.
+    - ONLINE TRADING, INC.
+    register_id: CRD 39473
+    sec_file_number: 8-48711
+    registration_status: ACTIVE
+    main_office: PLANTATION, FL, UNITED STATES
+    matched_domain: null
+    matched_by: register-name
+    register_name_note: BrokerCheck firm name 'TRADESTATION SECURITIES, INC.' normalises to tradestation's apis.yml
+      name 'TradeStation'
+    signal_note: 'participation only: broker-dealer registration is not a certification; disclosures and branch
+      counts are not recorded (breadth is not credit)'
+    detected_by: sweep-private-markets-fund-admin.py
+    detected: '2026-10-20'
+    identity_source: register-name
+    identity_note: register gave only the name; exact normalised match to the repo's apis.yml name, one repo, Wikidata
+      P856 not contradicting (Kin 2026-10-20 decision 2)
+  status: not-a-workflow
+  arazzo: null
